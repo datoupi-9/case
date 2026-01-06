@@ -1,0 +1,472 @@
+/* ========================================
+   进入页面样式 - Entry Page
+   ======================================== */
+
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'HarmonyOS Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #000000;
+    color: #FFFFFF;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 背景图片 */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://via.placeholder.com/1920x1080/1a1a1a/ffffff?text=Background+Image');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+/* 主容器 */
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ========================================
+   顶部导航栏
+   ======================================== */
+.top-navigation {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 0 40px;
+}
+
+.nav-item {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #FFFFFF;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 16px;
+}
+
+.nav-item:hover {
+    color: #3E6AE2;
+    transform: translateY(-2px);
+}
+
+.nav-item.active {
+    color: #3E6AE2;
+    font-weight: 700;
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background-color: #3E6AE2;
+}
+
+/* ========================================
+   Case Library 下拉面板
+   ======================================== */
+.dropdown-panel {
+    display: none;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 60px 40px;
+    margin-top: 0;
+    animation: slideDown 0.3s ease-in-out;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.panel-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-start;
+    padding-top: 60px;
+}
+
+/* 下拉动画 */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   案例模块区域 - 三个案例并排，占左侧2/3
+   ======================================== */
+.cases-section {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: flex-start;
+    width: 66.67%;
+}
+
+.case-module {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.case-module:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.case-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+.case-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.case-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #000000;
+}
+
+.case-title {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+}
+
+/* ========================================
+   搜索栏区域 - 位于右侧，占1/3宽度
+   ======================================== */
+.search-section {
+    flex: 1;
+    width: 33.33%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.search-container {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+    padding: 4px 4px 4px 20px;
+    border: 2px solid #E0E0E0;
+    transition: border-color 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: #3E6AE2;
+    background-color: #FFFFFF;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+    padding: 12px 0;
+}
+
+.search-input::placeholder {
+    color: #999999;
+}
+
+.search-btn {
+    width: 48px;
+    height: 48px;
+    background-color: #3E6AE2;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.search-btn:hover {
+    background-color: #2D5BCF;
+    transform: scale(1.05);
+}
+
+.search-btn:active {
+    transform: scale(0.95);
+}
+
+.search-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Popular Recommendations 标题 */
+.recommendations-title {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+
+/* 可滚动的图片区域 */
+.image-scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #CCCCCC #F5F5F5;
+}
+
+.image-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-scroll-container::-webkit-scrollbar-track {
+    background: #F5F5F5;
+    border-radius: 4px;
+}
+
+.image-scroll-container::-webkit-scrollbar-thumb {
+    background: #CCCCCC;
+    border-radius: 4px;
+}
+
+.image-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}
+
+.image-scroll-wrapper {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 8px;
+}
+
+.image-item {
+    flex-shrink: 0;
+    width: 200px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #F5F5F5;
+}
+
+.image-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.image-item:active {
+    transform: translateY(-2px);
+}
+
+.scroll-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 右下角箭头按钮 */
+.enter-arrow-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    background-color: #3E6AE2;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(62, 106, 226, 0.4);
+    z-index: 10;
+}
+
+.enter-arrow-btn:hover {
+    background-color: #2D5BCF;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(62, 106, 226, 0.5);
+}
+
+.enter-arrow-btn:active {
+    transform: scale(0.95);
+}
+
+.enter-arrow-btn svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 1024px) {
+    .panel-container {
+        flex-direction: column;
+        padding-top: 40px;
+        gap: 30px;
+    }
+    
+    .cases-section {
+        width: 100%;
+        flex-direction: row;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .search-section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .nav-item {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+    
+    .dropdown-panel {
+        padding: 40px 20px;
+    }
+    
+    .cases-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .case-module {
+        width: 100%;
+    }
+    
+    .case-image {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+    }
+    
+    .search-container {
+        padding: 20px;
+    }
+    
+    .enter-arrow-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .enter-arrow-btn svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-item {
+        font-size: 14px;
+    }
+    
+    .case-module {
+        padding: 15px;
+    }
+    
+    .case-title {
+        font-size: 18px;
+    }
+}
+

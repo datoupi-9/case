@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Liked Cases Page">
+    <title>Liked Cases</title>
+    <link rel="stylesheet" href="like-page.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部标题区域 -->
+        <section class="top-section">
+            <div class="title-container">
+                <h1 class="page-title">My Likes</h1>
+                <p class="page-subtitle">View all cases you've liked</p>
+            </div>
+        </section>
+
+        <!-- 案例卡片网格 -->
+        <section class="cases-section">
+            <div class="cases-container">
+                <div class="cases-grid" id="likedCasesGrid">
+                    <!-- 案例卡片将通过JavaScript动态加载 -->
+                </div>
+                
+                <!-- 空状态提示 -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <path d="M40 70L15 45C10 40 5 30 5 20C5 10 15 0 25 0C30 0 35 2.5 40 5L40 5L45 2.5C50 0 55 0 60 0C70 0 80 10 80 20C80 30 75 40 70 45L40 70Z" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h2 class="empty-title">No liked cases yet</h2>
+                    <p class="empty-text">Discover more amazing content in the case library!</p>
+                    <button class="empty-btn" onclick="window.location.href='basic-case.html'">Go to Case Library</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 底部导航栏 - 固定在页面底部 -->
+        <nav class="bottom-nav">
+            <div class="nav-user">
+                <div class="nav-avatar">
+                    <svg width="41" height="41" viewBox="0 0 41 41" fill="none">
+                        <circle cx="20.5" cy="20.5" r="20.5" fill="#E0E0E0"/>
+                        <circle cx="20.5" cy="16" r="6" fill="#9E9E9E"/>
+                        <path d="M8 32C8 26 13.5 22 20.5 22C27.5 22 33 26 33 32" fill="#9E9E9E"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="nav-tabs">
+                <button class="nav-tab" data-tab="library" onclick="window.location.href='basic-case.html'">Case Library</button>
+                <button class="nav-tab" data-tab="collect" onclick="window.location.href='collect-page.html'">Collect</button>
+                <button class="nav-tab" data-tab="follow" onclick="window.location.href='follow-page.html'">Follow</button>
+                <button class="nav-tab active" data-tab="like">Like</button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- JavaScript 加载点赞的案例 -->
+    <script>
+        // 从localStorage获取点赞的案例ID列表
+        function getLikedCaseIds() {
+            const likedIds = localStorage.getItem('likedCases');
+            return likedIds ? JSON.parse(likedIds) : [];
+        }
+
+        // 所有案例数据（示例数据，实际应该从服务器获取）
+        const allCases = [
+            { id: 1, title: 'SnapFrames Beta Launch!', likeCount: '2.3k', bookmarkCount: '668' },
+            { id: 2, title: 'Design System v2.0', likeCount: '1.8k', bookmarkCount: '520' },
+            { id: 3, title: 'Mobile App Redesign', likeCount: '3.2k', bookmarkCount: '890' },
+            { id: 4, title: 'E-commerce Platform', likeCount: '1.5k', bookmarkCount: '420' },
+            { id: 5, title: 'Dashboard Analytics', likeCount: '2.7k', bookmarkCount: '750' },
+            { id: 6, title: 'Brand Identity Design', likeCount: '1.2k', bookmarkCount: '380' },
+            { id: 7, title: 'Tesla Cybertruck Sticker Pack', likeCount: '4.1k', bookmarkCount: '1.2k' },
+            { id: 8, title: 'Illustration Collection', likeCount: '2.0k', bookmarkCount: '610' }
+        ];
+
+        // 创建案例卡片HTML
+        function createCaseCard(caseData) {
+            return `
+                <article class="case-card" data-card-id="${caseData.id}">
+                    <div class="card-image">
+                        <div class="card-actions">
+                            <button class="action-like-btn active" aria-label="Like" title="Like">
+                                <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
+                                    <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="#FF6B6B" stroke="#FF6B6B" stroke-width="1.5"/>
+                                </svg>
+                            </button>
+                            <button class="action-bookmark-btn" aria-label="Bookmark" title="Bookmark">
+                                <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
+                                    <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-stats">
+                            <div class="stat-item like-stat" data-liked="true">
+                                <button class="like-btn" aria-label="Like">
+                                    <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="#FF6B6B" stroke="#FF6B6B" stroke-width="1.2"/>
+                                    </svg>
+                                </button>
+                                <span class="stat-number like-count">${caseData.likeCount}</span>
+                            </div>
+                            <div class="stat-item bookmark-stat" data-bookmarked="false">
+                                <button class="bookmark-btn" aria-label="Bookmark">
+                                    <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
+                                    </svg>
+                                </button>
+                                <span class="stat-number">${caseData.bookmarkCount}</span>
+                            </div>
+                        </div>
+                        <h3 class="card-title">${caseData.title}</h3>
+                    </div>
+                </article>
+            `;
+        }
+
+        // 加载点赞的案例
+        function loadLikedCases() {
+            const likedIds = getLikedCaseIds();
+            const casesGrid = document.getElementById('likedCasesGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (likedIds.length === 0) {
+                casesGrid.style.display = 'none';
+                emptyState.style.display = 'flex';
+                return;
+            }
+
+            casesGrid.style.display = 'grid';
+            emptyState.style.display = 'none';
+            casesGrid.innerHTML = '';
+
+            // 过滤出被点赞的案例
+            const likedCases = allCases.filter(caseData => likedIds.includes(caseData.id));
+
+            likedCases.forEach(caseData => {
+                casesGrid.innerHTML += createCaseCard(caseData);
+            });
+
+            // 为每个卡片添加事件监听
+            attachCardEvents();
+        }
+
+        // 为卡片添加事件监听
+        function attachCardEvents() {
+            const caseCards = document.querySelectorAll('.case-card');
+            
+            caseCards.forEach(function(card) {
+                // 点击卡片跳转到详情页
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('button') || e.target.closest('.card-actions')) {
+                        e.stopPropagation();
+                        return;
+                    }
+                    window.location.href = 'case-detail.html';
+                });
+
+                // 点赞和收藏功能（与basic-case.html相同）
+                const likeBtn = card.querySelector('.like-btn');
+                const likeStat = card.querySelector('.like-stat');
+                const likeCount = card.querySelector('.like-count');
+                const actionLikeBtn = card.querySelector('.action-like-btn');
+                
+                const bookmarkBtn = card.querySelector('.bookmark-btn');
+                const bookmarkStat = card.querySelector('.bookmark-stat');
+                const actionBookmarkBtn = card.querySelector('.action-bookmark-btn');
+
+                function parseCount(countText) {
+                    if (countText.includes('k')) {
+                        return parseFloat(countText) * 1000;
+                    }
+                    return parseInt(countText) || 0;
+                }
+
+                function formatCount(count) {
+                    if (count >= 1000) {
+                        return (count / 1000).toFixed(1) + 'k';
+                    }
+                    return count.toString();
+                }
+
+                function toggleLike() {
+                    const isLiked = likeStat.getAttribute('data-liked') === 'true';
+                    const currentCount = parseCount(likeCount.textContent);
+                    const cardId = parseInt(card.getAttribute('data-card-id'));
+                    let likedIds = getLikedCaseIds();
+
+                    if (isLiked) {
+                        likeStat.setAttribute('data-liked', 'false');
+                        likeCount.textContent = formatCount(currentCount - 1);
+                        if (actionLikeBtn) {
+                            actionLikeBtn.classList.remove('active');
+                            actionLikeBtn.querySelector('svg path').setAttribute('fill', 'none');
+                            actionLikeBtn.querySelector('svg path').setAttribute('stroke', '#FFFFFF');
+                        }
+                        // 从localStorage中移除
+                        likedIds = likedIds.filter(id => id !== cardId);
+                        localStorage.setItem('likedCases', JSON.stringify(likedIds));
+                        // 重新加载页面以更新列表
+                        setTimeout(() => loadLikedCases(), 100);
+                    } else {
+                        likeStat.setAttribute('data-liked', 'true');
+                        likeCount.textContent = formatCount(currentCount + 1);
+                        if (actionLikeBtn) {
+                            actionLikeBtn.classList.add('active');
+                            actionLikeBtn.querySelector('svg path').setAttribute('fill', '#FF6B6B');
+                            actionLikeBtn.querySelector('svg path').setAttribute('stroke', '#FF6B6B');
+                        }
+                        // 添加到localStorage
+                        if (!likedIds.includes(cardId)) {
+                            likedIds.push(cardId);
+                            localStorage.setItem('likedCases', JSON.stringify(likedIds));
+                        }
+                    }
+                }
+
+                function toggleBookmark() {
+                    const isBookmarked = bookmarkStat.getAttribute('data-bookmarked') === 'true';
+                    
+                    if (isBookmarked) {
+                        bookmarkStat.setAttribute('data-bookmarked', 'false');
+                        if (actionBookmarkBtn) {
+                            actionBookmarkBtn.classList.remove('active');
+                        }
+                    } else {
+                        bookmarkStat.setAttribute('data-bookmarked', 'true');
+                        if (actionBookmarkBtn) {
+                            actionBookmarkBtn.classList.add('active');
+                        }
+                    }
+                }
+
+                if (likeBtn && likeStat && likeCount) {
+                    likeBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        toggleLike();
+                    });
+                }
+
+                if (actionLikeBtn && likeStat && likeCount) {
+                    actionLikeBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        toggleLike();
+                    });
+                }
+
+                if (bookmarkBtn && bookmarkStat) {
+                    bookmarkBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        toggleBookmark();
+                    });
+                }
+
+                if (actionBookmarkBtn && bookmarkStat) {
+                    actionBookmarkBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        toggleBookmark();
+                    });
+                }
+            });
+        }
+
+        // 页面加载时执行
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLikedCases();
+        });
+    </script>
+</body>
+</html>
+

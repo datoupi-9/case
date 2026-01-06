@@ -1,0 +1,577 @@
+/* ========================================
+   案例详情页样式 - Case Detail Page
+   ======================================== */
+
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'HarmonyOS Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #FAFBFC;
+    color: #000000;
+    line-height: 1.6;
+    padding-bottom: 76px; /* 为固定导航栏留出空间 */
+}
+
+/* 主容器 */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 20px 20px 20px;
+    background-color: #FAFBFC;
+    min-height: 100vh;
+}
+
+/* 返回按钮 */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 44px;
+    height: 44px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:hover {
+    background-color: #F5F5F5;
+    transform: scale(1.05);
+}
+
+/* 主要内容区域 */
+.main-content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-top: 0;
+}
+
+/* ========================================
+   左侧：案例内容
+   ======================================== */
+.case-content {
+    flex: 1;
+    max-width: 800px;
+}
+
+/* 案例标题区域 */
+.case-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.case-title {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #000000;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.case-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-size: 14px;
+    color: #666666;
+}
+
+.case-author {
+    font-weight: 500;
+}
+
+/* Follow Designer 按钮 */
+.follow-designer-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: #F3F3F3;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #434343;
+}
+
+.follow-designer-btn:hover {
+    background-color: #E8E8E8;
+    border-color: #D0D0D0;
+}
+
+.follow-designer-btn.active {
+    background-color: #3E6AE2;
+    border-color: #3E6AE2;
+    color: #FFFFFF;
+}
+
+.follow-designer-btn.active svg path,
+.follow-designer-btn.active svg circle {
+    stroke: #FFFFFF;
+}
+
+.follow-designer-btn.active .follow-text {
+    color: #FFFFFF;
+}
+
+.follow-designer-btn svg {
+    flex-shrink: 0;
+}
+
+.follow-text {
+    font-size: 13px;
+    transition: color 0.2s ease;
+}
+
+.case-date {
+    color: #999999;
+}
+
+/* 案例简介 */
+.case-description {
+    margin-bottom: 40px;
+}
+
+.description-text {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #434343;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.description-text:last-child {
+    margin-bottom: 0;
+}
+
+/* 案例图片内容 */
+.case-images {
+    margin-bottom: 40px;
+}
+
+.image-gallery {
+    width: 100%;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.image-box {
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-box:hover {
+    background-color: #EEEEEE;
+    border-color: #D0D0D0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   右侧：评论区域
+   ======================================== */
+.comments-section {
+    width: 380px;
+    flex-shrink: 0;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 评论区域上方的操作按钮栏 */
+.comment-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 12px;
+    padding: 16px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.comment-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.comment-action-btn:hover {
+    background-color: #EEEEEE;
+    transform: translateY(-2px);
+}
+
+.comment-action-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.comment-action-btn.like-action-btn.active svg path {
+    fill: #FF6B6B;
+    stroke: #FF6B6B;
+}
+
+.comment-action-btn.bookmark-action-btn.active svg path {
+    fill: #4A90E2;
+    stroke: #4A90E2;
+}
+
+.comments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.comments-title {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+}
+
+.comments-count {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #666666;
+    background-color: #F5F5F5;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+/* 评论输入区域 */
+.comment-input-area {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.comment-input-area .comment-avatar {
+    flex-shrink: 0;
+}
+
+.comment-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #F8F8F8;
+    border-radius: 24px;
+    padding: 8px 16px;
+    border: 1px solid #E0E0E0;
+    transition: border-color 0.2s ease;
+}
+
+.comment-input-wrapper:focus-within {
+    border-color: #3E6AE2;
+    background-color: #FFFFFF;
+}
+
+.comment-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-size: 14px;
+    color: #000000;
+}
+
+.comment-input::placeholder {
+    color: #999999;
+}
+
+.comment-submit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.comment-submit-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 评论列表 */
+.comments-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comment-item {
+    display: flex;
+    gap: 12px;
+}
+
+.comment-item .comment-avatar {
+    flex-shrink: 0;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.comment-author {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #000000;
+}
+
+.comment-time {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #999999;
+}
+
+.comment-text {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #434343;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.comment-like-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-size: 12px;
+    color: #666666;
+    transition: color 0.2s ease;
+}
+
+.comment-like-btn:hover {
+    color: #FF6B6B;
+}
+
+.comment-like-btn.active svg path {
+    fill: #FF6B6B;
+    stroke: #FF6B6B;
+}
+
+.comment-reply-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-size: 12px;
+    color: #3E6AE2;
+    transition: color 0.2s ease;
+}
+
+.comment-reply-btn:hover {
+    color: #2D5BCF;
+}
+
+/* ========================================
+   底部导航栏 - 固定在页面底部
+   ======================================== */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 381px;
+    height: 56px;
+    background-color: #FFFFFF;
+    box-shadow: 0px -2px 8px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-avatar {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F5F5F5;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.nav-avatar:hover {
+    transform: scale(1.05);
+}
+
+.nav-avatar svg {
+    width: 100%;
+    height: 100%;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 9px;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.nav-tab {
+    flex: 1;
+    height: 46px;
+    background-color: #F3F3F3;
+    border: none;
+    border-radius: 3px;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #929292;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+}
+
+.nav-tab:hover:not(.active) {
+    background-color: #E8E8E8;
+    color: #666666;
+}
+
+.nav-tab.active {
+    background-color: #3E6AE2;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 1200px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .case-content {
+        max-width: 100%;
+    }
+    
+    .comments-section {
+        width: 100%;
+        position: relative;
+        top: 0;
+        max-height: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .back-btn {
+        top: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .case-title {
+        font-size: 24px;
+    }
+    
+    .image-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comments-section {
+        padding: 16px;
+    }
+}
+

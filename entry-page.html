@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="进入页面 - Entry Page">
+    <title>进入页面 - Entry Page</title>
+    <link rel="stylesheet" href="entry-page.css">
+</head>
+<body>
+    <!-- 背景图片 -->
+    <div class="background-image"></div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        
+        <!-- 顶部导航栏 -->
+        <nav class="top-navigation">
+            <div class="nav-container">
+                <a href="#" class="nav-item" data-nav="parametric">Parametric modeling</a>
+                <a href="#" class="nav-item active" data-nav="library" id="libraryNav">Case Library</a>
+                <a href="#" class="nav-item" data-nav="learning">Learning documents</a>
+            </div>
+        </nav>
+        
+        <!-- Case Library 下拉面板 -->
+        <div class="dropdown-panel" id="libraryPanel">
+            <div class="panel-container">
+                <!-- 案例模块 -->
+                <div class="cases-section">
+                    <div class="case-module">
+                        <div class="case-image">
+                            <img src="images/educational-kit.png" alt="Educational Kit" class="case-img">
+                        </div>
+                        <div class="case-info">
+                            <h3 class="case-title">Educational Kit</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="case-module">
+                        <div class="case-image">
+                            <img src="images/drive-by-wire-chassis.png" alt="Drive-by-wire chassis" class="case-img">
+                        </div>
+                        <div class="case-info">
+                            <h3 class="case-title">Drive-by-wire chassis</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="case-module">
+                        <div class="case-image">
+                            <img src="images/simulation-simulator.png" alt="Simulation simulator" class="case-img">
+                        </div>
+                        <div class="case-info">
+                            <h3 class="case-title">Simulation simulator</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 搜索栏 -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" class="search-input" placeholder="Search what you are interested in？" aria-label="搜索">
+                            <button class="search-btn" aria-label="搜索">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="11" cy="11" r="8" stroke="#FFFFFF" stroke-width="2"/>
+                                    <path d="M20 20L16 16" stroke="#FFFFFF" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Popular Recommendations 标题 -->
+                        <h3 class="recommendations-title">Popular Recommendations</h3>
+                        
+                        <!-- 可滚动的图片区域 -->
+                        <div class="image-scroll-container">
+                            <div class="image-scroll-wrapper">
+                                <div class="image-item" onclick="handleImageClick(1)">
+                                    <img src="images/simulation-simulator.png" alt="Image 1" class="scroll-img">
+                                </div>
+                                <div class="image-item" onclick="handleImageClick(2)">
+                                    <img src="images/drive-by-wire-chassis.png" alt="Image 2" class="scroll-img">
+                                </div>
+                                <div class="image-item" onclick="handleImageClick(3)">
+                                    <img src="images/educational-kit.png" alt="Image 3" class="scroll-img">
+                                </div>
+                                <div class="image-item" onclick="handleImageClick(4)">
+                                    <img src="images/simulation-simulator.png" alt="Image 4" class="scroll-img">
+                                </div>
+                                <div class="image-item" onclick="handleImageClick(5)">
+                                    <img src="images/drive-by-wire-chassis.png" alt="Image 5" class="scroll-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右下角箭头按钮 -->
+                <button class="enter-arrow-btn" onclick="window.location.href='basic-case.html'" aria-label="进入案例库">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M8 16H24M24 16L16 8M24 16L16 24" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript 控制下拉面板显示/隐藏 -->
+    <script>
+        // 获取导航项和下拉面板
+        const libraryNav = document.getElementById('libraryNav');
+        const libraryPanel = document.getElementById('libraryPanel');
+        
+        // 点击 Case Library 导航项时切换下拉面板显示
+        libraryNav.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (libraryPanel.style.display === 'none' || libraryPanel.style.display === '') {
+                libraryPanel.style.display = 'block';
+                libraryPanel.style.animation = 'slideDown 0.3s ease-in-out';
+            } else {
+                libraryPanel.style.display = 'none';
+            }
+        });
+        
+        // 点击其他导航项时隐藏下拉面板
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.id !== 'libraryNav') {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    libraryPanel.style.display = 'none';
+                    // 移除所有 active 类
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    // 添加当前项的 active 类
+                    this.classList.add('active');
+                });
+            }
+        });
+        
+        // 处理图片点击事件
+        function handleImageClick(imageId) {
+            console.log('点击了图片:', imageId);
+            // 这里可以添加跳转到详情页或其他操作
+            // 例如: window.location.href = 'case-detail.html?id=' + imageId;
+        }
+    </script>
+</body>
+</html>
+
