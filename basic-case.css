@@ -460,6 +460,14 @@ body {
     overflow: hidden;
 }
 
+/* 案例卡片主图片 */
+.card-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 /* 卡片操作按钮（悬停显示） */
 .card-actions {
     position: absolute;
