@@ -40,25 +40,76 @@
             </div>
         </section>
 
-        <!-- 底部导航栏 - 固定在页面底部 -->
-        <nav class="bottom-nav">
-            <div class="nav-user">
-                <div class="nav-avatar" onclick="window.location.href='entry-page.html'" style="cursor: pointer;">
-                    <svg width="41" height="41" viewBox="0 0 41 41" fill="none">
-                        <circle cx="20.5" cy="20.5" r="20.5" fill="#E0E0E0"/>
-                        <circle cx="20.5" cy="16" r="6" fill="#9E9E9E"/>
-                        <path d="M8 32C8 26 13.5 22 20.5 22C27.5 22 33 26 33 32" fill="#9E9E9E"/>
-                    </svg>
+        <!-- 左上角返回按钮 -->
+        <button class="back-btn" onclick="window.location.href='index.html'" aria-label="返回">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        
+        <!-- 右上角头像按钮和下拉菜单 -->
+        <div class="user-menu-container">
+            <button class="user-avatar-btn" id="userMenuBtn" aria-label="用户菜单">
+                <svg width="41" height="41" viewBox="0 0 41 41" fill="none">
+                    <circle cx="20.5" cy="20.5" r="20.5" fill="#E0E0E0"/>
+                    <circle cx="20.5" cy="16" r="6" fill="#9E9E9E"/>
+                    <path d="M8 32C8 26 13.5 22 20.5 22C27.5 22 33 26 33 32" fill="#9E9E9E"/>
+                </svg>
+            </button>
+            
+            <!-- 下拉菜单 -->
+            <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
+                <div class="menu-item menu-user-id">
+                    <div class="user-id-avatar">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
+                            <circle cx="20" cy="15" r="6" fill="#9E9E9E"/>
+                            <path d="M8 30C8 25 12 21 20 21C28 21 32 25 32 30" fill="#9E9E9E"/>
+                        </svg>
+                    </div>
+                    <span class="user-id-text">User ID</span>
                 </div>
+                <div class="menu-divider"></div>
+                <button class="menu-item" onclick="window.location.href='like-page.html'">
+                    <span>Like</span>
+                </button>
+                <button class="menu-item" onclick="window.location.href='collect-page.html'">
+                    <span>Collect</span>
+                </button>
+                <button class="menu-item" onclick="window.location.href='follow-page.html'">
+                    <span>Follow</span>
+                </button>
+                <div class="menu-divider"></div>
+                <button class="menu-item">
+                    <span>Setting</span>
+                </button>
+                <button class="menu-item">
+                    <span>Sign Out</span>
+                </button>
             </div>
-            <div class="nav-tabs">
-                <button class="nav-tab" data-tab="library" onclick="window.location.href='index.html'">Case Library</button>
-                <button class="nav-tab" data-tab="collect" onclick="window.location.href='collect-page.html'">Collect</button>
-                <button class="nav-tab active" data-tab="follow">Follow</button>
-                <button class="nav-tab" data-tab="like" onclick="window.location.href='like-page.html'">Like</button>
-            </div>
-        </nav>
+        </div>
     </div>
+    
+    <!-- JavaScript 控制用户菜单 -->
+    <script>
+        const userMenuBtn = document.getElementById('userMenuBtn');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+        
+        userMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (userDropdownMenu.style.display === 'none' || userDropdownMenu.style.display === '') {
+                userDropdownMenu.style.display = 'block';
+            } else {
+                userDropdownMenu.style.display = 'none';
+            }
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                userDropdownMenu.style.display = 'none';
+            }
+        });
+    </script>
 
     <!-- JavaScript 加载关注的内容 -->
     <script>

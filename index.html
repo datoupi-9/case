@@ -4,662 +4,807 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="案例库基础页面 - Basic Case Library">
-    <title>案例库 - Basic Case Library</title>
+    <title>Sophicar - Case Library</title>
     <link rel="stylesheet" href="basic-case.css">
 </head>
 <body>
-    <!-- 主容器 -->
+    <!-- 主容器 - 固定尺寸 1400x900 -->
     <div class="container">
+        <!-- 顶部渐变背景 Cover -->
+        <div class="cover-background"></div>
         
-        <!-- 顶部搜索栏区域 -->
-        <section class="top-search-section">
-            <div class="search-container">
-                <!-- 搜索框 -->
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Search what you are interested in？" aria-label="搜索">
-                    <!-- Type 下拉菜单 - 位于搜索 icon 左侧 -->
-                    <select class="type-select">
-                        <option>Type</option>
-                    </select>
-                    <button class="search-icon-btn" aria-label="搜索">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-                            <circle cx="11" cy="11" r="8" stroke="#434343" stroke-width="2"/>
-                            <path d="M20 20L16 16" stroke="#434343" stroke-width="2"/>
-                        </svg>
+        <!-- 顶部标题 -->
+        <h1 class="main-title">Sophicar</h1>
+        
+        <!-- 导航栏 -->
+        <nav class="main-navbar">
+            <!-- 左侧搜索区域 -->
+            <div class="search-area">
+                <div class="search-content-wrapper">
+                    <img src="images/search icon.png" alt="搜索" class="search-icon-img">
+                    <span class="keyword-text">keyword</span>
+                    <button class="search-arrow-btn" aria-label="搜索" type="button">
+                        <img src="images/search arrow.png" alt="搜索箭头" class="search-arrow-img">
                     </button>
                 </div>
-                
-                <!-- 顶部导航 Projects/News -->
-                <div class="top-nav">
-                    <button class="nav-link active">Projects</button>
-                    <div class="nav-divider"></div>
-                    <button class="nav-link">News</button>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 筛选区域 -->
-        <section class="filter-section">
-            <div class="filter-container">
-                <!-- Popular 标签 -->
-                <button class="popular-tag">
-                    <span>Popular</span>
-                </button>
-                
-                <!-- 筛选下拉菜单 -->
-                <select class="filter-select">
-                    <option>Application scenarios</option>
-                </select>
-                
-                <select class="filter-select">
-                    <option>Technology type</option>
-                </select>
-                
-                <select class="filter-select">
-                    <option>Industry sectors</option>
-                </select>
-                
-                <select class="filter-select">
-                    <option>Target audience</option>
-                </select>
-                
-                <select class="filter-select">
-                    <option>Model type</option>
-                </select>
-                
-                <!-- Filters 按钮 -->
-                <button class="filter-btn active" id="filterToggleBtn">
-                    <svg class="menu-icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                        <path d="M3 6H19M3 11H19M3 16H19" stroke="#fff" stroke-width="2"/>
-                    </svg>
-                    <span>Filters</span>
-                </button>
+                <img src="images/Vector 120.png" alt="底部线条" class="search-bottom-line">
             </div>
             
-            <!-- 更多标签区域 - 默认隐藏，点击Filters按钮时显示 -->
-            <div class="more-tags-container" id="moreTagsContainer" style="display: none;">
-                <div class="tag-group">
-                    <h3 class="tag-group-title">·Tags</h3>
-                    <div class="tag-box"></div>
-                    <button class="expand-arrow" aria-label="展开"></button>
-                </div>
-                
-                <div class="tag-group">
-                    <h3 class="tag-group-title">·User Group</h3>
-                    <div class="tag-box"></div>
-                    <button class="expand-arrow" aria-label="展开"></button>
-                </div>
-                
-                <div class="tag-group">
-                    <h3 class="tag-group-title">·Timeframe</h3>
-                    <div class="tag-box"></div>
-                    <button class="expand-arrow" aria-label="展开"></button>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 特色分类和标签区域 -->
-        <section class="categories-section">
-            <div class="categories-container">
-                <!-- 左侧垂直排列：Featured Categories 和 Tag -->
-                <div class="left-sidebar">
-                    <!-- Featured Categories -->
-                    <div class="featured-categories">
-                        <h3 class="category-title">·Featured Categories</h3>
-                        <div class="category-list">
-                            <a href="#" class="category-item">
-                                <span>Hot Trends</span>
-                            </a>
-                            <a href="#" class="category-item">
-                                <span>Special Collection</span>
-                            </a>
-                            <a href="#" class="category-item">
-                                <span>Practical tutorial</span>
-                            </a>
-                            <a href="#" class="category-item">
-                                <span>Competition entries</span>
-                            </a>
-                            <a href="#" class="category-item">
-                                <span>cultural elements</span>
-                            </a>
-                            <a href="#" class="category-item">
-                                <span>Materials and Media</span>
-                            </a>
+            <!-- 中间标签按钮区域 -->
+            <div class="tag-buttons-area">
+                <div class="tag-btn-wrapper">
+                    <button class="tag-btn" data-dropdown="industrial">
+                        <span>Industrial Logistics</span>
+                        <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
+                    </button>
+                    <div class="tag-dropdown-menu" id="dropdown-industrial" style="display: none;">
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">AVG</span>
                         </div>
-                    </div>
-                    
-                    <!-- Tag 区域 - 放在 Featured Categories 下面 -->
-                    <div class="tag-section">
-                        <h3 class="tag-title">·Tag</h3>
-                        <div class="tag-list">
-                            <a href="#" class="tag-item">open source</a>
-                            <a href="#" class="tag-item">figure</a>
-                            <a href="#" class="tag-item">animal</a>
-                            <a href="#" class="tag-item">plant</a>
-                            <a href="#" class="tag-item">festival</a>
-                            <a href="#" class="tag-item">Commercial use</a>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Delivery vehicle</span>
+                        </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Truck</span>
+                        </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Forklift</span>
+                        </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Tractor</span>
+                        </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Crane</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- 右侧：案例卡片网格 -->
-                <div class="cases-grid">
-                    <!-- 案例卡片 1 -->
-                    <article class="case-card" data-card-id="1">
-                        <div class="card-image">
-                            <!-- 案例图片 -->
-                            <img src="images/case-main-image.png" alt="CyberBrick 四驱车" class="card-main-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                <div class="tag-btn-wrapper">
+                    <button class="tag-btn" data-dropdown="passenger">
+                        <span>Passenger transport</span>
+                        <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
+                    </button>
+                    <div class="tag-dropdown-menu" id="dropdown-passenger" style="display: none;">
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Robotaxi</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">2.3k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">668</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">SnapFrames Beta Launch!</h3>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">bus</span>
                         </div>
-                    </article>
-                    
-                    <!-- 案例卡片 2-8（类似结构，省略详细内容以节省空间） -->
-                    <article class="case-card" data-card-id="2">
-                        <div class="card-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">subway</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">1.8k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">520</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">Design System v2.0</h3>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">shuttle bus</span>
                         </div>
-                    </article>
-                    
-                    <article class="case-card" data-card-id="3">
-                        <div class="card-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">ride-hailing</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">3.2k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">890</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">Mobile App Redesign</h3>
+                    </div>
+                </div>
+                <div class="tag-btn-wrapper">
+                    <button class="tag-btn" data-dropdown="education">
+                        <span>Education related</span>
+                        <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
+                    </button>
+                    <div class="tag-dropdown-menu" id="dropdown-education" style="display: none;">
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Programming Carr</span>
                         </div>
-                    </article>
-                    
-                    <article class="case-card" data-card-id="4">
-                        <div class="card-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Open source platform</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">1.5k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">420</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">E-commerce Platform</h3>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Simulation model car</span>
                         </div>
-                    </article>
-                    
-                    <article class="case-card" data-card-id="5">
-                        <div class="card-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                    </div>
+                </div>
+                <div class="tag-btn-wrapper">
+                    <button class="tag-btn" data-dropdown="special-ops">
+                        <span>Special Operations</span>
+                        <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
+                    </button>
+                    <div class="tag-dropdown-menu" id="dropdown-special-ops" style="display: none;">
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Patrol vehicles</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">2.7k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">750</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">Dashboard Analytics</h3>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">fire trucks</span>
                         </div>
-                    </article>
-                    
-                    <article class="case-card" data-card-id="6">
-                        <div class="card-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">ambulances</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">1.2k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">380</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">Brand Identity Design</h3>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">monitoring vehicles</span>
                         </div>
-                    </article>
-                    
-                    <article class="case-card" data-card-id="7">
-                        <div class="card-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">agricultural vehicles</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">4.1k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">1.2k</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">Tesla Cybertruck Sticker Pack</h3>
+                    </div>
+                </div>
+                <div class="tag-btn-wrapper">
+                    <button class="tag-btn" data-dropdown="special-env">
+                        <span>Special environment</span>
+                        <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
+                    </button>
+                    <div class="tag-dropdown-menu" id="dropdown-special-env" style="display: none;">
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">Lunar rover</span>
                         </div>
-                    </article>
-                    
-                    <article class="case-card" data-card-id="8">
-                        <div class="card-image">
-                            <!-- 卡片操作按钮（悬停显示） -->
-                            <div class="card-actions">
-                                <button class="action-like-btn" aria-label="点赞" title="点赞">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                                <button class="action-bookmark-btn" aria-label="收藏" title="收藏">
-                                    <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">underwater rover</span>
                         </div>
-                        <div class="card-content">
-                            <div class="card-stats">
-                                <div class="stat-item like-stat" data-liked="false">
-                                    <button class="like-btn" aria-label="点赞">
-                                        <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number like-count">2.0k</span>
-                                </div>
-                                <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                    <button class="bookmark-btn" aria-label="收藏">
-                                        <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                            <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                        </svg>
-                                    </button>
-                                    <span class="stat-number">610</span>
-                                </div>
-                            </div>
-                            <h3 class="card-title">Illustration Collection</h3>
+                        <div class="tag-dropdown-item">
+                            <img src="images/点击方框.png" alt="选择框" class="checkbox-icon">
+                            <span class="item-text">polar car</span>
                         </div>
-                    </article>
+                    </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- 底部导航栏 - 固定在页面底部 -->
-        <nav class="bottom-nav">
-            <div class="nav-user">
-                <div class="nav-avatar" onclick="window.location.href='entry-page.html'" style="cursor: pointer;">
-                    <svg width="41" height="41" viewBox="0 0 41 41" fill="none">
-                        <circle cx="20.5" cy="20.5" r="20.5" fill="#E0E0E0"/>
-                        <circle cx="20.5" cy="16" r="6" fill="#9E9E9E"/>
-                        <path d="M8 32C8 26 13.5 22 20.5 22C27.5 22 33 26 33 32" fill="#9E9E9E"/>
-                    </svg>
+            
+            <!-- 右侧用户头像 -->
+            <div class="user-menu-container">
+                <button class="user-avatar-btn" id="userMenuBtn" aria-label="用户菜单">
+                    <img src="images/头像.png" alt="用户头像" class="user-avatar-img">
+                </button>
+                <!-- 用户下拉菜单 -->
+                <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
+                    <!-- 顶部区域：头像和切换图标 -->
+                    <div class="menu-header">
+                        <img src="images/头像.png" alt="个人头像" class="menu-header-avatar">
+                        <button class="menu-switch-btn" aria-label="切换">
+                            <img src="images/切换icon.png" alt="切换" class="menu-switch-icon">
+                        </button>
+                    </div>
+                    <!-- 菜单项列表 -->
+                    <div class="menu-items-list">
+                        <a href="like-page.html" class="menu-item">
+                            <img src="images/heart icon.png" alt="likes" class="menu-item-icon">
+                            <span class="menu-item-text">likes</span>
+                        </a>
+                        <a href="collect-page.html" class="menu-item">
+                            <img src="images/collect icon.png" alt="collect" class="menu-item-icon">
+                            <span class="menu-item-text">collect</span>
+                        </a>
+                        <a href="follow-page.html" class="menu-item">
+                            <img src="images/follow icon.png" alt="follow" class="menu-item-icon">
+                            <span class="menu-item-text">follow</span>
+                        </a>
+                        <a href="#" class="menu-item">
+                            <img src="images/Settings icon.png" alt="setting" class="menu-item-icon">
+                            <span class="menu-item-text">setting</span>
+                        </a>
+                        <a href="#" class="menu-item">
+                            <img src="images/sign out icon.png" alt="sign out" class="menu-item-icon">
+                            <span class="menu-item-text">sign out</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="nav-tabs">
-                <button class="nav-tab active" data-tab="library">Case Library</button>
-                <button class="nav-tab" data-tab="collect" onclick="window.location.href='collect-page.html'">Collect</button>
-                <button class="nav-tab" data-tab="follow" onclick="window.location.href='follow-page.html'">Follow</button>
-                <button class="nav-tab" data-tab="like" onclick="window.location.href='like-page.html'">Like</button>
             </div>
         </nav>
-    </div>
-    
-    <!-- JavaScript 控制 Filters 按钮显示/隐藏检索框 -->
-    <script>
-        // 获取 Filters 按钮和更多标签容器
-        const filterToggleBtn = document.getElementById('filterToggleBtn');
-        const moreTagsContainer = document.getElementById('moreTagsContainer');
         
-        // 点击 Filters 按钮时切换显示/隐藏
-        filterToggleBtn.addEventListener('click', function() {
-            // 切换显示/隐藏
-            if (moreTagsContainer.style.display === 'none') {
-                moreTagsContainer.style.display = 'flex';
-                // 添加动画效果
-                moreTagsContainer.style.animation = 'fadeIn 0.3s ease-in-out';
-            } else {
-                moreTagsContainer.style.display = 'none';
+        <!-- 主要内容区域 -->
+        <main class="main-content-area">
+            <!-- 右侧 "Most popular" 标题 -->
+            <div class="most-popular-header">
+                <svg class="divider-line" width="244" height="0" viewBox="0 0 244 0" fill="none">
+                    <line x1="0" y1="0" x2="244" y2="0" stroke="url(#gradient)" stroke-width="1.5"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:rgba(149, 183, 255, 0.7);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgba(103, 152, 255, 1);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="most-popular-wrapper">
+                    <h2 class="most-popular-title" id="mostPopularBtn">Most popular</h2>
+                    <img src="images/Expand Arrow.png" alt="展开" class="expand-arrow-icon">
+                    <div class="most-popular-dropdown" id="mostPopularDropdown" style="display: none;">
+                        <div class="popular-dropdown-item" data-value="latest">
+                            <span class="popular-item-text">Lastest</span>
+                            <img src="images/Done.png" alt="选中" class="done-icon" style="display: none;">
+                        </div>
+                        <div class="popular-dropdown-item active" data-value="popular">
+                            <span class="popular-item-text">Most popular</span>
+                            <img src="images/Done.png" alt="选中" class="done-icon">
+                        </div>
+                        <div class="popular-dropdown-item" data-value="rated">
+                            <span class="popular-item-text">Top rated</span>
+                            <img src="images/Done.png" alt="选中" class="done-icon" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例卡片网格 - 3列2行 -->
+            <div class="cases-grid-new">
+                <!-- 第一行 -->
+                <article class="case-card-new" data-card-id="1">
+                    <div class="card-image-new">
+                        <img src="images/case-main-image.png" alt="CyberBrick 4WD car" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">2.3k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">668</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="2">
+                    <div class="card-image-new">
+                        <img src="images/case2.jpg" alt="Case 2" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">1.8k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">520</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="3">
+                    <div class="card-image-new">
+                        <img src="images/case3.jpg" alt="Case 3" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">3.2k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">890</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 第二行 -->
+                <article class="case-card-new" data-card-id="4">
+                    <div class="card-image-new">
+                        <img src="images/case4.jpg" alt="Case 4" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">1.5k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">420</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="5">
+                    <div class="card-image-new">
+                        <img src="images/case5.jpg" alt="Case 5" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">2.1k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">580</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="6">
+                    <div class="card-image-new">
+                        <img src="images/case6.jpg" alt="Case 6" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">2.7k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">750</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 第三行 -->
+                <article class="case-card-new" data-card-id="7">
+                    <div class="card-image-new">
+                        <img src="images/case-main-image.png" alt="CyberBrick 4WD car" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">2.5k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">720</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="8">
+                    <div class="card-image-new">
+                        <img src="images/case2.jpg" alt="Case 8" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">1.9k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">540</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="9">
+                    <div class="card-image-new">
+                        <img src="images/case3.jpg" alt="Case 9" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">3.5k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">920</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 第四行 -->
+                <article class="case-card-new" data-card-id="10">
+                    <div class="card-image-new">
+                        <img src="images/case4.jpg" alt="Case 10" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">1.6k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">450</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="11">
+                    <div class="card-image-new">
+                        <img src="images/case5.jpg" alt="Case 11" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">2.2k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">600</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="case-card-new" data-card-id="12">
+                    <div class="card-image-new">
+                        <img src="images/case6.jpg" alt="Case 12" class="card-main-image-new">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
+                        <div class="card-actions-new">
+                            <button class="action-like-btn-new" aria-label="点赞" title="点赞">
+                                <img src="images/heart icon.png" alt="点赞" class="action-icon-img">
+                            </button>
+                            <button class="action-bookmark-btn-new" aria-label="收藏" title="收藏">
+                                <img src="images/collect icon.png" alt="收藏" class="action-icon-img">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content-new">
+                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                        <div class="card-stats-new">
+                            <div class="card-stat-item-new">
+                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                                <span class="card-stat-count-new like-count-new">2.8k</span>
+                            </div>
+                            <div class="card-stat-item-new">
+                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                                <span class="card-stat-count-new bookmark-count-new">780</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- 右下角展开箭头 -->
+            <button class="expand-arrow-btn" aria-label="展开更多">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#434343" stroke-width="2"/>
+                </svg>
+            </button>
+        </main>
+    </div>
+
+    <script>
+        // 用户菜单显示/隐藏
+        const userMenuBtn = document.getElementById('userMenuBtn');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+        
+        if (userMenuBtn && userDropdownMenu) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isVisible = userDropdownMenu.style.display === 'block';
+                userDropdownMenu.style.display = isVisible ? 'none' : 'block';
+            });
+            
+            // 点击外部关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                    userDropdownMenu.style.display = 'none';
+                }
+            });
+        }
+        
+        // 标签按钮下拉菜单显示/隐藏
+        document.querySelectorAll('.tag-btn').forEach(btn => {
+            const dropdownId = btn.getAttribute('data-dropdown');
+            if (dropdownId) {
+                const dropdown = document.getElementById('dropdown-' + dropdownId);
+                if (dropdown) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // 关闭其他所有下拉菜单并移除active状态
+                        document.querySelectorAll('.tag-btn').forEach(otherBtn => {
+                            if (otherBtn !== btn) {
+                                otherBtn.classList.remove('active');
+                            }
+                        });
+                        document.querySelectorAll('.tag-dropdown-menu').forEach(menu => {
+                            if (menu !== dropdown) {
+                                menu.style.display = 'none';
+                            }
+                        });
+                        // 切换当前下拉菜单和按钮状态
+                        const isVisible = dropdown.style.display === 'block';
+                        dropdown.style.display = isVisible ? 'none' : 'block';
+                        if (isVisible) {
+                            btn.classList.remove('active');
+                        } else {
+                            btn.classList.add('active');
+                        }
+                    });
+                }
             }
         });
         
-        // 案例卡片点击跳转和点赞收藏功能
-        document.addEventListener('DOMContentLoaded', function() {
-            // 从localStorage恢复点赞和收藏状态
-            const likedIds = JSON.parse(localStorage.getItem('likedCases') || '[]');
-            const collectedIds = JSON.parse(localStorage.getItem('collectedCases') || '[]');
-            
-            // 获取所有案例卡片
-            const caseCards = document.querySelectorAll('.case-card');
-            
-            caseCards.forEach(function(card) {
-                const cardId = parseInt(card.getAttribute('data-card-id'));
-                const likeStat = card.querySelector('.like-stat');
-                const actionLikeBtn = card.querySelector('.action-like-btn');
-                const bookmarkStat = card.querySelector('.bookmark-stat');
-                const actionBookmarkBtn = card.querySelector('.action-bookmark-btn');
-                
-                // 恢复点赞状态
-                if (likedIds.includes(cardId)) {
-                    if (likeStat) likeStat.setAttribute('data-liked', 'true');
-                    if (actionLikeBtn) actionLikeBtn.classList.add('active');
-                }
-                
-                // 恢复收藏状态
-                if (collectedIds.includes(cardId)) {
-                    if (bookmarkStat) bookmarkStat.setAttribute('data-bookmarked', 'true');
-                    if (actionBookmarkBtn) actionBookmarkBtn.classList.add('active');
-                }
-            });
-            
-            caseCards.forEach(function(card) {
-                // 点击卡片跳转到详情页（排除按钮点击）
-                card.addEventListener('click', function(e) {
-                    // 如果点击的是按钮，不跳转
-                    if (e.target.closest('button') || e.target.closest('.card-actions')) {
-                        e.stopPropagation();
-                        return;
-                    }
-                    // 跳转到详情页
-                    window.location.href = 'case-detail.html';
+        // 点击外部关闭所有标签下拉菜单
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.tag-btn-wrapper')) {
+                document.querySelectorAll('.tag-dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
                 });
-                
-                // 获取点赞相关元素
-                const likeBtn = card.querySelector('.like-btn');
-                const likeStat = card.querySelector('.like-stat');
-                const likeCount = card.querySelector('.like-count');
-                const actionLikeBtn = card.querySelector('.action-like-btn');
-                
-                // 获取收藏相关元素
-                const bookmarkBtn = card.querySelector('.bookmark-btn');
-                const bookmarkStat = card.querySelector('.bookmark-stat');
-                const actionBookmarkBtn = card.querySelector('.action-bookmark-btn');
-                
-                // 解析点赞数（处理 k 后缀）
-                function parseCount(countText) {
-                    if (countText.includes('k')) {
-                        return parseFloat(countText) * 1000;
-                    }
-                    return parseInt(countText) || 0;
+                // 移除所有按钮的active状态
+                document.querySelectorAll('.tag-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+            }
+            // 关闭 Most popular 下拉菜单
+            if (!e.target.closest('.most-popular-wrapper')) {
+                const mostPopularDropdown = document.getElementById('mostPopularDropdown');
+                if (mostPopularDropdown) {
+                    mostPopularDropdown.style.display = 'none';
                 }
-                
-                // 格式化点赞数
-                function formatCount(count) {
-                    if (count >= 1000) {
-                        return (count / 1000).toFixed(1) + 'k';
-                    }
-                    return count.toString();
-                }
-                
-                // 统一的点赞切换函数
-                function toggleLike() {
-                    const isLiked = likeStat.getAttribute('data-liked') === 'true';
-                    const currentCount = parseCount(likeCount.textContent);
-                    const cardId = parseInt(card.getAttribute('data-card-id'));
-                    let likedIds = JSON.parse(localStorage.getItem('likedCases') || '[]');
-                    
-                    if (isLiked) {
-                        likeStat.setAttribute('data-liked', 'false');
-                        likeCount.textContent = formatCount(currentCount - 1);
-                        if (actionLikeBtn) {
-                            actionLikeBtn.classList.remove('active');
+            }
+        });
+        
+        // 下拉菜单项复选框点击功能
+        document.querySelectorAll('.tag-dropdown-item').forEach(item => {
+            const checkbox = item.querySelector('.checkbox-icon');
+            if (checkbox) {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('checked');
+                });
+            }
+        });
+        
+        // Most popular 下拉菜单功能
+        const mostPopularBtn = document.getElementById('mostPopularBtn');
+        const mostPopularDropdown = document.getElementById('mostPopularDropdown');
+        const expandArrowIcon = document.querySelector('.expand-arrow-icon');
+        
+        if (mostPopularBtn && mostPopularDropdown) {
+            // 点击标题或箭头展开/关闭菜单
+            mostPopularBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isVisible = mostPopularDropdown.style.display === 'block';
+                mostPopularDropdown.style.display = isVisible ? 'none' : 'block';
+            });
+            
+            if (expandArrowIcon) {
+                expandArrowIcon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = mostPopularDropdown.style.display === 'block';
+                    mostPopularDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+            }
+            
+            // 点击菜单项
+            document.querySelectorAll('.popular-dropdown-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // 移除所有项的active状态
+                    document.querySelectorAll('.popular-dropdown-item').forEach(i => {
+                        i.classList.remove('active');
+                        const doneIcon = i.querySelector('.done-icon');
+                        if (doneIcon) {
+                            doneIcon.style.display = 'none';
                         }
-                        // 从localStorage中移除
-                        likedIds = likedIds.filter(id => id !== cardId);
-                        localStorage.setItem('likedCases', JSON.stringify(likedIds));
-                    } else {
-                        likeStat.setAttribute('data-liked', 'true');
-                        likeCount.textContent = formatCount(currentCount + 1);
-                        if (actionLikeBtn) {
-                            actionLikeBtn.classList.add('active');
-                        }
-                        // 添加到localStorage
-                        if (!likedIds.includes(cardId)) {
-                            likedIds.push(cardId);
-                            localStorage.setItem('likedCases', JSON.stringify(likedIds));
-                        }
-                    }
-                }
-                
-                // 统一的收藏切换函数
-                function toggleBookmark() {
-                    const isBookmarked = bookmarkStat.getAttribute('data-bookmarked') === 'true';
-                    const cardId = parseInt(card.getAttribute('data-card-id'));
-                    let collectedIds = JSON.parse(localStorage.getItem('collectedCases') || '[]');
-                    
-                    if (isBookmarked) {
-                        bookmarkStat.setAttribute('data-bookmarked', 'false');
-                        if (actionBookmarkBtn) {
-                            actionBookmarkBtn.classList.remove('active');
-                        }
-                        // 从localStorage中移除
-                        collectedIds = collectedIds.filter(id => id !== cardId);
-                        localStorage.setItem('collectedCases', JSON.stringify(collectedIds));
-                    } else {
-                        bookmarkStat.setAttribute('data-bookmarked', 'true');
-                        if (actionBookmarkBtn) {
-                            actionBookmarkBtn.classList.add('active');
-                        }
-                        // 添加到localStorage
-                        if (!collectedIds.includes(cardId)) {
-                            collectedIds.push(cardId);
-                            localStorage.setItem('collectedCases', JSON.stringify(collectedIds));
-                        }
-                    }
-                }
-                
-                // 底部点赞按钮功能
-                if (likeBtn && likeStat && likeCount) {
-                    likeBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleLike();
                     });
-                }
-                
-                // 图片上的点赞按钮功能
-                if (actionLikeBtn && likeStat && likeCount) {
-                    actionLikeBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleLike();
-                    });
-                }
-                
-                // 底部收藏按钮功能
-                if (bookmarkBtn && bookmarkStat) {
-                    bookmarkBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleBookmark();
-                    });
-                }
-                
-                // 图片上的收藏按钮功能
-                if (actionBookmarkBtn && bookmarkStat) {
-                    actionBookmarkBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleBookmark();
-                    });
+                    // 添加当前项的active状态
+                    this.classList.add('active');
+                    const doneIcon = this.querySelector('.done-icon');
+                    if (doneIcon) {
+                        doneIcon.style.display = 'block';
+                    }
+                    // 更新标题文字
+                    const itemText = this.querySelector('.popular-item-text').textContent;
+                    if (mostPopularBtn) {
+                        mostPopularBtn.textContent = itemText;
+                    }
+                    // 关闭下拉菜单
+                    mostPopularDropdown.style.display = 'none';
+                });
+            });
+        }
+        
+        // 案例卡片点击跳转到详情页
+        document.querySelectorAll('.case-card-new').forEach(card => {
+            card.addEventListener('click', function() {
+                const cardId = this.getAttribute('data-card-id');
+                if (cardId === '1') {
+                    window.location.href = 'case-detail.html';
                 }
             });
+        });
+        
+        // 点赞和收藏功能
+        document.querySelectorAll('.case-card-new').forEach(card => {
+            const actionLikeBtn = card.querySelector('.action-like-btn-new');
+            const actionBookmarkBtn = card.querySelector('.action-bookmark-btn-new');
+            const cardId = parseInt(card.getAttribute('data-card-id'));
+            
+            // 点赞功能
+            if (actionLikeBtn) {
+                const likeIcon = actionLikeBtn.querySelector('.action-icon-img');
+                const originalLikeSrc = 'images/heart icon.png';
+                
+                // 点击功能
+                actionLikeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                    const isLiked = this.classList.contains('active');
+                    // 切换图标和背景色
+                    if (isLiked) {
+                        likeIcon.src = 'images/blueHeart.png';
+                        this.style.backgroundColor = '#F4F4F4';
+                    } else {
+                        likeIcon.src = originalLikeSrc;
+                        this.style.backgroundColor = '';
+                    }
+                    // 这里可以添加保存到 localStorage 的逻辑
+                });
+            }
+            
+            // 收藏功能
+            if (actionBookmarkBtn) {
+                const bookmarkIcon = actionBookmarkBtn.querySelector('.action-icon-img');
+                const originalBookmarkSrc = 'images/collect icon.png';
+                
+                // 点击功能
+                actionBookmarkBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                    const isBookmarked = this.classList.contains('active');
+                    // 切换图标和背景色
+                    if (isBookmarked) {
+                        bookmarkIcon.src = 'images/blueBookmark.png';
+                        this.style.backgroundColor = '#F4F4F4';
+                    } else {
+                        bookmarkIcon.src = originalBookmarkSrc;
+                        this.style.backgroundColor = '';
+                    }
+                    // 这里可以添加保存到 localStorage 的逻辑
+                });
+            }
         });
     </script>
 </body>
 </html>
-
