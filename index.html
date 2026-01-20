@@ -265,17 +265,15 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-content-new">
-                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
-                        <div class="card-stats-new">
-                            <div class="card-stat-item-new">
-                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
-                                <span class="card-stat-count-new like-count-new">2.3k</span>
-                            </div>
-                            <div class="card-stat-item-new">
-                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
-                                <span class="card-stat-count-new bookmark-count-new">668</span>
-                            </div>
+                    <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                    <div class="card-stats-new">
+                        <div class="card-stat-item-new">
+                            <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                            <span class="card-stat-count-new like-count-new">2.3k</span>
+                        </div>
+                        <div class="card-stat-item-new">
+                            <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                            <span class="card-stat-count-new bookmark-count-new">668</span>
                         </div>
                     </div>
                 </article>
@@ -295,17 +293,15 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-content-new">
-                        <h3 class="card-title-new">CyberBrick 4WD car</h3>
-                        <div class="card-stats-new">
-                            <div class="card-stat-item-new">
-                                <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
-                                <span class="card-stat-count-new like-count-new">1.8k</span>
-                            </div>
-                            <div class="card-stat-item-new">
-                                <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
-                                <span class="card-stat-count-new bookmark-count-new">520</span>
-                            </div>
+                    <h3 class="card-title-new">CyberBrick 4WD car</h3>
+                    <div class="card-stats-new">
+                        <div class="card-stat-item-new">
+                            <img src="images/heart icon.png" alt="点赞" class="card-stat-icon-new">
+                            <span class="card-stat-count-new like-count-new">1.8k</span>
+                        </div>
+                        <div class="card-stat-item-new">
+                            <img src="images/collect icon.png" alt="收藏" class="card-stat-icon-new">
+                            <span class="card-stat-count-new bookmark-count-new">520</span>
                         </div>
                     </div>
                 </article>
@@ -652,20 +648,20 @@
         const userMenuBtn = document.getElementById('userMenuBtn');
         const userDropdownMenu = document.getElementById('userDropdownMenu');
         
-        if (userMenuBtn && userDropdownMenu) {
-            userMenuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const isVisible = userDropdownMenu.style.display === 'block';
-                userDropdownMenu.style.display = isVisible ? 'none' : 'block';
-            });
-            
-            // 点击外部关闭菜单
-            document.addEventListener('click', function(e) {
-                if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-                    userDropdownMenu.style.display = 'none';
-                }
-            });
-        }
+        userMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (userDropdownMenu.style.display === 'none' || userDropdownMenu.style.display === '') {
+                userDropdownMenu.style.display = 'block';
+            } else {
+                userDropdownMenu.style.display = 'none';
+            }
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                userDropdownMenu.style.display = 'none';
+            }
+        });
         
         // 标签按钮下拉菜单显示/隐藏
         document.querySelectorAll('.tag-btn').forEach(btn => {
