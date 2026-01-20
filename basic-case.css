@@ -21,6 +21,7 @@ body {
     padding-bottom: 76px; /* 为固定导航栏留出空间 */
     margin: 0;
     min-height: 100vh;
+    transition: background-image 0.3s ease;
 }
 
 /* 主容器 */
@@ -45,6 +46,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
+    transition: background-image 0.3s ease;
 }
 
 /* 顶部标题 */
@@ -82,6 +84,7 @@ body {
     z-index: 1000;
     overflow: visible;
     box-sizing: border-box;
+    transition: background-image 0.3s ease;
 }
 
 /* 左侧搜索区域 */
@@ -941,10 +944,45 @@ body {
 .user-menu-container {
     position: relative;
     z-index: 1000;
-    transform: translateY(-15px);
+    transform: translate(40px, -15px);
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 10px;
+}
+
+.theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+    transform: rotate(180deg);
 }
 
 .user-avatar-btn {
@@ -1033,7 +1071,7 @@ body {
     top: calc(100% + 8px);
     right: 0;
     width: 200px;
-    background-image: url('images/mpmenu.png');
+    background-image: url('images/button menu.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     border-radius: 8px;
@@ -1063,7 +1101,7 @@ body {
     font-family: 'HarmonyOS Sans SC', sans-serif;
     font-weight: 700;
     font-size: 15px;
-    color: #4454CC;
+    color: #FFFFFF;
 }
 
 .done-icon {
@@ -1095,7 +1133,7 @@ body {
     border-radius: 24px;
     overflow: visible;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-image 0.3s ease;
     position: relative;
     padding: 10px;
     box-sizing: border-box;
@@ -1599,4 +1637,73 @@ body {
 
 .menu-item.menu-item-danger:hover .menu-item-text {
     color: #FF9999;
+}
+
+/* ========================================
+   浅色模式样式
+   ======================================== */
+[data-theme="light"] body,
+[data-theme="light"] .cover-background {
+    background-image: url('images/light background.png');
+}
+
+[data-theme="light"] .main-navbar {
+    background-image: url('images/浅色导航栏.png');
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+}
+
+[data-theme="light"] .tag-btn {
+    background-image: url('images/浅色button.png');
+}
+
+[data-theme="light"] .tag-btn.active {
+    background-image: url('images/浅色button点击.png');
+}
+
+
+[data-theme="light"] .case-card-new {
+    background-image: url('images/light case card.png');
+}
+
+/* 浅色模式下：保持卡片尺寸与文字字号与深色模式完全一致（只换图片不换布局） */
+[data-theme="light"] .case-card-new {
+    width: 395px;
+    height: 363px;
+}
+
+[data-theme="light"] .card-title-new {
+    font-size: 24px;
+}
+
+[data-theme="light"] .card-stat-count-new,
+[data-theme="light"] .card-stat-item-new:first-child .card-stat-count-new,
+[data-theme="light"] .card-stat-item-new:last-child .card-stat-count-new {
+    font-size: 12px;
+}
+
+/* 浅色模式文字颜色：Sophicar + Most popular */
+[data-theme="light"] .main-title,
+[data-theme="light"] .most-popular-title {
+    color: #3E6AE2;
+}
+
+/* 浅色模式下 Most popular 下拉菜单底图 */
+[data-theme="light"] .most-popular-dropdown {
+    background-image: url('images/mpmenu.png');
+}
+
+/* 浅色模式下 Most popular 下拉菜单文字颜色 */
+[data-theme="light"] .popular-item-text {
+    color: #4454CC;
+}
+
+/* 浅色模式下：导航栏 5 个按钮展开的下拉菜单底图与文字颜色 */
+[data-theme="light"] .tag-dropdown-menu {
+    background-image: url('images/浅色button menu.png');
+}
+
+[data-theme="light"] .item-text {
+    color: #4254D9;
 }

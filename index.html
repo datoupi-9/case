@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -162,10 +162,13 @@
                 </div>
             </div>
             
-            <!-- 右侧用户头像 -->
+            <!-- 右侧用户头像和模式切换按钮 -->
             <div class="user-menu-container">
                 <button class="user-avatar-btn" id="userMenuBtn" aria-label="用户菜单">
                     <img src="images/头像.png" alt="用户头像" class="user-avatar-img">
+                </button>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="切换主题">
+                    <img src="images/切换icon.png" alt="切换主题" class="theme-icon">
                 </button>
                 <!-- 用户下拉菜单 -->
                 <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
@@ -723,6 +726,12 @@
                     e.stopPropagation();
                     // 切换复选框的选中状态
                     checkbox.classList.toggle('checked');
+                    // 更新checkbox图标（如果取消选中，恢复正确的图标）
+                    if (!checkbox.classList.contains('checked')) {
+                        const theme = document.documentElement.getAttribute('data-theme');
+                        const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
+                        checkbox.src = checkboxSrc;
+                    }
                 });
             }
         });
@@ -944,6 +953,88 @@
                         removeBookmarkedCase(cardId);
                     }
                 });
+            }
+        });
+        
+        // 主题切换功能
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const htmlElement = document.documentElement;
+        const userAvatarImg = document.querySelector('.user-avatar-img');
+        const menuHeaderAvatar = document.querySelector('.menu-header-avatar');
+        const expandArrowIconEl = document.querySelector('.expand-arrow-icon');
+        
+        // 更新头像图片的函数
+        function updateAvatarImage(theme) {
+            const avatarSrc = theme === 'light' ? 'images/light头像.png' : 'images/头像.png';
+            if (userAvatarImg) {
+                userAvatarImg.src = avatarSrc;
+            }
+            if (menuHeaderAvatar) {
+                menuHeaderAvatar.src = avatarSrc;
+            }
+        }
+        
+        // 更新箭头图标的函数
+        function updateArrowIcon(theme) {
+            const arrowSrc = theme === 'light' ? 'images/expand-arrow.png' : 'images/Expand Arrow.png';
+            if (expandArrowIconEl) {
+                expandArrowIconEl.src = arrowSrc;
+            }
+        }
+        
+        // 更新checkbox图标的函数
+        function updateCheckboxIcons(theme) {
+            const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
+            const checkboxIcons = document.querySelectorAll('.checkbox-icon');
+            checkboxIcons.forEach(icon => {
+                // 只更新未选中的checkbox，选中的checkbox会显示Done图标
+                if (!icon.classList.contains('checked')) {
+                    icon.src = checkboxSrc;
+                }
+            });
+        }
+        
+        // 初始化所有checkbox图标
+        function initCheckboxIcons() {
+            const theme = htmlElement.getAttribute('data-theme');
+            updateCheckboxIcons(theme);
+        }
+        
+        // 从localStorage读取保存的主题
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        updateAvatarImage(savedTheme);
+        updateArrowIcon(savedTheme);
+        
+        // 页面加载完成后初始化checkbox图标
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCheckboxIcons);
+        } else {
+            initCheckboxIcons();
+        }
+        
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateAvatarImage(newTheme);
+                updateArrowIcon(newTheme);
+                updateCheckboxIcons(newTheme);
+            });
+        }
+        
+        // 监听checkbox点击事件，确保切换主题后新创建的checkbox也使用正确的图标
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('checkbox-icon')) {
+                const theme = htmlElement.getAttribute('data-theme');
+                const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
+                // 如果checkbox被取消选中，恢复正确的图标
+                if (!e.target.classList.contains('checked')) {
+                    e.target.src = checkboxSrc;
+                }
             }
         });
         
