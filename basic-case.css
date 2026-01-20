@@ -1654,6 +1654,19 @@ body {
     background-position: center;
 }
 
+/* 浅色模式下导航栏内容向下移15px */
+[data-theme="light"] .search-area {
+    transform: translateY(0);
+}
+
+[data-theme="light"] .tag-buttons-area {
+    transform: translateY(-50%);
+}
+
+[data-theme="light"] .user-menu-container {
+    transform: translate(40px, 0);
+}
+
 [data-theme="light"] .tag-btn {
     background-image: url('images/浅色button.png');
 }
