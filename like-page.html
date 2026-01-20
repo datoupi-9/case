@@ -124,6 +124,9 @@
                 <article class="case-card" data-card-id="${caseData.id}">
                     <div class="card-image">
                         <img src="${caseData.image}" alt="${caseData.title}" class="card-main-image">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
                         <div class="card-actions">
                             <button class="action-like-btn active" aria-label="Like" title="Like">
                                 <img src="images/heart icon.png" alt="Like" class="action-icon-img">
@@ -133,22 +136,16 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-content">
-                        <div class="card-stats">
-                            <div class="stat-item like-stat" data-liked="true">
-                                <button class="like-btn" aria-label="Like">
-                                    <img src="images/heart icon.png" alt="Like" class="card-stat-icon">
-                                </button>
-                                <span class="stat-number like-count">${caseData.likeCount}</span>
-                            </div>
-                            <div class="stat-item bookmark-stat" data-bookmarked="false">
-                                <button class="bookmark-btn" aria-label="Bookmark">
-                                    <img src="images/collect icon.png" alt="Bookmark" class="card-stat-icon">
-                                </button>
-                                <span class="stat-number">${caseData.bookmarkCount}</span>
-                            </div>
+                    <h3 class="card-title">${caseData.title}</h3>
+                    <div class="card-stats">
+                        <div class="stat-item like-stat" data-liked="true">
+                            <img src="images/heart icon.png" alt="Like" class="card-stat-icon">
+                            <span class="stat-number like-count">${caseData.likeCount}</span>
                         </div>
-                        <h3 class="card-title">${caseData.title}</h3>
+                        <div class="stat-item bookmark-stat" data-bookmarked="false">
+                            <img src="images/collect icon.png" alt="Bookmark" class="card-stat-icon">
+                            <span class="stat-number">${caseData.bookmarkCount}</span>
+                        </div>
                     </div>
                 </article>
             `;
@@ -166,12 +163,32 @@
                 return;
             }
 
+            // 跳过第一个案例卡片，从第二个开始
+            const filteredCases = likedCases.slice(1);
+            
+            if (filteredCases.length === 0) {
+                if (casesGrid) casesGrid.style.display = 'none';
+                if (emptyState) emptyState.style.display = 'flex';
+                return;
+            }
+
             if (casesGrid) casesGrid.style.display = 'grid';
             if (emptyState) emptyState.style.display = 'none';
             if (casesGrid) casesGrid.innerHTML = '';
 
-            // 显示被点赞的案例（使用从localStorage读取的完整数据）
-            likedCases.forEach(caseData => {
+            // 如果第二个案例存在，更新其内容和布局与index.html第一个案例一致
+            if (filteredCases.length > 0 && likedCases.length > 1) {
+                filteredCases[0] = {
+                    id: likedCases[1].id || 2,
+                    title: "CyberBrick 4WD car",
+                    image: "images/case-main-image.png",
+                    likeCount: "2.3k",
+                    bookmarkCount: "668"
+                };
+            }
+
+            // 显示被点赞的案例（跳过第一个）
+            filteredCases.forEach(caseData => {
                 if (casesGrid) {
                     casesGrid.innerHTML += createCaseCard(caseData);
                 }
@@ -196,12 +213,10 @@
                 });
 
                 // 点赞和收藏功能
-                const likeBtn = card.querySelector('.like-btn');
                 const likeStat = card.querySelector('.like-stat');
                 const likeCount = card.querySelector('.like-count');
                 const actionLikeBtn = card.querySelector('.action-like-btn');
                 
-                const bookmarkBtn = card.querySelector('.bookmark-btn');
                 const bookmarkStat = card.querySelector('.bookmark-stat');
                 const actionBookmarkBtn = card.querySelector('.action-bookmark-btn');
 
@@ -352,24 +367,10 @@
                     }
                 }
 
-                if (likeBtn && likeStat && likeCount) {
-                    likeBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleLike();
-                    });
-                }
-
                 if (actionLikeBtn && likeStat && likeCount) {
                     actionLikeBtn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         toggleLike();
-                    });
-                }
-
-                if (bookmarkBtn && bookmarkStat) {
-                    bookmarkBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleBookmark();
                     });
                 }
 

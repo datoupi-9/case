@@ -1209,19 +1209,20 @@ body {
 
 .card-stats-new {
     position: absolute;
-    top: 309px;
-    left: 291px;
+    top: 305px;
+    left: 271px;
     width: 77px;
-    height: 22px;
+    height: 46px;
+    display: flex;
+    align-items: center;
 }
 
 /* Heart图标和数字位置 */
 .card-stat-item-new:first-child {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     display: flex;
     align-items: center;
+    gap: 1px;
 }
 
 .card-stat-item-new:first-child .card-stat-icon-new {
@@ -1231,10 +1232,7 @@ body {
 }
 
 .card-stat-item-new:first-child .card-stat-count-new {
-    position: absolute;
-    left: 23px;
-    top: 3px;
-    width: 22px;
+    width: auto;
     height: 12px;
     font-family: 'Inter', 'HarmonyOS Sans SC', sans-serif;
     font-weight: 700;
@@ -1243,15 +1241,16 @@ body {
     color: #FFFFFF;
     display: flex;
     align-items: center;
+    margin-top: 3px;
 }
 
 /* Bookmark图标和数字位置 */
 .card-stat-item-new:last-child {
-    position: absolute;
-    top: 0;
-    left: 55px;
+    position: relative;
     display: flex;
     align-items: center;
+    gap: 1px;
+    margin-left: 13px;
 }
 
 .card-stat-item-new:last-child .card-stat-icon-new {
@@ -1261,10 +1260,7 @@ body {
 }
 
 .card-stat-item-new:last-child .card-stat-count-new {
-    position: absolute;
-    left: 23px;
-    top: 3px;
-    width: 22px;
+    width: auto;
     height: 12px;
     font-family: 'Inter', 'HarmonyOS Sans SC', sans-serif;
     font-weight: 700;
@@ -1273,6 +1269,7 @@ body {
     color: #FFFFFF;
     display: flex;
     align-items: center;
+    margin-top: 3px;
 }
 
 .card-stat-icon-new {
@@ -1294,7 +1291,7 @@ body {
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    min-width: 200px;
+    min-width: 220px;
     background-image: url('images/button menu.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -1315,10 +1312,17 @@ body {
     padding: 8px 16px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    white-space: nowrap;
+    min-width: 0;
 }
 
 .tag-dropdown-item:hover {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tag-dropdown-item:active {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(0.98);
 }
 
 .checkbox-icon {
@@ -1326,17 +1330,26 @@ body {
     height: 18px;
     object-fit: contain;
     position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.checkbox-icon.checked {
+    position: relative;
 }
 
 .checkbox-icon.checked::after {
-    content: '✓';
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #3E6AE2;
-    font-size: 12px;
-    font-weight: bold;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/Done.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
 }
 
 .item-text {
@@ -1344,6 +1357,9 @@ body {
     font-weight: 400;
     font-size: 14px;
     color: #A3DEFD;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* 用户下拉菜单 */
