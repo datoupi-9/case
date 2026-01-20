@@ -12,10 +12,8 @@
     <div class="container">
         
         <!-- 返回按钮 -->
-        <button class="back-btn" onclick="history.back()" aria-label="Back">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18L9 12L15 6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <button class="back-btn" onclick="window.location.href='index.html'" aria-label="Back">
+            <img src="images/back icon.png" alt="Back" class="back-icon-img">
         </button>
         
         <!-- 主要内容区域 -->
@@ -27,19 +25,20 @@
                     <h1 class="case-title">CyberBrick 4WD - Free 3D Printing Model - MakerWorld</h1>
                     <div class="case-meta">
                         <div class="meta-item">
-                            <span class="meta-label">Model Name:</span>
-                            <span class="meta-value">CyberBrick 4WD</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Designer:</span>
-                            <span class="case-author">Unknown</span>
-                            <button class="follow-designer-btn" data-designer="Unknown" aria-label="Follow Designer" title="Follow Designer">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <circle cx="9" cy="9" r="8" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                    <path d="M9 5V13M5 9H13" stroke="#434343" stroke-width="1.2" stroke-linecap="round"/>
-                                </svg>
-                                <span class="follow-text">Follow</span>
-                            </button>
+                            <div class="designer-avatar-wrapper">
+                                <img src="images/头像.png" alt="Designer" class="designer-icon" id="designerAvatar">
+                                <button class="follow-add-btn" id="followBtn" data-designer="Asif lpbal" aria-label="Follow Designer" title="Follow Designer">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="follow-icon">
+                                        <circle cx="6" cy="6" r="5.5" fill="#6798FF" stroke="#FFFFFF" stroke-width="1"/>
+                                        <path d="M6 3V9M3 6H9" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="follow-check" style="display: none;">
+                                        <circle cx="6" cy="6" r="5.5" fill="#3E6AE2" stroke="#FFFFFF" stroke-width="1"/>
+                                        <path d="M3 6L5.5 8.5L9 4.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="case-author">Asif lpbal</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">Release Date:</span>
@@ -79,7 +78,6 @@
                         <p class="description-text">
                             The designer has invested significant effort in creating detailed assembly guides and providing STP files for the chassis and wheels to facilitate user remixing. He has decided to release this model as an exclusive on the MakerWorld platform. Users can support him by clicking "Buy Now" to provide commission incentives.
                         </p>
-                        <button class="purchase-btn">Buy Now</button>
                     </div>
                 </section>
                 
@@ -124,33 +122,27 @@
                 </section>
             </div>
             
+            <!-- 垂直分隔线 -->
+            <div class="vertical-divider"></div>
+            
             <!-- 右侧：评论区域 -->
             <aside class="comments-section">
                 <!-- 操作按钮 - 点赞、收藏、转发、跳转 -->
                 <div class="comment-actions-bar">
                     <button class="comment-action-btn like-action-btn" aria-label="Like" title="Like">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 21L4.5 12.5C3.5 11.5 2.5 10 2.5 8C2.5 5 5 2.5 8 2.5C9.5 2.5 11 3 12 4L12 4L13.5 3C14.5 2 16 1.5 17.5 1.5C20.5 1.5 23 4 23 8C23 10 22 11.5 21 12.5L12 21Z" stroke="#434343" stroke-width="1.5"/>
-                        </svg>
+                        <img src="images/heart icon.png" alt="Like" class="action-icon-img">
                     </button>
                     
                     <button class="comment-action-btn bookmark-action-btn" aria-label="Bookmark" title="Bookmark">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 5H19V19L12 15L5 19V5Z" stroke="#434343" stroke-width="1.5"/>
-                        </svg>
+                        <img src="images/collect icon.png" alt="Bookmark" class="action-icon-img">
                     </button>
                     
                     <button class="comment-action-btn share-action-btn" aria-label="Share" title="Share">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 5.12549 15.0077 5.24919 15.0227 5.37063L8.46447 9.46447C7.77396 8.77396 6.78929 8.25 5.5 8.25C3.01472 8.25 1 10.2647 1 12.75C1 15.2353 3.01472 17.25 5.5 17.25C6.78929 17.25 7.77396 16.726 8.46447 16.0355L15.0227 20.1294C15.0077 20.2508 15 20.3745 15 20.5C15 22.1569 16.3431 23.5 18 23.5C19.6569 23.5 21 22.1569 21 20.5C21 18.8431 19.6569 17.5 18 17.5C16.3431 17.5 15 18.8431 15 20.5C15 20.6255 15.0077 20.7492 15.0227 20.8706L8.46447 16.7768C7.77396 17.4673 6.78929 17.9913 5.5 17.9913C3.01472 17.9913 1 15.9766 1 13.4913C1 11.006 3.01472 8.99127 5.5 8.99127C6.78929 8.99127 7.77396 9.51527 8.46447 10.2058L15.0227 6.11201C15.0077 5.99057 15 5.86687 15 5.74138C15 4.08453 16.3431 2.74138 18 2.74138Z" stroke="#434343" stroke-width="1.5"/>
-                        </svg>
+                        <img src="images/转发icon.png" alt="Share" class="action-icon-img">
                     </button>
                     
                     <button class="comment-action-btn link-action-btn" aria-label="Link" title="Link" onclick="window.open('https://makerworld.com.cn/zh/models/1949321-cyberbrick-si-qu-che#profileId-2165973', '_blank')">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M18 13V19C18 20.1046 17.1046 21 16 21H5C3.89543 21 3 20.1046 3 19V8C3 6.89543 3.89543 6 5 6H11" stroke="#434343" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M15 3H21M21 3V9M21 3L10 14" stroke="#434343" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <img src="images/link icon.png" alt="Link" class="action-icon-img">
                     </button>
                 </div>
                 
@@ -162,20 +154,15 @@
                 <!-- 评论输入框 -->
                 <div class="comment-input-area">
                     <div class="comment-avatar">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
-                            <circle cx="20" cy="15" r="6" fill="#9E9E9E"/>
-                            <path d="M8 30C8 25 12 21 20 21C28 21 32 25 32 30" fill="#9E9E9E"/>
-                        </svg>
+                        <img src="images/头像.png" alt="Avatar" class="comment-avatar-img">
                     </div>
                     <div class="comment-input-wrapper">
-                        <input type="text" class="comment-input" placeholder="Add a comment..." aria-label="Add comment">
-                        <button class="comment-submit-btn" aria-label="Send">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="#3E6AE2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                        <input type="text" class="comment-input" placeholder="Add a comment..." aria-label="Add comment" maxlength="500">
+                        <button class="comment-submit-btn" aria-label="Send" disabled>
+                            <img src="images/Email Send.png" alt="Send" class="comment-send-icon">
                         </button>
                     </div>
+                    <div class="comment-char-count" style="display: none;">0/500</div>
                 </div>
                 
                 <!-- 评论列表 -->
@@ -183,11 +170,7 @@
                     <!-- 评论项 1 -->
                     <article class="comment-item">
                         <div class="comment-avatar">
-                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                                <circle cx="18" cy="18" r="18" fill="#E0E0E0"/>
-                                <circle cx="18" cy="13" r="5" fill="#9E9E9E"/>
-                                <path d="M7 27C7 22 10.5 19 18 19C25.5 19 29 22 29 27" fill="#9E9E9E"/>
-                            </svg>
+                            <img src="images/头像.png" alt="Avatar" class="comment-avatar-img">
                         </div>
                         <div class="comment-content">
                             <div class="comment-header">
@@ -197,9 +180,7 @@
                             <p class="comment-text">This is absolutely stunning! The design is so clean and modern. Great work!</p>
                             <div class="comment-actions">
                                 <button class="comment-like-btn" aria-label="Like comment">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 14L3 9C2 8 1 6.5 1 4.5C1 2.5 2.5 1 4.5 1C6 1 7.5 1.5 8.5 2.5L8 3L9.5 2C10.5 1 12 0.5 13.5 0.5C15.5 0.5 17 2 17 4.5C17 6.5 16 8 15 9L8 14Z" stroke="#666" stroke-width="1.2"/>
-                                    </svg>
+                                    <img src="images/heart icon.png" alt="Like" class="comment-like-icon">
                                     <span>12</span>
                                 </button>
                                 <button class="comment-reply-btn">Reply</button>
@@ -210,11 +191,7 @@
                     <!-- 评论项 2 -->
                     <article class="comment-item">
                         <div class="comment-avatar">
-                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                                <circle cx="18" cy="18" r="18" fill="#E0E0E0"/>
-                                <circle cx="18" cy="13" r="5" fill="#9E9E9E"/>
-                                <path d="M7 27C7 22 10.5 19 18 19C25.5 19 29 22 29 27" fill="#9E9E9E"/>
-                            </svg>
+                            <img src="images/头像.png" alt="Avatar" class="comment-avatar-img">
                         </div>
                         <div class="comment-content">
                             <div class="comment-header">
@@ -224,9 +201,7 @@
                             <p class="comment-text">Love the color scheme and typography choices. Very professional!</p>
                             <div class="comment-actions">
                                 <button class="comment-like-btn" aria-label="Like comment">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 14L3 9C2 8 1 6.5 1 4.5C1 2.5 2.5 1 4.5 1C6 1 7.5 1.5 8.5 2.5L8 3L9.5 2C10.5 1 12 0.5 13.5 0.5C15.5 0.5 17 2 17 4.5C17 6.5 16 8 15 9L8 14Z" stroke="#666" stroke-width="1.2"/>
-                                    </svg>
+                                    <img src="images/heart icon.png" alt="Like" class="comment-like-icon">
                                     <span>8</span>
                                 </button>
                                 <button class="comment-reply-btn">Reply</button>
@@ -237,11 +212,7 @@
                     <!-- 评论项 3 -->
                     <article class="comment-item">
                         <div class="comment-avatar">
-                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                                <circle cx="18" cy="18" r="18" fill="#E0E0E0"/>
-                                <circle cx="18" cy="13" r="5" fill="#9E9E9E"/>
-                                <path d="M7 27C7 22 10.5 19 18 19C25.5 19 29 22 29 27" fill="#9E9E9E"/>
-                            </svg>
+                            <img src="images/头像.png" alt="Avatar" class="comment-avatar-img">
                         </div>
                         <div class="comment-content">
                             <div class="comment-header">
@@ -251,9 +222,7 @@
                             <p class="comment-text">The user experience flow is really well thought out. Can't wait to see more!</p>
                             <div class="comment-actions">
                                 <button class="comment-like-btn" aria-label="Like comment">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 14L3 9C2 8 1 6.5 1 4.5C1 2.5 2.5 1 4.5 1C6 1 7.5 1.5 8.5 2.5L8 3L9.5 2C10.5 1 12 0.5 13.5 0.5C15.5 0.5 17 2 17 4.5C17 6.5 16 8 15 9L8 14Z" stroke="#666" stroke-width="1.2"/>
-                                    </svg>
+                                    <img src="images/heart icon.png" alt="Like" class="comment-like-icon">
                                     <span>15</span>
                                 </button>
                                 <button class="comment-reply-btn">Reply</button>
@@ -264,11 +233,7 @@
                     <!-- 评论项 4 -->
                     <article class="comment-item">
                         <div class="comment-avatar">
-                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                                <circle cx="18" cy="18" r="18" fill="#E0E0E0"/>
-                                <circle cx="18" cy="13" r="5" fill="#9E9E9E"/>
-                                <path d="M7 27C7 22 10.5 19 18 19C25.5 19 29 22 29 27" fill="#9E9E9E"/>
-                            </svg>
+                            <img src="images/头像.png" alt="Avatar" class="comment-avatar-img">
                         </div>
                         <div class="comment-content">
                             <div class="comment-header">
@@ -294,42 +259,47 @@
         <!-- 右上角头像按钮和下拉菜单 -->
         <div class="user-menu-container">
             <button class="user-avatar-btn" id="userMenuBtn" aria-label="用户菜单">
-                <svg width="41" height="41" viewBox="0 0 41 41" fill="none">
-                    <circle cx="20.5" cy="20.5" r="20.5" fill="#E0E0E0"/>
-                    <circle cx="20.5" cy="16" r="6" fill="#9E9E9E"/>
-                    <path d="M8 32C8 26 13.5 22 20.5 22C27.5 22 33 26 33 32" fill="#9E9E9E"/>
-                </svg>
+                <img src="images/头像.png" alt="用户头像" class="user-avatar-img">
             </button>
-            
-            <!-- 下拉菜单 -->
+            <!-- 用户下拉菜单 -->
             <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
-                <div class="menu-item menu-user-id">
-                    <div class="user-id-avatar">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
-                            <circle cx="20" cy="15" r="6" fill="#9E9E9E"/>
-                            <path d="M8 30C8 25 12 21 20 21C28 21 32 25 32 30" fill="#9E9E9E"/>
-                        </svg>
+                <!-- 顶部区域：头像和用户信息 -->
+                <div class="menu-header">
+                    <div class="menu-header-info">
+                        <img src="images/头像.png" alt="个人头像" class="menu-header-avatar">
+                        <div class="menu-header-user-info">
+                            <div class="menu-header-user-name">User Name</div>
+                            <div class="menu-header-user-email">user@example.com</div>
+                        </div>
                     </div>
-                    <span class="user-id-text">User ID</span>
+                    <button class="menu-switch-btn" aria-label="切换">
+                        <img src="images/切换icon.png" alt="切换" class="menu-switch-icon">
+                    </button>
                 </div>
-                <div class="menu-divider"></div>
-                <button class="menu-item" onclick="window.location.href='like-page.html'">
-                    <span>Like</span>
-                </button>
-                <button class="menu-item" onclick="window.location.href='collect-page.html'">
-                    <span>Collect</span>
-                </button>
-                <button class="menu-item" onclick="window.location.href='follow-page.html'">
-                    <span>Follow</span>
-                </button>
-                <div class="menu-divider"></div>
-                <button class="menu-item">
-                    <span>Setting</span>
-                </button>
-                <button class="menu-item">
-                    <span>Sign Out</span>
-                </button>
+                <!-- 菜单项列表 -->
+                <div class="menu-items-list">
+                    <a href="like-page.html" class="menu-item">
+                        <img src="images/heart icon.png" alt="likes" class="menu-item-icon">
+                        <span class="menu-item-text">Likes</span>
+                    </a>
+                    <a href="collect-page.html" class="menu-item">
+                        <img src="images/collect icon.png" alt="collect" class="menu-item-icon">
+                        <span class="menu-item-text">Collect</span>
+                    </a>
+                    <a href="follow-page.html" class="menu-item">
+                        <img src="images/follow icon.png" alt="follow" class="menu-item-icon">
+                        <span class="menu-item-text">Follow</span>
+                    </a>
+                    <div class="menu-divider"></div>
+                    <a href="#" class="menu-item">
+                        <img src="images/Settings icon.png" alt="setting" class="menu-item-icon">
+                        <span class="menu-item-text">Settings</span>
+                    </a>
+                    <a href="#" class="menu-item menu-item-danger">
+                        <img src="images/sign out icon.png" alt="sign out" class="menu-item-icon">
+                        <span class="menu-item-text">Sign Out</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -358,10 +328,11 @@
     <!-- JavaScript 处理 Designer Follow 功能 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const followBtn = document.querySelector('.follow-designer-btn');
-            if (!followBtn) return;
+            const followBtn = document.getElementById('followBtn');
+            const designerAvatar = document.getElementById('designerAvatar');
+            const designerName = followBtn ? followBtn.getAttribute('data-designer') : '';
             
-            const designerName = followBtn.getAttribute('data-designer');
+            if (!followBtn || !designerName) return;
             
             // 从localStorage获取关注的designer列表
             function getFollowedDesigners() {
@@ -379,37 +350,833 @@
             function updateButtonState() {
                 if (isFollowing()) {
                     followBtn.classList.add('active');
-                    followBtn.querySelector('.follow-text').textContent = 'Following';
+                    if (designerAvatar) {
+                        designerAvatar.style.borderColor = '#3E6AE2';
+                    }
                 } else {
                     followBtn.classList.remove('active');
-                    followBtn.querySelector('.follow-text').textContent = 'Follow';
+                    if (designerAvatar) {
+                        designerAvatar.style.borderColor = 'transparent';
+                    }
                 }
             }
             
             // 切换关注状态
-            followBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                let followedDesigners = getFollowedDesigners();
+            function toggleFollow(e) {
+                if (e) {
+                    e.stopPropagation();
+                }
                 
-                if (isFollowing()) {
+                let followedDesigners = getFollowedDesigners();
+                let wasFollowing = isFollowing();
+                
+                // 设计者完整信息
+                const designerData = {
+                    name: designerName,
+                    avatar: 'images/头像.png',
+                    description: 'Creative designer specializing in 3D modeling',
+                    caseCount: 1
+                };
+                
+                if (wasFollowing) {
                     // 取消关注
-                    followedDesigners = followedDesigners.filter(name => name !== designerName);
+                    followedDesigners = followedDesigners.filter(d => d.name !== designerName);
                     localStorage.setItem('followedDesigners', JSON.stringify(followedDesigners));
                 } else {
                     // 添加关注
-                    if (!followedDesigners.includes(designerName)) {
-                        followedDesigners.push(designerName);
-                        localStorage.setItem('followedDesigners', JSON.stringify(followedDesigners));
+                    const existingIndex = followedDesigners.findIndex(d => d.name === designerName);
+                    if (existingIndex === -1) {
+                        followedDesigners.push(designerData);
+                    } else {
+                        followedDesigners[existingIndex] = designerData;
                     }
+                    localStorage.setItem('followedDesigners', JSON.stringify(followedDesigners));
                 }
                 
                 updateButtonState();
-            });
+                
+                // 添加动画效果
+                if (followBtn) {
+                    followBtn.style.animation = 'none';
+                    setTimeout(() => {
+                        followBtn.style.animation = 'pulse 0.3s ease';
+                    }, 10);
+                }
+                
+                // 头像点击反馈
+                if (designerAvatar && !wasFollowing) {
+                    designerAvatar.style.animation = 'none';
+                    setTimeout(() => {
+                        designerAvatar.style.animation = 'avatarPulse 0.4s ease';
+                    }, 10);
+                }
+            }
+            
+            // 关注按钮点击事件
+            followBtn.addEventListener('click', toggleFollow);
+            
+            // 头像点击事件（点击头像也可以关注/取消关注）
+            if (designerAvatar) {
+                designerAvatar.addEventListener('click', toggleFollow);
+            }
             
             // 初始化按钮状态
             updateButtonState();
         });
+        
+        // 评论点赞功能
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.comment-like-btn').forEach(btn => {
+                // 为每个按钮存储初始点赞数
+                const likeCountSpan = btn.querySelector('span');
+                if (likeCountSpan && !btn.dataset.initialCount) {
+                    btn.dataset.initialCount = parseInt(likeCountSpan.textContent) || 0;
+                    btn.dataset.isLiked = 'false';
+                }
+                
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isCurrentlyActive = this.classList.contains('active');
+                    const likeCountSpan = this.querySelector('span');
+                    
+                    if (likeCountSpan) {
+                        let currentCount = parseInt(likeCountSpan.textContent) || 0;
+                        
+                        if (isCurrentlyActive) {
+                            // 取消点赞，数量减1
+                            this.classList.remove('active');
+                            currentCount = Math.max(0, currentCount - 1);
+                            this.dataset.isLiked = 'false';
+                        } else {
+                            // 点赞，数量加1
+                            this.classList.add('active');
+                            currentCount = currentCount + 1;
+                            this.dataset.isLiked = 'true';
+                        }
+                        
+                        likeCountSpan.textContent = currentCount;
+                    } else {
+                        // 如果没有数量显示，只切换状态
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+        });
+        
+        // 右上角操作按钮交互功能（点赞、收藏、转发）
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeBtn = document.querySelector('.like-action-btn');
+            const bookmarkBtn = document.querySelector('.bookmark-action-btn');
+            const shareBtn = document.querySelector('.share-action-btn');
+            
+            const caseId = 1; // 案例ID，对应index.html中的card-id=1
+            
+            // 案例完整信息
+            const caseData = {
+                id: caseId,
+                title: 'CyberBrick 4WD - Free 3D Printing Model - MakerWorld',
+                image: 'images/case-main-image.png',
+                likeCount: '2.3k',
+                bookmarkCount: '668'
+            };
+            
+            // 获取已点赞的案例列表
+            function getLikedCases() {
+                const liked = localStorage.getItem('likedCases');
+                return liked ? JSON.parse(liked) : [];
+            }
+            
+            // 获取已收藏的案例列表
+            function getBookmarkedCases() {
+                const bookmarked = localStorage.getItem('bookmarkedCases');
+                return bookmarked ? JSON.parse(bookmarked) : [];
+            }
+            
+            // 检查是否已点赞
+            function isLiked() {
+                const likedCases = getLikedCases();
+                return likedCases.some(c => c.id === caseId);
+            }
+            
+            // 检查是否已收藏
+            function isBookmarked() {
+                const bookmarkedCases = getBookmarkedCases();
+                return bookmarkedCases.some(c => c.id === caseId);
+            }
+            
+            // 更新点赞按钮状态
+            function updateLikeButton() {
+                if (isLiked()) {
+                    likeBtn.classList.add('active');
+                } else {
+                    likeBtn.classList.remove('active');
+                }
+            }
+            
+            // 更新收藏按钮状态
+            function updateBookmarkButton() {
+                if (isBookmarked()) {
+                    bookmarkBtn.classList.add('active');
+                } else {
+                    bookmarkBtn.classList.remove('active');
+                }
+            }
+            
+            // 保存点赞案例
+            function saveLikedCase(caseData) {
+                const likedCases = getLikedCases();
+                const existingIndex = likedCases.findIndex(c => c.id === caseData.id);
+                
+                if (existingIndex === -1) {
+                    likedCases.push(caseData);
+                } else {
+                    likedCases[existingIndex] = caseData;
+                }
+                
+                localStorage.setItem('likedCases', JSON.stringify(likedCases));
+            }
+            
+            // 移除点赞案例
+            function removeLikedCase(caseId) {
+                const likedCases = getLikedCases();
+                const filtered = likedCases.filter(c => c.id !== caseId);
+                localStorage.setItem('likedCases', JSON.stringify(filtered));
+            }
+            
+            // 保存收藏案例
+            function saveBookmarkedCase(caseData) {
+                const bookmarkedCases = getBookmarkedCases();
+                const existingIndex = bookmarkedCases.findIndex(c => c.id === caseData.id);
+                
+                if (existingIndex === -1) {
+                    bookmarkedCases.push(caseData);
+                } else {
+                    bookmarkedCases[existingIndex] = caseData;
+                }
+                
+                localStorage.setItem('bookmarkedCases', JSON.stringify(bookmarkedCases));
+            }
+            
+            // 移除收藏案例
+            function removeBookmarkedCase(caseId) {
+                const bookmarkedCases = getBookmarkedCases();
+                const filtered = bookmarkedCases.filter(c => c.id !== caseId);
+                localStorage.setItem('bookmarkedCases', JSON.stringify(filtered));
+            }
+            
+            // 点赞功能
+            if (likeBtn) {
+                likeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isCurrentlyLiked = isLiked();
+                    
+                    if (isCurrentlyLiked) {
+                        // 取消点赞
+                        removeLikedCase(caseId);
+                        this.classList.remove('active');
+                    } else {
+                        // 点赞
+                        saveLikedCase(caseData);
+                        this.classList.add('active');
+                    }
+                    
+                    // 添加视觉反馈
+                    this.style.animation = 'none';
+                    setTimeout(() => {
+                        this.style.animation = 'heartBeat 0.4s ease';
+                    }, 10);
+                });
+                
+                // 初始化点赞状态
+                updateLikeButton();
+            }
+            
+            // 收藏功能
+            if (bookmarkBtn) {
+                bookmarkBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isCurrentlyBookmarked = isBookmarked();
+                    
+                    if (isCurrentlyBookmarked) {
+                        // 取消收藏
+                        removeBookmarkedCase(caseId);
+                        this.classList.remove('active');
+                    } else {
+                        // 收藏
+                        saveBookmarkedCase(caseData);
+                        this.classList.add('active');
+                    }
+                    
+                    // 添加视觉反馈
+                    this.style.animation = 'none';
+                    setTimeout(() => {
+                        this.style.animation = 'bookmarkBounce 0.4s ease';
+                    }, 10);
+                });
+                
+                // 初始化收藏状态
+                updateBookmarkButton();
+            }
+            
+            // 转发功能
+            if (shareBtn) {
+                shareBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // 切换活跃状态
+                    this.classList.toggle('active');
+                    
+                    // 尝试使用 Web Share API，如果不支持则复制链接
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'CyberBrick 4WD - Free 3D Printing Model - MakerWorld',
+                            text: 'Check out this amazing 3D printing model!',
+                            url: window.location.href
+                        }).catch(err => {
+                            console.log('Error sharing:', err);
+                            copyToClipboard();
+                        });
+                    } else {
+                        copyToClipboard();
+                    }
+                    
+                    // 添加视觉反馈
+                    this.style.animation = 'none';
+                    setTimeout(() => {
+                        this.style.animation = 'shareRotate 0.4s ease';
+                    }, 10);
+                });
+            }
+            
+            // 复制链接到剪贴板
+            function copyToClipboard() {
+                const url = window.location.href;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        showToast('Link copied to clipboard!');
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                        showToast('Failed to copy link');
+                    });
+                } else {
+                    // 降级方案
+                    const textarea = document.createElement('textarea');
+                    textarea.value = url;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        showToast('Link copied to clipboard!');
+                    } catch (err) {
+                        console.error('Failed to copy:', err);
+                        showToast('Failed to copy link');
+                    }
+                    document.body.removeChild(textarea);
+                }
+            }
+            
+            // 显示提示消息
+            function showToast(message) {
+                // 移除已存在的提示
+                const existingToast = document.querySelector('.share-toast');
+                if (existingToast) {
+                    existingToast.remove();
+                }
+                
+                const toast = document.createElement('div');
+                toast.className = 'share-toast';
+                toast.textContent = message;
+                toast.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: rgba(62, 106, 226, 0.9);
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    z-index: 10000;
+                    animation: slideInRight 0.3s ease;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                `;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'slideOutRight 0.3s ease';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }, 2000);
+            }
+        });
     </script>
+    
+    <style>
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes slideInComment {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .comment-item.new-comment {
+            animation: slideInComment 0.3s ease;
+        }
+    </style>
+    
+    <script>
+        // 评论发布功能 - 优化版本
+        document.addEventListener('DOMContentLoaded', function() {
+            const commentInput = document.querySelector('.comment-input');
+            const commentSubmitBtn = document.querySelector('.comment-submit-btn');
+            const commentsList = document.querySelector('.comments-list');
+            const commentsCount = document.querySelector('.comments-count');
+            const charCount = document.querySelector('.comment-char-count');
+            
+            if (!commentInput || !commentSubmitBtn || !commentsList || !commentsCount) return;
+            
+            const MAX_LENGTH = 500;
+            let isSubmitting = false;
+            
+            // 显示Toast提示消息
+            function showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `comment-toast ${type}`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 300);
+                }, 2000);
+            }
+            
+            // 更新字符计数
+            function updateCharCount() {
+                if (!charCount) return;
+                const length = commentInput.value.length;
+                charCount.textContent = `${length}/${MAX_LENGTH}`;
+                
+                if (length > 0) {
+                    charCount.style.display = 'block';
+                    if (length > MAX_LENGTH * 0.9) {
+                        charCount.style.color = '#FF6B6B';
+                    } else {
+                        charCount.style.color = '#BAD0FF';
+                    }
+                } else {
+                    charCount.style.display = 'none';
+                }
+            }
+            
+            // 更新提交按钮状态
+            function updateSubmitButton() {
+                const hasText = commentInput.value.trim().length > 0;
+                const isValid = commentInput.value.trim().length <= MAX_LENGTH && !isSubmitting;
+                
+                if (hasText && isValid) {
+                    commentSubmitBtn.disabled = false;
+                    commentSubmitBtn.style.opacity = '1';
+                    commentSubmitBtn.style.cursor = 'pointer';
+                } else {
+                    commentSubmitBtn.disabled = true;
+                    commentSubmitBtn.style.opacity = '0.5';
+                    commentSubmitBtn.style.cursor = 'not-allowed';
+                }
+            }
+            
+            // 获取当前评论数量
+            function getCurrentCommentCount() {
+                return parseInt(commentsCount.textContent) || 0;
+            }
+            
+            // 更新评论数量
+            function updateCommentCount(count) {
+                commentsCount.textContent = count;
+                // 添加计数更新动画
+                commentsCount.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    commentsCount.style.transform = 'scale(1)';
+                }, 200);
+            }
+            
+            // 格式化时间
+            function formatTimeAgo(date) {
+                const now = new Date();
+                const diffMs = now - date;
+                const diffMins = Math.floor(diffMs / 60000);
+                const diffHours = Math.floor(diffMs / 3600000);
+                const diffDays = Math.floor(diffMs / 86400000);
+                
+                if (diffMins < 1) {
+                    return 'just now';
+                } else if (diffMins < 60) {
+                    return `${diffMins} ${diffMins === 1 ? 'minute' : 'minutes'} ago`;
+                } else if (diffHours < 24) {
+                    return `${diffHours} ${diffHours === 1 ? 'hour' : 'hours'} ago`;
+                } else if (diffDays < 7) {
+                    return `${diffDays} ${diffDays === 1 ? 'day' : 'days'} ago`;
+                } else {
+                    return date.toLocaleDateString();
+                }
+            }
+            
+            // 创建评论元素（使用createElement，更安全）
+            function createCommentElement(text) {
+                const now = new Date();
+                const currentUser = 'You';
+                const timeAgo = formatTimeAgo(now);
+                
+                const article = document.createElement('article');
+                article.className = 'comment-item new-comment';
+                
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'comment-avatar';
+                const avatarImg = document.createElement('img');
+                avatarImg.src = 'images/头像.png';
+                avatarImg.alt = 'Avatar';
+                avatarImg.className = 'comment-avatar-img';
+                avatarDiv.appendChild(avatarImg);
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'comment-content';
+                
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'comment-header';
+                const authorSpan = document.createElement('span');
+                authorSpan.className = 'comment-author';
+                authorSpan.textContent = currentUser;
+                const timeSpan = document.createElement('span');
+                timeSpan.className = 'comment-time';
+                timeSpan.textContent = timeAgo;
+                headerDiv.appendChild(authorSpan);
+                headerDiv.appendChild(timeSpan);
+                
+                const textP = document.createElement('p');
+                textP.className = 'comment-text';
+                textP.textContent = text;
+                
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'comment-actions';
+                
+                const likeBtn = document.createElement('button');
+                likeBtn.className = 'comment-like-btn';
+                likeBtn.setAttribute('aria-label', 'Like comment');
+                const likeImg = document.createElement('img');
+                likeImg.src = 'images/heart icon.png';
+                likeImg.alt = 'Like';
+                likeImg.className = 'comment-like-icon';
+                const likeSpan = document.createElement('span');
+                likeSpan.textContent = '0';
+                likeBtn.appendChild(likeImg);
+                likeBtn.appendChild(likeSpan);
+                
+                const replyBtn = document.createElement('button');
+                replyBtn.className = 'comment-reply-btn';
+                replyBtn.textContent = 'Reply';
+                
+                actionsDiv.appendChild(likeBtn);
+                actionsDiv.appendChild(replyBtn);
+                
+                contentDiv.appendChild(headerDiv);
+                contentDiv.appendChild(textP);
+                contentDiv.appendChild(actionsDiv);
+                
+                article.appendChild(avatarDiv);
+                article.appendChild(contentDiv);
+                
+                return article;
+            }
+            
+            // 为新评论添加点赞功能
+            function attachLikeHandler(likeBtn) {
+                likeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isCurrentlyActive = this.classList.contains('active');
+                    const likeCountSpan = this.querySelector('span');
+                    
+                    if (likeCountSpan) {
+                        let currentCount = parseInt(likeCountSpan.textContent) || 0;
+                        
+                        if (isCurrentlyActive) {
+                            this.classList.remove('active');
+                            currentCount = Math.max(0, currentCount - 1);
+                        } else {
+                            this.classList.add('active');
+                            currentCount = currentCount + 1;
+                        }
+                        
+                        likeCountSpan.textContent = currentCount;
+                    } else {
+                        this.classList.toggle('active');
+                    }
+                });
+            }
+            
+            // 发布评论
+            function publishComment() {
+                if (isSubmitting) return;
+                
+                const commentText = commentInput.value.trim();
+                
+                // 验证评论
+                if (!commentText) {
+                    showToast('Please enter a comment', 'error');
+                    commentInput.classList.add('error');
+                    setTimeout(() => {
+                        commentInput.classList.remove('error');
+                    }, 1000);
+                    commentInput.focus();
+                    return;
+                }
+                
+                if (commentText.length > MAX_LENGTH) {
+                    showToast(`Comment is too long (max ${MAX_LENGTH} characters)`, 'error');
+                    return;
+                }
+                
+                // 设置提交状态
+                isSubmitting = true;
+                commentSubmitBtn.disabled = true;
+                commentSubmitBtn.classList.add('loading');
+                
+                // 模拟提交延迟（实际项目中这里会是API调用）
+                setTimeout(() => {
+                    // 创建新评论元素
+                    const newComment = createCommentElement(commentText);
+                    
+                    // 将新评论插入到列表顶部
+                    commentsList.insertBefore(newComment, commentsList.firstChild);
+                    
+                    // 为新评论添加点赞功能
+                    const newLikeBtn = newComment.querySelector('.comment-like-btn');
+                    if (newLikeBtn) {
+                        attachLikeHandler(newLikeBtn);
+                    }
+                    
+                    // 更新评论数量
+                    const currentCount = getCurrentCommentCount();
+                    updateCommentCount(currentCount + 1);
+                    
+                    // 清空输入框
+                    commentInput.value = '';
+                    updateCharCount();
+                    updateSubmitButton();
+                    
+                    // 显示成功提示
+                    showToast('Comment published successfully!', 'success');
+                    
+                    // 滚动到新评论位置
+                    newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // 重置提交状态
+                    isSubmitting = false;
+                    commentSubmitBtn.classList.remove('loading');
+                    updateSubmitButton();
+                    
+                    // 自动聚焦输入框
+                    setTimeout(() => {
+                        commentInput.focus();
+                    }, 300);
+                }, 300);
+            }
+            
+            // 输入框事件监听
+            commentInput.addEventListener('input', function() {
+                updateCharCount();
+                updateSubmitButton();
+                
+                // 清除错误状态
+                this.classList.remove('error');
+            });
+            
+            // 点击提交按钮发布评论
+            commentSubmitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!this.disabled && !isSubmitting) {
+                    publishComment();
+                }
+            });
+            
+            // 按Enter键发布评论（Shift+Enter换行）
+            commentInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (!commentSubmitBtn.disabled && !isSubmitting) {
+                        publishComment();
+                    }
+                }
+            });
+            
+            // 输入框获得焦点时的效果
+            commentInput.addEventListener('focus', function() {
+                commentInput.parentElement.classList.add('focused');
+                updateSubmitButton();
+            });
+            
+            // 输入框失去焦点时的效果
+            commentInput.addEventListener('blur', function() {
+                commentInput.parentElement.classList.remove('focused');
+                setTimeout(() => {
+                    updateSubmitButton();
+                }, 200);
+            });
+            
+            // 初始化
+            updateSubmitButton();
+        });
+
+</script>
+    
+    <style>
+        /* 新评论动画 */
+        @keyframes slideInComment {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .comment-item.new-comment {
+            animation: slideInComment 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* 字符计数样式 */
+        .comment-char-count {
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+            font-size: 12px;
+            color: #BAD0FF;
+            text-align: right;
+            margin-top: 4px;
+            transition: color 0.2s ease;
+        }
+        
+        /* 输入框错误状态 */
+        .comment-input.error {
+            border: 1px solid #FF6B6B !important;
+            animation: shake 0.4s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* 提交按钮加载状态 */
+        .comment-submit-btn.loading {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .comment-submit-btn.loading .comment-send-icon {
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Toast提示样式 */
+        .comment-toast {
+            position: fixed;
+            bottom: 100px;
+            right: 50%;
+            transform: translateX(50%) translateY(20px);
+            background: rgba(0, 0, 0, 0.85);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+            font-size: 14px;
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .comment-toast.show {
+            opacity: 1;
+            transform: translateX(50%) translateY(0);
+        }
+        
+        .comment-toast.error {
+            background: rgba(255, 107, 107, 0.9);
+        }
+        
+        .comment-toast.success {
+            background: rgba(62, 106, 226, 0.9);
+        }
+        
+        /* 输入框聚焦状态 */
+        .comment-input-wrapper.focused {
+            transform: scale(1.01);
+            transition: transform 0.2s ease;
+        }
+        
+        /* 评论计数动画 */
+        .comments-count {
+            transition: transform 0.2s ease;
+        }
+    </style>
+    
+    <style>
+        /* 新评论动画 */
+        @keyframes slideInComment {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .comment-item.new-comment {
+            animation: slideInComment 0.3s ease;
+        }
+    </style>
 </body>
 </html>
 

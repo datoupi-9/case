@@ -169,9 +169,15 @@
                 </button>
                 <!-- 用户下拉菜单 -->
                 <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
-                    <!-- 顶部区域：头像和切换图标 -->
+                    <!-- 顶部区域：头像和用户信息 -->
                     <div class="menu-header">
-                        <img src="images/头像.png" alt="个人头像" class="menu-header-avatar">
+                        <div class="menu-header-info">
+                            <img src="images/头像.png" alt="个人头像" class="menu-header-avatar">
+                            <div class="menu-header-user-info">
+                                <div class="menu-header-user-name">User Name</div>
+                                <div class="menu-header-user-email">user@example.com</div>
+                            </div>
+                        </div>
                         <button class="menu-switch-btn" aria-label="切换">
                             <img src="images/切换icon.png" alt="切换" class="menu-switch-icon">
                         </button>
@@ -180,23 +186,24 @@
                     <div class="menu-items-list">
                         <a href="like-page.html" class="menu-item">
                             <img src="images/heart icon.png" alt="likes" class="menu-item-icon">
-                            <span class="menu-item-text">likes</span>
+                            <span class="menu-item-text">Likes</span>
                         </a>
                         <a href="collect-page.html" class="menu-item">
                             <img src="images/collect icon.png" alt="collect" class="menu-item-icon">
-                            <span class="menu-item-text">collect</span>
+                            <span class="menu-item-text">Collect</span>
                         </a>
                         <a href="follow-page.html" class="menu-item">
                             <img src="images/follow icon.png" alt="follow" class="menu-item-icon">
-                            <span class="menu-item-text">follow</span>
+                            <span class="menu-item-text">Follow</span>
                         </a>
+                        <div class="menu-divider"></div>
                         <a href="#" class="menu-item">
                             <img src="images/Settings icon.png" alt="setting" class="menu-item-icon">
-                            <span class="menu-item-text">setting</span>
+                            <span class="menu-item-text">Settings</span>
                         </a>
-                        <a href="#" class="menu-item">
+                        <a href="#" class="menu-item menu-item-danger">
                             <img src="images/sign out icon.png" alt="sign out" class="menu-item-icon">
-                            <span class="menu-item-text">sign out</span>
+                            <span class="menu-item-text">Sign Out</span>
                         </a>
                     </div>
                 </div>
@@ -239,7 +246,11 @@
             <!-- 案例卡片网格 - 3列2行 -->
             <div class="cases-grid-new">
                 <!-- 第一行 -->
-                <article class="case-card-new" data-card-id="1">
+                <article class="case-card-new" data-card-id="1" 
+                    data-title="CyberBrick 4WD - Free 3D Printing Model - MakerWorld"
+                    data-image="images/case-main-image.png"
+                    data-like-count="2.3k"
+                    data-bookmark-count="668">
                     <div class="card-image-new">
                         <img src="images/case-main-image.png" alt="CyberBrick 4WD car" class="card-main-image-new">
                         <!-- 渐变蒙版（悬停显示） -->
@@ -421,9 +432,13 @@
                 </article>
                 
                 <!-- 第三行 -->
-                <article class="case-card-new" data-card-id="7">
+                <article class="case-card-new" data-card-id="7" 
+                    data-title="CyberBrick 4WD car"
+                    data-image="images/case7.jpg"
+                    data-like-count="2.5k"
+                    data-bookmark-count="720">
                     <div class="card-image-new">
-                        <img src="images/case-main-image.png" alt="CyberBrick 4WD car" class="card-main-image-new">
+                        <img src="images/case7.jpg" alt="CyberBrick 4WD car" class="card-main-image-new">
                         <!-- 渐变蒙版（悬停显示） -->
                         <div class="card-gradient-overlay"></div>
                         <!-- 卡片操作按钮（悬停显示） -->
@@ -451,9 +466,13 @@
                     </div>
                 </article>
                 
-                <article class="case-card-new" data-card-id="8">
+                <article class="case-card-new" data-card-id="8" 
+                    data-title="CyberBrick 4WD car"
+                    data-image="images/case8.jpg"
+                    data-like-count="1.9k"
+                    data-bookmark-count="540">
                     <div class="card-image-new">
-                        <img src="images/case2.jpg" alt="Case 8" class="card-main-image-new">
+                        <img src="images/case8.jpg" alt="Case 8" class="card-main-image-new">
                         <!-- 渐变蒙版（悬停显示） -->
                         <div class="card-gradient-overlay"></div>
                         <!-- 卡片操作按钮（悬停显示） -->
@@ -481,9 +500,13 @@
                     </div>
                 </article>
                 
-                <article class="case-card-new" data-card-id="9">
+                <article class="case-card-new" data-card-id="9" 
+                    data-title="CyberBrick 4WD car"
+                    data-image="images/case9.jpg"
+                    data-like-count="3.5k"
+                    data-bookmark-count="920">
                     <div class="card-image-new">
-                        <img src="images/case3.jpg" alt="Case 9" class="card-main-image-new">
+                        <img src="images/case9.jpg" alt="Case 9" class="card-main-image-new">
                         <!-- 渐变蒙版（悬停显示） -->
                         <div class="card-gradient-overlay"></div>
                         <!-- 卡片操作按钮（悬停显示） -->
@@ -512,9 +535,13 @@
                 </article>
                 
                 <!-- 第四行 -->
-                <article class="case-card-new" data-card-id="10">
+                <article class="case-card-new" data-card-id="10" 
+                    data-title="CyberBrick 4WD car"
+                    data-image="images/case10.jpg"
+                    data-like-count="1.6k"
+                    data-bookmark-count="450">
                     <div class="card-image-new">
-                        <img src="images/case4.jpg" alt="Case 10" class="card-main-image-new">
+                        <img src="images/case10.jpg" alt="Case 10" class="card-main-image-new">
                         <!-- 渐变蒙版（悬停显示） -->
                         <div class="card-gradient-overlay"></div>
                         <!-- 卡片操作按钮（悬停显示） -->
@@ -542,9 +569,13 @@
                     </div>
                 </article>
                 
-                <article class="case-card-new" data-card-id="11">
+                <article class="case-card-new" data-card-id="11" 
+                    data-title="CyberBrick 4WD car"
+                    data-image="images/case11.jpg"
+                    data-like-count="2.2k"
+                    data-bookmark-count="600">
                     <div class="card-image-new">
-                        <img src="images/case5.jpg" alt="Case 11" class="card-main-image-new">
+                        <img src="images/case11.jpg" alt="Case 11" class="card-main-image-new">
                         <!-- 渐变蒙版（悬停显示） -->
                         <div class="card-gradient-overlay"></div>
                         <!-- 卡片操作按钮（悬停显示） -->
@@ -572,9 +603,13 @@
                     </div>
                 </article>
                 
-                <article class="case-card-new" data-card-id="12">
+                <article class="case-card-new" data-card-id="12" 
+                    data-title="CyberBrick 4WD car"
+                    data-image="images/case12.jpg"
+                    data-like-count="2.8k"
+                    data-bookmark-count="650">
                     <div class="card-image-new">
-                        <img src="images/case6.jpg" alt="Case 12" class="card-main-image-new">
+                        <img src="images/case12.jpg" alt="Case 12" class="card-main-image-new">
                         <!-- 渐变蒙版（悬停显示） -->
                         <div class="card-gradient-overlay"></div>
                         <!-- 卡片操作按钮（悬停显示） -->
@@ -755,11 +790,98 @@
             });
         });
         
+        // 获取和保存案例数据的工具函数
+        function getLikedCases() {
+            const liked = localStorage.getItem('likedCases');
+            return liked ? JSON.parse(liked) : [];
+        }
+        
+        function getBookmarkedCases() {
+            const bookmarked = localStorage.getItem('bookmarkedCases');
+            return bookmarked ? JSON.parse(bookmarked) : [];
+        }
+        
+        function saveLikedCase(caseData) {
+            const likedCases = getLikedCases();
+            const existingIndex = likedCases.findIndex(c => c.id === caseData.id);
+            
+            if (existingIndex === -1) {
+                likedCases.push(caseData);
+            } else {
+                likedCases[existingIndex] = caseData;
+            }
+            
+            localStorage.setItem('likedCases', JSON.stringify(likedCases));
+        }
+        
+        function removeLikedCase(caseId) {
+            const likedCases = getLikedCases();
+            const filtered = likedCases.filter(c => c.id !== caseId);
+            localStorage.setItem('likedCases', JSON.stringify(filtered));
+        }
+        
+        function saveBookmarkedCase(caseData) {
+            const bookmarkedCases = getBookmarkedCases();
+            const existingIndex = bookmarkedCases.findIndex(c => c.id === caseData.id);
+            
+            if (existingIndex === -1) {
+                bookmarkedCases.push(caseData);
+            } else {
+                bookmarkedCases[existingIndex] = caseData;
+            }
+            
+            localStorage.setItem('bookmarkedCases', JSON.stringify(bookmarkedCases));
+        }
+        
+        function removeBookmarkedCase(caseId) {
+            const bookmarkedCases = getBookmarkedCases();
+            const filtered = bookmarkedCases.filter(c => c.id !== caseId);
+            localStorage.setItem('bookmarkedCases', JSON.stringify(filtered));
+        }
+        
+        // 初始化卡片状态
+        function initCardState(card) {
+            const cardId = parseInt(card.getAttribute('data-card-id'));
+            const likedCases = getLikedCases();
+            const bookmarkedCases = getBookmarkedCases();
+            
+            const isLiked = likedCases.some(c => c.id === cardId);
+            const isBookmarked = bookmarkedCases.some(c => c.id === cardId);
+            
+            const actionLikeBtn = card.querySelector('.action-like-btn-new');
+            const actionBookmarkBtn = card.querySelector('.action-bookmark-btn-new');
+            
+            if (actionLikeBtn && isLiked) {
+                actionLikeBtn.classList.add('active');
+                const likeIcon = actionLikeBtn.querySelector('.action-icon-img');
+                if (likeIcon) {
+                    likeIcon.src = 'images/blueHeart.png';
+                    actionLikeBtn.style.backgroundColor = '#F4F4F4';
+                }
+            }
+            
+            if (actionBookmarkBtn && isBookmarked) {
+                actionBookmarkBtn.classList.add('active');
+                const bookmarkIcon = actionBookmarkBtn.querySelector('.action-icon-img');
+                if (bookmarkIcon) {
+                    bookmarkIcon.src = 'images/blueBookmark.png';
+                    actionBookmarkBtn.style.backgroundColor = '#F4F4F4';
+                }
+            }
+        }
+        
         // 点赞和收藏功能
         document.querySelectorAll('.case-card-new').forEach(card => {
             const actionLikeBtn = card.querySelector('.action-like-btn-new');
             const actionBookmarkBtn = card.querySelector('.action-bookmark-btn-new');
             const cardId = parseInt(card.getAttribute('data-card-id'));
+            const cardTitle = card.getAttribute('data-title') || card.querySelector('.card-title-new').textContent;
+            const cardImage = card.getAttribute('data-image') || card.querySelector('.card-main-image-new').src;
+            const likeCount = card.getAttribute('data-like-count') || card.querySelector('.like-count-new').textContent;
+            const bookmarkCount = card.getAttribute('data-bookmark-count') || card.querySelector('.bookmark-count-new').textContent;
+            
+            // 初始化卡片状态
+            initCardState(card);
             
             // 点赞功能
             if (actionLikeBtn) {
@@ -771,15 +893,26 @@
                     e.stopPropagation();
                     this.classList.toggle('active');
                     const isLiked = this.classList.contains('active');
+                    
+                    // 创建案例数据对象
+                    const caseData = {
+                        id: cardId,
+                        title: cardTitle,
+                        image: cardImage,
+                        likeCount: likeCount,
+                        bookmarkCount: bookmarkCount
+                    };
+                    
                     // 切换图标和背景色
                     if (isLiked) {
                         likeIcon.src = 'images/blueHeart.png';
                         this.style.backgroundColor = '#F4F4F4';
+                        saveLikedCase(caseData);
                     } else {
                         likeIcon.src = originalLikeSrc;
                         this.style.backgroundColor = '';
+                        removeLikedCase(cardId);
                     }
-                    // 这里可以添加保存到 localStorage 的逻辑
                 });
             }
             
@@ -793,18 +926,30 @@
                     e.stopPropagation();
                     this.classList.toggle('active');
                     const isBookmarked = this.classList.contains('active');
+                    
+                    // 创建案例数据对象
+                    const caseData = {
+                        id: cardId,
+                        title: cardTitle,
+                        image: cardImage,
+                        likeCount: likeCount,
+                        bookmarkCount: bookmarkCount
+                    };
+                    
                     // 切换图标和背景色
                     if (isBookmarked) {
                         bookmarkIcon.src = 'images/blueBookmark.png';
                         this.style.backgroundColor = '#F4F4F4';
+                        saveBookmarkedCase(caseData);
                     } else {
                         bookmarkIcon.src = originalBookmarkSrc;
                         this.style.backgroundColor = '';
+                        removeBookmarkedCase(cardId);
                     }
-                    // 这里可以添加保存到 localStorage 的逻辑
                 });
             }
         });
+        
     </script>
 </body>
 </html>

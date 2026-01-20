@@ -28,10 +28,7 @@
                 <!-- 空状态提示 -->
                 <div class="empty-state" id="emptyState" style="display: none;">
                     <div class="empty-icon">
-                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                            <circle cx="40" cy="40" r="35" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="2"/>
-                            <path d="M25 40L35 50L55 30" stroke="#9E9E9E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <img src="images/follow page icon.png" alt="Follow Icon" class="empty-icon-img">
                     </div>
                     <h2 class="empty-title">Not following anyone yet</h2>
                     <p class="empty-text">Discover and follow creators to see their latest work!</p>
@@ -42,50 +39,53 @@
 
         <!-- 左上角返回按钮 -->
         <button class="back-btn" onclick="window.location.href='index.html'" aria-label="返回">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18L9 12L15 6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="images/back icon.png" alt="Back" class="back-icon-img">
         </button>
         
         <!-- 右上角头像按钮和下拉菜单 -->
         <div class="user-menu-container">
             <button class="user-avatar-btn" id="userMenuBtn" aria-label="用户菜单">
-                <svg width="41" height="41" viewBox="0 0 41 41" fill="none">
-                    <circle cx="20.5" cy="20.5" r="20.5" fill="#E0E0E0"/>
-                    <circle cx="20.5" cy="16" r="6" fill="#9E9E9E"/>
-                    <path d="M8 32C8 26 13.5 22 20.5 22C27.5 22 33 26 33 32" fill="#9E9E9E"/>
-                </svg>
+                <img src="images/头像.png" alt="用户头像" class="user-avatar-img">
             </button>
-            
-            <!-- 下拉菜单 -->
+            <!-- 用户下拉菜单 -->
             <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
-                <div class="menu-item menu-user-id">
-                    <div class="user-id-avatar">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
-                            <circle cx="20" cy="15" r="6" fill="#9E9E9E"/>
-                            <path d="M8 30C8 25 12 21 20 21C28 21 32 25 32 30" fill="#9E9E9E"/>
-                        </svg>
+                <!-- 顶部区域：头像和用户信息 -->
+                <div class="menu-header">
+                    <div class="menu-header-info">
+                        <img src="images/头像.png" alt="个人头像" class="menu-header-avatar">
+                        <div class="menu-header-user-info">
+                            <div class="menu-header-user-name">User Name</div>
+                            <div class="menu-header-user-email">user@example.com</div>
+                        </div>
                     </div>
-                    <span class="user-id-text">User ID</span>
+                    <button class="menu-switch-btn" aria-label="切换">
+                        <img src="images/切换icon.png" alt="切换" class="menu-switch-icon">
+                    </button>
                 </div>
-                <div class="menu-divider"></div>
-                <button class="menu-item" onclick="window.location.href='like-page.html'">
-                    <span>Like</span>
-                </button>
-                <button class="menu-item" onclick="window.location.href='collect-page.html'">
-                    <span>Collect</span>
-                </button>
-                <button class="menu-item" onclick="window.location.href='follow-page.html'">
-                    <span>Follow</span>
-                </button>
-                <div class="menu-divider"></div>
-                <button class="menu-item">
-                    <span>Setting</span>
-                </button>
-                <button class="menu-item">
-                    <span>Sign Out</span>
-                </button>
+                <!-- 菜单项列表 -->
+                <div class="menu-items-list">
+                    <a href="like-page.html" class="menu-item">
+                        <img src="images/heart icon.png" alt="likes" class="menu-item-icon">
+                        <span class="menu-item-text">Likes</span>
+                    </a>
+                    <a href="collect-page.html" class="menu-item">
+                        <img src="images/collect icon.png" alt="collect" class="menu-item-icon">
+                        <span class="menu-item-text">Collect</span>
+                    </a>
+                    <a href="follow-page.html" class="menu-item">
+                        <img src="images/follow icon.png" alt="follow" class="menu-item-icon">
+                        <span class="menu-item-text">Follow</span>
+                    </a>
+                    <div class="menu-divider"></div>
+                    <a href="#" class="menu-item">
+                        <img src="images/Settings icon.png" alt="setting" class="menu-item-icon">
+                        <span class="menu-item-text">Settings</span>
+                    </a>
+                    <a href="#" class="menu-item menu-item-danger">
+                        <img src="images/sign out icon.png" alt="sign out" class="menu-item-icon">
+                        <span class="menu-item-text">Sign Out</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -95,20 +95,20 @@
         const userMenuBtn = document.getElementById('userMenuBtn');
         const userDropdownMenu = document.getElementById('userDropdownMenu');
         
-        userMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (userDropdownMenu.style.display === 'none' || userDropdownMenu.style.display === '') {
-                userDropdownMenu.style.display = 'block';
-            } else {
-                userDropdownMenu.style.display = 'none';
-            }
-        });
-        
-        document.addEventListener('click', function(e) {
-            if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-                userDropdownMenu.style.display = 'none';
-            }
-        });
+        if (userMenuBtn && userDropdownMenu) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isVisible = userDropdownMenu.style.display === 'block';
+                userDropdownMenu.style.display = isVisible ? 'none' : 'block';
+            });
+            
+            // 点击外部关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                    userDropdownMenu.style.display = 'none';
+                }
+            });
+        }
     </script>
 
     <!-- JavaScript 加载关注的内容 -->
@@ -119,33 +119,21 @@
             return followed ? JSON.parse(followed) : [];
         }
 
-        // Designer数据（示例数据）
-        const designerData = {
-            'Designer Name': { name: 'Designer Name', description: 'Creative designer specializing in UI/UX', caseCount: 12 },
-            'Design Studio': { name: 'Design Studio', description: 'Creative design agency', caseCount: 24 },
-            'UI Designer': { name: 'UI Designer', description: 'Mobile app designer', caseCount: 18 },
-            'Brand Agency': { name: 'Brand Agency', description: 'Brand identity specialist', caseCount: 15 }
-        };
-
         // 创建关注Designer HTML
-        function createFollowItem(designerName, designerInfo) {
+        function createFollowItem(designerInfo) {
             return `
                 <article class="follow-item creator-item">
                     <div class="follow-avatar">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="30" fill="#E0E0E0"/>
-                            <circle cx="30" cy="22" r="8" fill="#9E9E9E"/>
-                            <path d="M12 45C12 38 18 33 30 33C42 33 48 38 48 45" fill="#9E9E9E"/>
-                        </svg>
+                        <img src="${designerInfo.avatar || 'images/头像.png'}" alt="${designerInfo.name}" class="follow-avatar-img">
                     </div>
                     <div class="follow-info">
                         <h3 class="follow-name">${designerInfo.name}</h3>
-                        <p class="follow-description">${designerInfo.description}</p>
+                        <p class="follow-description">${designerInfo.description || 'Creative designer'}</p>
                         <div class="follow-stats">
-                            <span class="stat-text">${designerInfo.caseCount} cases</span>
+                            <span class="stat-text">${designerInfo.caseCount || 0} cases</span>
                         </div>
                     </div>
-                    <button class="follow-btn active" data-designer="${designerName}" onclick="toggleFollowDesigner('${designerName}')">
+                    <button class="follow-btn active" data-designer="${designerInfo.name}" onclick="toggleFollowDesigner('${designerInfo.name}')">
                         <span>Following</span>
                     </button>
                 </article>
@@ -158,20 +146,25 @@
             const followList = document.getElementById('followList');
             const emptyState = document.getElementById('emptyState');
 
-            if (followedDesigners.length === 0) {
-                followList.style.display = 'none';
-                emptyState.style.display = 'flex';
+            if (!followedDesigners || followedDesigners.length === 0) {
+                if (followList) followList.style.display = 'none';
+                if (emptyState) emptyState.style.display = 'flex';
                 return;
             }
 
-            followList.style.display = 'block';
-            emptyState.style.display = 'none';
-            followList.innerHTML = '';
+            if (followList) followList.style.display = 'block';
+            if (emptyState) emptyState.style.display = 'none';
+            if (followList) followList.innerHTML = '';
 
-            // 显示被关注的Designer
-            followedDesigners.forEach(designerName => {
-                if (designerData[designerName]) {
-                    followList.innerHTML += createFollowItem(designerName, designerData[designerName]);
+            // 显示被关注的Designer（使用从localStorage读取的完整数据）
+            followedDesigners.forEach(designerInfo => {
+                // 兼容旧数据格式（如果存储的是字符串而不是对象）
+                const designer = typeof designerInfo === 'string' 
+                    ? { name: designerInfo, avatar: 'images/头像.png', description: 'Creative designer', caseCount: 0 }
+                    : designerInfo;
+                
+                if (followList) {
+                    followList.innerHTML += createFollowItem(designer);
                 }
             });
         }
@@ -181,27 +174,48 @@
             let followedDesigners = getFollowedDesigners();
             const followBtn = document.querySelector(`.follow-btn[data-designer="${designerName}"]`);
 
-            if (followedDesigners.includes(designerName)) {
+            if (followedDesigners.some(d => (typeof d === 'string' ? d : d.name) === designerName)) {
                 // 取消关注
-                followedDesigners = followedDesigners.filter(name => name !== designerName);
+                followedDesigners = followedDesigners.filter(d => {
+                    const name = typeof d === 'string' ? d : d.name;
+                    return name !== designerName;
+                });
                 localStorage.setItem('followedDesigners', JSON.stringify(followedDesigners));
                 // 重新加载列表
                 setTimeout(() => loadFollowedItems(), 100);
             } else {
-                // 添加关注
-                if (!followedDesigners.includes(designerName)) {
-                    followedDesigners.push(designerName);
-                    localStorage.setItem('followedDesigners', JSON.stringify(followedDesigners));
-                }
+                // 添加关注（不应该到这里，因为按钮只显示已关注的）
+                const designerData = {
+                    name: designerName,
+                    avatar: 'images/头像.png',
+                    description: 'Creative designer',
+                    caseCount: 0
+                };
+                followedDesigners.push(designerData);
+                localStorage.setItem('followedDesigners', JSON.stringify(followedDesigners));
                 if (followBtn) {
                     followBtn.classList.add('active');
-                    followBtn.querySelector('span').textContent = 'Following';
+                    const span = followBtn.querySelector('span');
+                    if (span) span.textContent = 'Following';
                 }
+                setTimeout(() => loadFollowedItems(), 100);
             }
         }
 
         // 页面加载时执行
         document.addEventListener('DOMContentLoaded', function() {
+            loadFollowedItems();
+        });
+        
+        // 页面可见性变化时重新加载（从其他页面返回时）
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                loadFollowedItems();
+            }
+        });
+        
+        // 窗口获得焦点时重新加载
+        window.addEventListener('focus', function() {
             loadFollowedItems();
         });
     </script>

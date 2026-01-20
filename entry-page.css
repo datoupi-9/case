@@ -472,18 +472,19 @@ body {
 }
 
 .user-avatar-btn {
-    width: 50px;
-    height: 50px;
+    width: 63px;
+    height: 63px;
     border-radius: 50%;
-    border: 2px solid #FFFFFF;
-    background-color: #FFFFFF;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: none;
+    background: transparent;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     transition: all 0.3s ease;
+    box-shadow: none;
+    overflow: hidden;
 }
 
 .user-avatar-btn:hover {
@@ -491,91 +492,246 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.user-avatar-btn svg {
+.user-avatar-img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 /* 下拉菜单 */
 .user-dropdown-menu {
     position: absolute;
-    top: 60px;
+    top: calc(100% + 8px);
     right: 0;
-    width: 200px;
-    background-color: #FFFFFF;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    padding: 8px 0;
-    animation: slideDownMenu 0.3s ease-in-out;
+    width: 300px;
+    min-height: 380px;
+    background-image: url('images/personal.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 24px 20px 20px 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     overflow: hidden;
+    animation: slideDownMenu 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes slideDownMenu {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-10px) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
-.menu-item {
-    width: 100%;
+/* 菜单顶部区域 */
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+.menu-header-info {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 20px;
-    border: none;
-    background: none;
-    cursor: pointer;
+    flex: 1;
+}
+
+.menu-header-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.menu-header-avatar:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.menu-header-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.menu-header-user-name {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-header-user-email {
     font-family: 'HarmonyOS Sans SC', sans-serif;
     font-weight: 400;
-    font-size: 15px;
-    color: #434343;
-    text-align: left;
-    transition: background-color 0.2s ease;
-}
-
-.menu-item:hover {
-    background-color: #F5F5F5;
-}
-
-.menu-item.menu-user-id {
-    cursor: default;
-    padding: 16px 20px;
-}
-
-.menu-item.menu-user-id:hover {
-    background-color: transparent;
-}
-
-.user-id-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
     overflow: hidden;
-    flex-shrink: 0;
+    text-overflow: ellipsis;
+}
+
+.menu-switch-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin-left: -2px;
+    margin-right: 10px;
+    flex-shrink: 0;
 }
 
-.user-id-avatar svg {
-    width: 100%;
+.menu-switch-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1) rotate(90deg);
+}
+
+.menu-switch-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* 菜单项列表 */
+.menu-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0);
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
     height: 100%;
+    background: #FFFFFF;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    border-radius: 0 4px 4px 0;
 }
 
-.user-id-text {
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(6px);
+    padding-left: 18px;
+}
+
+.menu-item:hover::before {
+    transform: scaleY(1);
+}
+
+.menu-item:active {
+    transform: translateX(4px) scale(0.98);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.menu-item-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    filter: brightness(1);
+}
+
+.menu-item:hover .menu-item-icon {
+    transform: scale(1.15);
+    filter: brightness(1.2);
+}
+
+.menu-item-text {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
     font-weight: 600;
-    color: #000000;
+    font-size: 15px;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    flex: 1;
 }
 
+.menu-item:hover .menu-item-text {
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* 菜单分隔线 */
 .menu-divider {
     height: 1px;
-    background-color: #E0E0E0;
-    margin: 4px 0;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 8px 0;
+    border: none;
+}
+
+/* 特殊菜单项样式 */
+.menu-item.menu-item-danger {
+    margin-top: -6px;
+    transform: translateY(0);
+}
+
+.menu-item.menu-item-danger:hover {
+    background: rgba(255, 77, 77, 0.2);
+    transform: translateX(6px) translateY(0);
+}
+
+.menu-item.menu-item-danger .menu-item-text {
+    color: #FFB3B3;
+}
+
+.menu-item.menu-item-danger:hover .menu-item-text {
+    color: #FF9999;
 }
 
 @media (max-width: 480px) {

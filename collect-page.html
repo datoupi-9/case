@@ -27,9 +27,7 @@
                 <!-- 空状态提示 -->
                 <div class="empty-state" id="emptyState" style="display: none;">
                     <div class="empty-icon">
-                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                            <path d="M20 20H60V60L40 50L20 60V20Z" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="2"/>
-                        </svg>
+                        <img src="images/collect icon.png" alt="Collect Icon" class="empty-icon-img">
                     </div>
                     <h2 class="empty-title">No collected cases yet</h2>
                     <p class="empty-text">Discover more amazing content in the case library!</p>
@@ -40,50 +38,53 @@
 
         <!-- 左上角返回按钮 -->
         <button class="back-btn" onclick="window.location.href='index.html'" aria-label="返回">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18L9 12L15 6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="images/back icon.png" alt="Back" class="back-icon-img">
         </button>
         
         <!-- 右上角头像按钮和下拉菜单 -->
         <div class="user-menu-container">
             <button class="user-avatar-btn" id="userMenuBtn" aria-label="用户菜单">
-                <svg width="41" height="41" viewBox="0 0 41 41" fill="none">
-                    <circle cx="20.5" cy="20.5" r="20.5" fill="#E0E0E0"/>
-                    <circle cx="20.5" cy="16" r="6" fill="#9E9E9E"/>
-                    <path d="M8 32C8 26 13.5 22 20.5 22C27.5 22 33 26 33 32" fill="#9E9E9E"/>
-                </svg>
+                <img src="images/头像.png" alt="用户头像" class="user-avatar-img">
             </button>
-            
-            <!-- 下拉菜单 -->
+            <!-- 用户下拉菜单 -->
             <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
-                <div class="menu-item menu-user-id">
-                    <div class="user-id-avatar">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
-                            <circle cx="20" cy="15" r="6" fill="#9E9E9E"/>
-                            <path d="M8 30C8 25 12 21 20 21C28 21 32 25 32 30" fill="#9E9E9E"/>
-                        </svg>
+                <!-- 顶部区域：头像和用户信息 -->
+                <div class="menu-header">
+                    <div class="menu-header-info">
+                        <img src="images/头像.png" alt="个人头像" class="menu-header-avatar">
+                        <div class="menu-header-user-info">
+                            <div class="menu-header-user-name">User Name</div>
+                            <div class="menu-header-user-email">user@example.com</div>
+                        </div>
                     </div>
-                    <span class="user-id-text">User ID</span>
+                    <button class="menu-switch-btn" aria-label="切换">
+                        <img src="images/切换icon.png" alt="切换" class="menu-switch-icon">
+                    </button>
                 </div>
-                <div class="menu-divider"></div>
-                <button class="menu-item" onclick="window.location.href='like-page.html'">
-                    <span>Like</span>
-                </button>
-                <button class="menu-item" onclick="window.location.href='collect-page.html'">
-                    <span>Collect</span>
-                </button>
-                <button class="menu-item" onclick="window.location.href='follow-page.html'">
-                    <span>Follow</span>
-                </button>
-                <div class="menu-divider"></div>
-                <button class="menu-item">
-                    <span>Setting</span>
-                </button>
-                <button class="menu-item">
-                    <span>Sign Out</span>
-                </button>
+                <!-- 菜单项列表 -->
+                <div class="menu-items-list">
+                    <a href="like-page.html" class="menu-item">
+                        <img src="images/heart icon.png" alt="likes" class="menu-item-icon">
+                        <span class="menu-item-text">Likes</span>
+                    </a>
+                    <a href="collect-page.html" class="menu-item">
+                        <img src="images/collect icon.png" alt="collect" class="menu-item-icon">
+                        <span class="menu-item-text">Collect</span>
+                    </a>
+                    <a href="follow-page.html" class="menu-item">
+                        <img src="images/follow icon.png" alt="follow" class="menu-item-icon">
+                        <span class="menu-item-text">Follow</span>
+                    </a>
+                    <div class="menu-divider"></div>
+                    <a href="#" class="menu-item">
+                        <img src="images/Settings icon.png" alt="setting" class="menu-item-icon">
+                        <span class="menu-item-text">Settings</span>
+                    </a>
+                    <a href="#" class="menu-item menu-item-danger">
+                        <img src="images/sign out icon.png" alt="sign out" class="menu-item-icon">
+                        <span class="menu-item-text">Sign Out</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -93,57 +94,42 @@
         const userMenuBtn = document.getElementById('userMenuBtn');
         const userDropdownMenu = document.getElementById('userDropdownMenu');
         
-        userMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (userDropdownMenu.style.display === 'none' || userDropdownMenu.style.display === '') {
-                userDropdownMenu.style.display = 'block';
-            } else {
-                userDropdownMenu.style.display = 'none';
-            }
-        });
-        
-        document.addEventListener('click', function(e) {
-            if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-                userDropdownMenu.style.display = 'none';
-            }
-        });
+        if (userMenuBtn && userDropdownMenu) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isVisible = userDropdownMenu.style.display === 'block';
+                userDropdownMenu.style.display = isVisible ? 'none' : 'block';
+            });
+            
+            // 点击外部关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                    userDropdownMenu.style.display = 'none';
+                }
+            });
+        }
     </script>
 
     <!-- JavaScript 加载收藏的案例 -->
     <script>
-        // 从localStorage获取收藏的案例ID列表
-        function getCollectedCaseIds() {
-            const collectedIds = localStorage.getItem('collectedCases');
-            return collectedIds ? JSON.parse(collectedIds) : [];
+        // 从localStorage获取收藏的案例列表（完整对象数组）
+        function getCollectedCases() {
+            const collected = localStorage.getItem('bookmarkedCases');
+            return collected ? JSON.parse(collected) : [];
         }
-
-        // 所有案例数据（示例数据，实际应该从服务器获取）
-        const allCases = [
-            { id: 1, title: 'SnapFrames Beta Launch!', likeCount: '2.3k', bookmarkCount: '668' },
-            { id: 2, title: 'Design System v2.0', likeCount: '1.8k', bookmarkCount: '520' },
-            { id: 3, title: 'Mobile App Redesign', likeCount: '3.2k', bookmarkCount: '890' },
-            { id: 4, title: 'E-commerce Platform', likeCount: '1.5k', bookmarkCount: '420' },
-            { id: 5, title: 'Dashboard Analytics', likeCount: '2.7k', bookmarkCount: '750' },
-            { id: 6, title: 'Brand Identity Design', likeCount: '1.2k', bookmarkCount: '380' },
-            { id: 7, title: 'Tesla Cybertruck Sticker Pack', likeCount: '4.1k', bookmarkCount: '1.2k' },
-            { id: 8, title: 'Illustration Collection', likeCount: '2.0k', bookmarkCount: '610' }
-        ];
 
         // 创建案例卡片HTML
         function createCaseCard(caseData) {
             return `
                 <article class="case-card" data-card-id="${caseData.id}">
                     <div class="card-image">
+                        <img src="${caseData.image}" alt="${caseData.title}" class="card-main-image">
                         <div class="card-actions">
                             <button class="action-like-btn" aria-label="Like" title="Like">
-                                <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                    <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                                </svg>
+                                <img src="images/heart icon.png" alt="Like" class="action-icon-img">
                             </button>
                             <button class="action-bookmark-btn active" aria-label="Bookmark" title="Bookmark">
-                                <svg width="20" height="20" viewBox="0 0 17 17" fill="none">
-                                    <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="#4A90E2" stroke="#4A90E2" stroke-width="1.5"/>
-                                </svg>
+                                <img src="images/collect icon.png" alt="Bookmark" class="action-icon-img">
                             </button>
                         </div>
                     </div>
@@ -151,17 +137,13 @@
                         <div class="card-stats">
                             <div class="stat-item like-stat" data-liked="false">
                                 <button class="like-btn" aria-label="Like">
-                                    <svg class="heart-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <path d="M8.5 14L3.5 8.5C2.5 7.5 1.5 6 1.5 4C1.5 2 3 0.5 5 0.5C6.5 0.5 8 1 9 2L8.5 2.5L10 2C11 1 12.5 0.5 14 0.5C16 0.5 17.5 2 17.5 4C17.5 6 16.5 7.5 15.5 8.5L8.5 14Z" fill="none" stroke="#434343" stroke-width="1.2"/>
-                                    </svg>
+                                    <img src="images/heart icon.png" alt="Like" class="card-stat-icon">
                                 </button>
                                 <span class="stat-number like-count">${caseData.likeCount}</span>
                             </div>
                             <div class="stat-item bookmark-stat" data-bookmarked="true">
                                 <button class="bookmark-btn" aria-label="Bookmark">
-                                    <svg class="bookmark-icon" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <path d="M4 4H13V13L8.5 10L4 13V4Z" fill="#4A90E2" stroke="#4A90E2" stroke-width="1.2"/>
-                                    </svg>
+                                    <img src="images/collect icon.png" alt="Bookmark" class="card-stat-icon">
                                 </button>
                                 <span class="stat-number">${caseData.bookmarkCount}</span>
                             </div>
@@ -174,25 +156,28 @@
 
         // 加载收藏的案例
         function loadCollectedCases() {
-            const collectedIds = getCollectedCaseIds();
+            const collectedCases = getCollectedCases();
             const casesGrid = document.getElementById('collectedCasesGrid');
             const emptyState = document.getElementById('emptyState');
 
-            if (collectedIds.length === 0) {
-                casesGrid.style.display = 'none';
-                emptyState.style.display = 'flex';
+            if (!collectedCases || collectedCases.length === 0) {
+                if (casesGrid) casesGrid.style.display = 'none';
+                if (emptyState) emptyState.style.display = 'flex';
                 return;
             }
 
-            casesGrid.style.display = 'grid';
-            emptyState.style.display = 'none';
-            casesGrid.innerHTML = '';
+            if (casesGrid) {
+                casesGrid.style.display = 'grid';
+                casesGrid.className = 'cases-grid-new';
+            }
+            if (emptyState) emptyState.style.display = 'none';
+            if (casesGrid) casesGrid.innerHTML = '';
 
-            // 过滤出被收藏的案例
-            const collectedCases = allCases.filter(caseData => collectedIds.includes(caseData.id));
-
+            // 显示被收藏的案例（使用从localStorage读取的完整数据）
             collectedCases.forEach(caseData => {
-                casesGrid.innerHTML += createCaseCard(caseData);
+                if (casesGrid) {
+                    casesGrid.innerHTML += createCaseCard(caseData);
+                }
             });
 
             // 为每个卡片添加事件监听
@@ -213,7 +198,7 @@
                     window.location.href = 'case-detail.html';
                 });
 
-                // 点赞和收藏功能（与index.html相同）
+                // 点赞和收藏功能
                 const likeBtn = card.querySelector('.like-btn');
                 const likeStat = card.querySelector('.like-stat');
                 const likeCount = card.querySelector('.like-count');
@@ -241,64 +226,112 @@
                     const isLiked = likeStat.getAttribute('data-liked') === 'true';
                     const currentCount = parseCount(likeCount.textContent);
                     const cardId = parseInt(card.getAttribute('data-card-id'));
-                    let likedIds = JSON.parse(localStorage.getItem('likedCases') || '[]');
+                    let likedCases = getLikedCases();
+                    
+                    // 获取案例数据
+                    const cardTitle = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent : 'Case ' + cardId;
+                    const cardImage = card.querySelector('.card-main-image') ? card.querySelector('.card-main-image').src : '';
+                    const likeCountText = likeCount.textContent;
+                    const bookmarkCountText = card.querySelector('.bookmark-stat .stat-number') ? card.querySelector('.bookmark-stat .stat-number').textContent : '0';
+                    
+                    const caseData = {
+                        id: cardId,
+                        title: cardTitle,
+                        image: cardImage,
+                        likeCount: likeCountText,
+                        bookmarkCount: bookmarkCountText
+                    };
 
                     if (isLiked) {
                         likeStat.setAttribute('data-liked', 'false');
                         likeCount.textContent = formatCount(currentCount - 1);
                         if (actionLikeBtn) {
                             actionLikeBtn.classList.remove('active');
-                            actionLikeBtn.querySelector('svg path').setAttribute('fill', 'none');
-                            actionLikeBtn.querySelector('svg path').setAttribute('stroke', '#FFFFFF');
+                            const iconImg = actionLikeBtn.querySelector('.action-icon-img');
+                            if (iconImg) {
+                                iconImg.src = 'images/heart icon.png';
+                            }
                         }
                         // 从localStorage中移除
-                        likedIds = likedIds.filter(id => id !== cardId);
-                        localStorage.setItem('likedCases', JSON.stringify(likedIds));
+                        likedCases = likedCases.filter(c => c.id !== cardId);
+                        localStorage.setItem('likedCases', JSON.stringify(likedCases));
                     } else {
                         likeStat.setAttribute('data-liked', 'true');
                         likeCount.textContent = formatCount(currentCount + 1);
                         if (actionLikeBtn) {
                             actionLikeBtn.classList.add('active');
-                            actionLikeBtn.querySelector('svg path').setAttribute('fill', '#FF6B6B');
-                            actionLikeBtn.querySelector('svg path').setAttribute('stroke', '#FF6B6B');
+                            const iconImg = actionLikeBtn.querySelector('.action-icon-img');
+                            if (iconImg) {
+                                iconImg.src = 'images/blueHeart.png';
+                            }
                         }
                         // 添加到localStorage
-                        if (!likedIds.includes(cardId)) {
-                            likedIds.push(cardId);
-                            localStorage.setItem('likedCases', JSON.stringify(likedIds));
+                        const existingIndex = likedCases.findIndex(c => c.id === cardId);
+                        if (existingIndex === -1) {
+                            likedCases.push(caseData);
+                        } else {
+                            likedCases[existingIndex] = caseData;
                         }
+                        localStorage.setItem('likedCases', JSON.stringify(likedCases));
                     }
+                }
+                
+                // 获取点赞的案例列表
+                function getLikedCases() {
+                    const liked = localStorage.getItem('likedCases');
+                    return liked ? JSON.parse(liked) : [];
                 }
 
                 function toggleBookmark() {
                     const isBookmarked = bookmarkStat.getAttribute('data-bookmarked') === 'true';
                     const cardId = parseInt(card.getAttribute('data-card-id'));
-                    let collectedIds = getCollectedCaseIds();
-
+                    let bookmarkedCases = getCollectedCases();
+                    
+                    // 获取案例数据
+                    const cardTitle = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent : 'Case ' + cardId;
+                    const cardImage = card.querySelector('.card-main-image') ? card.querySelector('.card-main-image').src : '';
+                    const likeCountText = card.querySelector('.like-count') ? card.querySelector('.like-count').textContent : '0';
+                    const bookmarkCountText = card.querySelector('.bookmark-stat .stat-number') ? card.querySelector('.bookmark-stat .stat-number').textContent : '0';
+                    
+                    const caseData = {
+                        id: cardId,
+                        title: cardTitle,
+                        image: cardImage,
+                        likeCount: likeCountText,
+                        bookmarkCount: bookmarkCountText
+                    };
+                    
                     if (isBookmarked) {
                         bookmarkStat.setAttribute('data-bookmarked', 'false');
                         if (actionBookmarkBtn) {
                             actionBookmarkBtn.classList.remove('active');
-                            actionBookmarkBtn.querySelector('svg path').setAttribute('fill', 'none');
-                            actionBookmarkBtn.querySelector('svg path').setAttribute('stroke', '#FFFFFF');
+                            const iconImg = actionBookmarkBtn.querySelector('.action-icon-img');
+                            if (iconImg) {
+                                iconImg.src = 'images/collect icon.png';
+                            }
                         }
                         // 从localStorage中移除
-                        collectedIds = collectedIds.filter(id => id !== cardId);
-                        localStorage.setItem('collectedCases', JSON.stringify(collectedIds));
+                        bookmarkedCases = bookmarkedCases.filter(c => c.id !== cardId);
+                        localStorage.setItem('bookmarkedCases', JSON.stringify(bookmarkedCases));
                         // 重新加载页面以更新列表
                         setTimeout(() => loadCollectedCases(), 100);
                     } else {
                         bookmarkStat.setAttribute('data-bookmarked', 'true');
                         if (actionBookmarkBtn) {
                             actionBookmarkBtn.classList.add('active');
-                            actionBookmarkBtn.querySelector('svg path').setAttribute('fill', '#4A90E2');
-                            actionBookmarkBtn.querySelector('svg path').setAttribute('stroke', '#4A90E2');
+                            const iconImg = actionBookmarkBtn.querySelector('.action-icon-img');
+                            if (iconImg) {
+                                iconImg.src = 'images/blueBookmark.png';
+                            }
                         }
                         // 添加到localStorage
-                        if (!collectedIds.includes(cardId)) {
-                            collectedIds.push(cardId);
-                            localStorage.setItem('collectedCases', JSON.stringify(collectedIds));
+                        const existingIndex = bookmarkedCases.findIndex(c => c.id === cardId);
+                        if (existingIndex === -1) {
+                            bookmarkedCases.push(caseData);
+                        } else {
+                            bookmarkedCases[existingIndex] = caseData;
                         }
+                        localStorage.setItem('bookmarkedCases', JSON.stringify(bookmarkedCases));
                     }
                 }
 
@@ -336,7 +369,20 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadCollectedCases();
         });
+        
+        // 页面可见性变化时重新加载（从其他页面返回时）
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                loadCollectedCases();
+            }
+        });
+        
+        // 窗口获得焦点时重新加载
+        window.addEventListener('focus', function() {
+            loadCollectedCases();
+        });
     </script>
 </body>
 </html>
+
 
