@@ -114,8 +114,17 @@ body {
 .keyword-text {
     font-family: 'HarmonyOS Sans SC', sans-serif;
     font-size: 15px;
-    color: #CFCFCF;
+    color: #FFFFFF;
+    background: transparent;
+    border: none;
+    outline: none;
     flex: 1;
+    padding: 0;
+    width: 100%;
+}
+
+.keyword-text::placeholder {
+    color: #CFCFCF;
 }
 
 .search-arrow-btn {
@@ -951,6 +960,16 @@ body {
     gap: 10px;
 }
 
+.theme-toggle-wrapper {
+    position: fixed;
+    top: 25px;
+    right: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1002;
+}
+
 .theme-toggle-btn {
     width: 40px;
     height: 40px;
@@ -963,6 +982,15 @@ body {
     justify-content: center;
     transition: all 0.3s ease;
     border-radius: 50%;
+}
+
+.theme-mode-text {
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-size: 10px;
+    color: #FFFFFF;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+    margin-left: -10px;
 }
 
 .theme-toggle-btn:hover {
@@ -1237,7 +1265,7 @@ body {
     height: 46px;
     font-family: 'Inter', 'HarmonyOS Sans SC', sans-serif;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 1.21;
     color: #FFFFFF;
     margin: 0;
@@ -1394,7 +1422,8 @@ body {
     font-family: 'HarmonyOS Sans SC', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    color: #A3DEFD;
+    /* 深色模式：下拉菜单文字为白色 */
+    color: #FFFFFF;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1654,19 +1683,6 @@ body {
     background-position: center;
 }
 
-/* 浅色模式下导航栏内容向下移15px */
-[data-theme="light"] .search-area {
-    transform: translateY(0);
-}
-
-[data-theme="light"] .tag-buttons-area {
-    transform: translateY(-50%);
-}
-
-[data-theme="light"] .user-menu-container {
-    transform: translate(40px, 0);
-}
-
 [data-theme="light"] .tag-btn {
     background-image: url('images/浅色button.png');
 }
@@ -1687,7 +1703,7 @@ body {
 }
 
 [data-theme="light"] .card-title-new {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 [data-theme="light"] .card-stat-count-new,
@@ -1719,4 +1735,22 @@ body {
 
 [data-theme="light"] .item-text {
     color: #4254D9;
+}
+
+/* 浅色模式下：导航栏内容向上平移15px（相对于当前位置） */
+[data-theme="light"] .search-area {
+    transform: translateY(0);
+}
+
+[data-theme="light"] .tag-buttons-area {
+    transform: translateY(-50%);
+}
+
+[data-theme="light"] .user-menu-container {
+    transform: translate(40px, 0);
+}
+
+/* 浅色模式下：主题切换按钮文字颜色 */
+[data-theme="light"] .theme-mode-text {
+    color: #4454CC;
 }

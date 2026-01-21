@@ -16,13 +16,21 @@
         <!-- 顶部标题 -->
         <h1 class="main-title">Sophicar</h1>
         
+        <!-- 切换深浅模式按钮 - 右上角 -->
+        <div class="theme-toggle-wrapper">
+            <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="切换主题">
+                <img src="images/moon.png" alt="切换主题" class="theme-icon">
+            </button>
+            <span class="theme-mode-text" id="themeModeText">Dark mode</span>
+        </div>
+        
         <!-- 导航栏 -->
         <nav class="main-navbar">
             <!-- 左侧搜索区域 -->
             <div class="search-area">
                 <div class="search-content-wrapper">
                     <img src="images/search icon.png" alt="搜索" class="search-icon-img">
-                    <span class="keyword-text">keyword</span>
+                    <input type="text" class="keyword-text" placeholder="keyword" aria-label="搜索关键词">
                     <button class="search-arrow-btn" aria-label="搜索" type="button">
                         <img src="images/search arrow.png" alt="搜索箭头" class="search-arrow-img">
                     </button>
@@ -162,13 +170,10 @@
                 </div>
             </div>
             
-            <!-- 右侧用户头像和模式切换按钮 -->
+            <!-- 右侧用户头像 -->
             <div class="user-menu-container">
                 <button class="user-avatar-btn" id="userMenuBtn" aria-label="用户菜单">
                     <img src="images/头像.png" alt="用户头像" class="user-avatar-img">
-                </button>
-                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="切换主题">
-                    <img src="images/切换icon.png" alt="切换主题" class="theme-icon">
                 </button>
                 <!-- 用户下拉菜单 -->
                 <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
@@ -994,6 +999,24 @@
             });
         }
         
+        // 更新主题切换按钮图标的函数
+        function updateThemeIcon(theme) {
+            const themeIcon = document.querySelector('.theme-icon');
+            if (themeIcon) {
+                // 深色模式显示月亮图标，浅色模式显示太阳图标
+                themeIcon.src = theme === 'light' ? 'images/Sun.png' : 'images/moon.png';
+            }
+        }
+        
+        // 更新主题模式文字的函数
+        function updateThemeModeText(theme) {
+            const themeModeText = document.getElementById('themeModeText');
+            if (themeModeText) {
+                // 深色模式显示 "Dark mode"，浅色模式显示 "Light mode"
+                themeModeText.textContent = theme === 'light' ? 'Light mode' : 'Dark mode';
+            }
+        }
+        
         // 初始化所有checkbox图标
         function initCheckboxIcons() {
             const theme = htmlElement.getAttribute('data-theme');
@@ -1005,6 +1028,8 @@
         htmlElement.setAttribute('data-theme', savedTheme);
         updateAvatarImage(savedTheme);
         updateArrowIcon(savedTheme);
+        updateThemeIcon(savedTheme); // 初始化主题切换按钮图标
+        updateThemeModeText(savedTheme); // 初始化主题模式文字
         
         // 页面加载完成后初始化checkbox图标
         if (document.readyState === 'loading') {
@@ -1023,6 +1048,8 @@
                 updateAvatarImage(newTheme);
                 updateArrowIcon(newTheme);
                 updateCheckboxIcons(newTheme);
+                updateThemeIcon(newTheme); // 更新主题切换按钮图标
+                updateThemeModeText(newTheme); // 更新主题模式文字
             });
         }
         
