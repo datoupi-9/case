@@ -52,12 +52,12 @@ body {
 /* 顶部标题 */
 .main-title {
     position: fixed;
-    top: 25px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'HarmonyOS Sans SC', sans-serif;
-    font-weight: 700;
-    font-size: 32px;
+    font-family: 'Dhurjati', sans-serif;
+    font-weight: 400;
+    font-size: 60px;
     line-height: 1.172;
     color: #FFFFFF;
     z-index: 1001;

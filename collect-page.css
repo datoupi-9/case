@@ -665,3 +665,10 @@ body {
     }
 }
 
+/* ========================================
+   浅色模式样式
+   ======================================== */
+[data-theme="light"] body {
+    background-image: url('images/light background.png');
+}
+

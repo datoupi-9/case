@@ -1395,3 +1395,135 @@ body {
     color: #FF9999;
 }
 
+/* ========================================
+   浅色模式样式
+   ======================================== */
+[data-theme="light"] body {
+    background-image: url('images/light background.png');
+}
+
+/* 浅色模式下：将所有白色字体改为 #4454CC */
+[data-theme="light"] .case-title {
+    color: #4454CC;
+}
+
+[data-theme="light"] .follow-designer-btn.active {
+    color: #4454CC;
+}
+
+[data-theme="light"] .follow-designer-btn.active .follow-text {
+    color: #4454CC;
+}
+
+[data-theme="light"] .description-text {
+    color: #4454CC;
+}
+
+[data-theme="light"] .purchase-btn {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comments-title {
+    color: #4454CC;
+}
+
+[data-theme="light"] .nav-tab.active {
+    color: #4454CC;
+}
+
+[data-theme="light"] .menu-header-user-name {
+    color: #4454CC;
+}
+
+[data-theme="light"] .menu-item-text {
+    color: #4454CC;
+}
+
+/* 浅色模式下：评论区按钮底图 */
+[data-theme="light"] .comment-action-btn {
+    background-image: url('images/浅色cdbutton.png');
+}
+
+/* 浅色模式下：评论输入框底图 */
+[data-theme="light"] .comment-input-wrapper {
+    background-image: url('images/浅色cd评论框.png');
+}
+
+/* 浅色模式下：将所有 #BAD0FF 颜色改为 #4454CC */
+[data-theme="light"] .meta-label {
+    color: #4454CC;
+}
+
+[data-theme="light"] .case-author {
+    color: #4454CC;
+}
+
+[data-theme="light"] .case-date {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-char-count {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-input {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-input::placeholder {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-author {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-like-btn {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-like-btn span {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-like-btn:hover {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-like-btn:hover span {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-reply-btn {
+    color: #4454CC;
+}
+
+[data-theme="light"] .comment-reply-btn:hover {
+    color: #4454CC;
+}
+
+/* 浅色模式下：将所有 #6798FF 颜色改为 #3E6AE2 */
+[data-theme="light"] .designer-icon:hover {
+    border-color: #3E6AE2;
+}
+
+[data-theme="light"] .designer-avatar-wrapper:hover .designer-icon {
+    border-color: #3E6AE2;
+}
+
+[data-theme="light"] .section-title {
+    color: #3E6AE2;
+}
+
+[data-theme="light"] .detail-subtitle {
+    color: #3E6AE2;
+}
+
+[data-theme="light"] .gallery-item {
+    background: linear-gradient(135deg, #3E6AE2, #7AFBF4, #A3A9FF);
+}
+
+[data-theme="light"] .comments-count {
+    color: #3E6AE2;
+}
+

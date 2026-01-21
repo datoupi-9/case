@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -304,6 +304,24 @@
         </div>
     </div>
     
+    <!-- JavaScript 读取主题设置 -->
+    <script>
+        // 从localStorage读取保存的主题并应用到页面
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // 更新返回按钮图片的函数
+        function updateBackButtonIcon(theme) {
+            const backIconImg = document.querySelector('.back-icon-img');
+            if (backIconImg) {
+                backIconImg.src = theme === 'light' ? 'images/浅色back button.png' : 'images/back icon.png';
+            }
+        }
+        
+        // 初始化返回按钮图标
+        updateBackButtonIcon(savedTheme);
+    </script>
+    
     <!-- JavaScript 控制用户菜单 -->
     <script>
         const userMenuBtn = document.getElementById('userMenuBtn');
@@ -522,6 +540,45 @@
                 }
             }
             
+            // 更新浅色模式下的按钮图标
+            function updateButtonIconsForLightMode() {
+                const theme = document.documentElement.getAttribute('data-theme');
+                if (theme !== 'light') return;
+                
+                // 更新点赞按钮图标
+                if (likeBtn && likeBtn.classList.contains('active')) {
+                    const likeIcon = likeBtn.querySelector('.action-icon-img');
+                    if (likeIcon) {
+                        likeIcon.src = 'images/浅色Heart.png';
+                    }
+                }
+                
+                // 更新收藏按钮图标
+                if (bookmarkBtn && bookmarkBtn.classList.contains('active')) {
+                    const bookmarkIcon = bookmarkBtn.querySelector('.action-icon-img');
+                    if (bookmarkIcon) {
+                        bookmarkIcon.src = 'images/浅色Bookmark.png';
+                    }
+                }
+                
+                // 更新转发按钮图标
+                if (shareBtn && shareBtn.classList.contains('active')) {
+                    const shareIcon = shareBtn.querySelector('.action-icon-img');
+                    if (shareIcon) {
+                        shareIcon.src = 'images/浅色转发.png';
+                    }
+                }
+                
+                // 更新链接按钮图标
+                const linkBtn = document.querySelector('.link-action-btn');
+                if (linkBtn && linkBtn.classList.contains('active')) {
+                    const linkIcon = linkBtn.querySelector('.action-icon-img');
+                    if (linkIcon) {
+                        linkIcon.src = 'images/浅色link.png';
+                    }
+                }
+            }
+            
             // 保存点赞案例
             function saveLikedCase(caseData) {
                 const likedCases = getLikedCases();
@@ -564,20 +621,32 @@
                 localStorage.setItem('bookmarkedCases', JSON.stringify(filtered));
             }
             
-            // 点赞功能
+            // 点赞功能（第一个按钮）
             if (likeBtn) {
                 likeBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const isCurrentlyLiked = isLiked();
+                    const theme = document.documentElement.getAttribute('data-theme');
+                    const iconImg = this.querySelector('.action-icon-img');
                     
                     if (isCurrentlyLiked) {
                         // 取消点赞
                         removeLikedCase(caseId);
                         this.classList.remove('active');
+                        // 浅色模式下恢复原图标
+                        if (theme === 'light' && iconImg) {
+                            iconImg.src = 'images/heart icon.png';
+                        } else if (iconImg) {
+                            iconImg.src = 'images/heart icon.png';
+                        }
                     } else {
                         // 点赞
                         saveLikedCase(caseData);
                         this.classList.add('active');
+                        // 浅色模式下切换为浅色图标
+                        if (theme === 'light' && iconImg) {
+                            iconImg.src = 'images/浅色Heart.png';
+                        }
                     }
                     
                     // 添加视觉反馈
@@ -589,6 +658,8 @@
                 
                 // 初始化点赞状态
                 updateLikeButton();
+                // 初始化浅色模式图标
+                updateButtonIconsForLightMode();
             }
             
             // 收藏功能
@@ -596,15 +667,25 @@
                 bookmarkBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const isCurrentlyBookmarked = isBookmarked();
+                    const theme = document.documentElement.getAttribute('data-theme');
+                    const iconImg = this.querySelector('.action-icon-img');
                     
                     if (isCurrentlyBookmarked) {
                         // 取消收藏
                         removeBookmarkedCase(caseId);
                         this.classList.remove('active');
+                        // 浅色模式下恢复原图标
+                        if (theme === 'light' && iconImg) {
+                            iconImg.src = 'images/collect icon.png';
+                        }
                     } else {
                         // 收藏
                         saveBookmarkedCase(caseData);
                         this.classList.add('active');
+                        // 浅色模式下切换为浅色图标
+                        if (theme === 'light' && iconImg) {
+                            iconImg.src = 'images/浅色Bookmark.png';
+                        }
                     }
                     
                     // 添加视觉反馈
@@ -616,15 +697,28 @@
                 
                 // 初始化收藏状态
                 updateBookmarkButton();
+                // 初始化浅色模式图标
+                updateButtonIconsForLightMode();
             }
             
             // 转发功能
             if (shareBtn) {
                 shareBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
+                    const theme = document.documentElement.getAttribute('data-theme');
+                    const iconImg = this.querySelector('.action-icon-img');
                     
                     // 切换活跃状态
-                    this.classList.toggle('active');
+                    const isActive = this.classList.toggle('active');
+                    
+                    // 浅色模式下切换图标
+                    if (theme === 'light' && iconImg) {
+                        if (isActive) {
+                            iconImg.src = 'images/浅色转发.png';
+                        } else {
+                            iconImg.src = 'images/转发icon.png';
+                        }
+                    }
                     
                     // 尝试使用 Web Share API，如果不支持则复制链接
                     if (navigator.share) {
@@ -647,6 +741,51 @@
                     }, 10);
                 });
             }
+            
+            // 链接按钮功能（第四个按钮）
+            const linkBtn = document.querySelector('.link-action-btn');
+            if (linkBtn) {
+                // 移除原有的 onclick，改用事件监听器
+                linkBtn.removeAttribute('onclick');
+                linkBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const theme = document.documentElement.getAttribute('data-theme');
+                    const iconImg = this.querySelector('.action-icon-img');
+                    
+                    // 切换活跃状态
+                    const isActive = this.classList.toggle('active');
+                    
+                    // 浅色模式下切换图标
+                    if (theme === 'light' && iconImg) {
+                        if (isActive) {
+                            iconImg.src = 'images/浅色link.png';
+                        } else {
+                            iconImg.src = 'images/link icon.png';
+                        }
+                    }
+                    
+                    // 执行原有的打开链接功能
+                    window.open('https://makerworld.com.cn/zh/models/1949321-cyberbrick-si-qu-che#profileId-2165973', '_blank');
+                });
+            }
+            
+            // 初始化浅色模式图标（在页面加载和主题切换时调用）
+            updateButtonIconsForLightMode();
+            
+            // 监听主题变化
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                        const currentTheme = document.documentElement.getAttribute('data-theme');
+                        updateButtonIconsForLightMode();
+                        updateBackButtonIcon(currentTheme);
+                    }
+                });
+            });
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-theme']
+            });
             
             // 复制链接到剪贴板
             function copyToClipboard() {

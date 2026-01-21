@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,6 +89,13 @@
             </div>
         </div>
     </div>
+    
+    <!-- JavaScript 读取主题设置 -->
+    <script>
+        // 从localStorage读取保存的主题并应用到页面
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
     
     <!-- JavaScript 控制用户菜单 -->
     <script>
