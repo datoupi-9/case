@@ -146,6 +146,38 @@
         </div>
     </div>
     
+    <!-- JavaScript 读取主题设置 -->
+    <script>
+        // 从localStorage读取保存的主题并应用到页面
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // 更新右上角头像的函数
+        function updateAvatarImage(theme) {
+            const userAvatarImg = document.querySelector('.user-avatar-img');
+            if (userAvatarImg) {
+                userAvatarImg.src = theme === 'light' ? 'images/白头像.png' : 'images/头像.png';
+            }
+        }
+        
+        // 初始化右上角头像
+        updateAvatarImage(savedTheme);
+        
+        // 监听主题变化
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    updateAvatarImage(currentTheme);
+                }
+            });
+        });
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    </script>
+    
     <!-- JavaScript 控制下拉面板显示/隐藏和用户菜单 -->
     <script>
         // 获取导航项和下拉面板

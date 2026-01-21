@@ -630,3 +630,41 @@ body {
     background-image: url('images/light background.png');
 }
 
+/* 浅色模式下：下拉菜单底图 */
+[data-theme="light"] .user-dropdown-menu {
+    background-image: url('images/浅色头像menu.png');
+    width: 310px;
+    min-height: 390px;
+}
+
+/* 浅色模式下：下拉菜单元素位置调整 */
+[data-theme="light"] .menu-header-avatar {
+    transform: translateX(10px);
+}
+
+[data-theme="light"] .menu-switch-btn {
+    transform: translateX(-10px);
+}
+
+[data-theme="light"] .menu-item.menu-item-danger {
+    transform: translateY(-10px);
+}
+
+[data-theme="light"] .menu-item.menu-item-danger:hover {
+    transform: translateX(6px) translateY(-10px);
+}
+
+/* 浅色模式下：下拉菜单中的所有图标向右移10px */
+[data-theme="light"] .menu-item-icon {
+    transform: translateX(10px);
+}
+
+/* 浅色模式下：文本颜色改为 #4454CC */
+[data-theme="light"] .page-title {
+    color: #4454CC;
+}
+
+[data-theme="light"] .empty-title {
+    color: #4454CC;
+}
+

@@ -27,7 +27,7 @@
                 <!-- 空状态提示 -->
                 <div class="empty-state" id="emptyState" style="display: none;">
                     <div class="empty-icon">
-                        <img src="images/heart icon.png" alt="Heart Icon" class="empty-icon-img">
+                        <img src="images/blueHeart.png" alt="Heart Icon" class="empty-icon-img">
                     </div>
                     <h2 class="empty-title">No liked cases yet</h2>
                     <p class="empty-text">Discover more amazing content in the case library!</p>
@@ -94,6 +94,114 @@
         // 从localStorage读取保存的主题并应用到页面
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // 更新返回按钮图标的函数
+        function updateBackButtonIcon(theme) {
+            const backIconImg = document.querySelector('.back-icon-img');
+            if (backIconImg) {
+                backIconImg.src = theme === 'light' ? 'images/浅色back button.png' : 'images/back icon.png';
+            }
+        }
+        
+        // 更新所有 heart icon 的函数
+        function updateHeartIcons(theme) {
+            // 更新空状态的 heart icon
+            const emptyIcon = document.querySelector('.empty-icon-img');
+            if (emptyIcon && emptyIcon.src.includes('heart icon.png')) {
+                emptyIcon.src = theme === 'light' ? 'images/blueHeart.png' : 'images/heart icon.png';
+            }
+            
+            // 更新卡片统计中的 heart icon
+            const cardStatIcons = document.querySelectorAll('.card-stat-icon');
+            cardStatIcons.forEach(icon => {
+                if (icon.src.includes('heart icon.png')) {
+                    icon.src = theme === 'light' ? 'images/blueHeart.png' : 'images/heart icon.png';
+                }
+            });
+            
+            // 更新操作按钮中的 heart icon（未激活状态）
+            const actionIcons = document.querySelectorAll('.action-icon-img');
+            actionIcons.forEach(icon => {
+                if (icon.src.includes('heart icon.png') && !icon.closest('.action-like-btn.active')) {
+                    icon.src = theme === 'light' ? 'images/blueHeart.png' : 'images/heart icon.png';
+                }
+            });
+        }
+        
+        // 更新右上角头像的函数
+        function updateAvatarImage(theme) {
+            const userAvatarImg = document.querySelector('.user-avatar-img');
+            if (userAvatarImg) {
+                userAvatarImg.src = theme === 'light' ? 'images/白头像.png' : 'images/头像.png';
+            }
+        }
+        
+        // 更新下拉菜单图标的函数
+        function updateDropdownMenuIcons(theme) {
+            const menuHeaderAvatar = document.querySelector('.menu-header-avatar');
+            const menuSwitchIcon = document.querySelector('.menu-switch-icon');
+            const menuItemIcons = document.querySelectorAll('.menu-item-icon');
+            
+            // 更新菜单头部头像
+            if (menuHeaderAvatar) {
+                menuHeaderAvatar.src = theme === 'light' ? 'images/白头像.png' : 'images/头像.png';
+            }
+            
+            // 更新切换按钮图标
+            if (menuSwitchIcon) {
+                menuSwitchIcon.src = theme === 'light' ? 'images/白Transfer.png' : 'images/切换icon.png';
+            }
+            
+            // 更新菜单项图标（从上到下）
+            if (menuItemIcons.length > 0) {
+                const lightIcons = [
+                    'images/白Heart.png',      // Likes
+                    'images/白Bookmark.png',   // Collect
+                    'images/白Add User Male.png', // Follow
+                    'images/白Settings.png',   // Settings
+                    'images/白Logout Rounded.png' // Sign Out
+                ];
+                const darkIcons = [
+                    'images/heart icon.png',
+                    'images/collect icon.png',
+                    'images/follow icon.png',
+                    'images/Settings icon.png',
+                    'images/sign out icon.png'
+                ];
+                
+                menuItemIcons.forEach((icon, index) => {
+                    if (index < lightIcons.length) {
+                        icon.src = theme === 'light' ? lightIcons[index] : darkIcons[index];
+                    }
+                });
+            }
+        }
+        
+        // 初始化右上角头像
+        updateAvatarImage(savedTheme);
+        // 初始化下拉菜单图标
+        updateDropdownMenuIcons(savedTheme);
+        // 初始化返回按钮图标
+        updateBackButtonIcon(savedTheme);
+        // 初始化 heart icon
+        updateHeartIcons(savedTheme);
+        
+        // 监听主题变化
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    updateAvatarImage(currentTheme);
+                    updateDropdownMenuIcons(currentTheme);
+                    updateBackButtonIcon(currentTheme);
+                    updateHeartIcons(currentTheme);
+                }
+            });
+        });
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
     </script>
     
     <!-- JavaScript 控制用户菜单 -->
@@ -127,6 +235,8 @@
 
         // 创建案例卡片HTML
         function createCaseCard(caseData) {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const heartIconSrc = theme === 'light' ? 'images/blueHeart.png' : 'images/heart icon.png';
             return `
                 <article class="case-card" data-card-id="${caseData.id}">
                     <div class="card-image">
@@ -136,7 +246,7 @@
                         <!-- 卡片操作按钮（悬停显示） -->
                         <div class="card-actions">
                             <button class="action-like-btn active" aria-label="Like" title="Like">
-                                <img src="images/heart icon.png" alt="Like" class="action-icon-img">
+                                <img src="images/blueHeart.png" alt="Like" class="action-icon-img">
                             </button>
                             <button class="action-bookmark-btn" aria-label="Bookmark" title="Bookmark">
                                 <img src="images/collect icon.png" alt="Bookmark" class="action-icon-img">
@@ -146,7 +256,7 @@
                     <h3 class="card-title">${caseData.title}</h3>
                     <div class="card-stats">
                         <div class="stat-item like-stat" data-liked="true">
-                            <img src="images/heart icon.png" alt="Like" class="card-stat-icon">
+                            <img src="${heartIconSrc}" alt="Like" class="card-stat-icon">
                             <span class="stat-number like-count">${caseData.likeCount}</span>
                         </div>
                         <div class="stat-item bookmark-stat" data-bookmarked="false">
@@ -203,6 +313,18 @@
 
             // 为每个卡片添加事件监听
             attachCardEvents();
+            
+            // 初始化所有激活状态的爱心图标为 blueHeart.png
+            const activeLikeButtons = document.querySelectorAll('.action-like-btn.active .action-icon-img');
+            activeLikeButtons.forEach(icon => {
+                icon.src = 'images/blueHeart.png';
+            });
+            
+            // 更新浅色模式下的 heart icon
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                updateHeartIcons('light');
+            }
         }
 
         // 为卡片添加事件监听
@@ -268,7 +390,8 @@
                             actionLikeBtn.classList.remove('active');
                             const iconImg = actionLikeBtn.querySelector('.action-icon-img');
                             if (iconImg) {
-                                iconImg.src = 'images/heart icon.png';
+                                const theme = document.documentElement.getAttribute('data-theme');
+                                iconImg.src = theme === 'light' ? 'images/blueHeart.png' : 'images/heart icon.png';
                             }
                         }
                         // 从localStorage中移除

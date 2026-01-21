@@ -27,7 +27,7 @@
                 <!-- 空状态提示 -->
                 <div class="empty-state" id="emptyState" style="display: none;">
                     <div class="empty-icon">
-                        <img src="images/collect icon.png" alt="Collect Icon" class="empty-icon-img">
+                        <img src="images/blueBookmark.png" alt="Collect Icon" class="empty-icon-img">
                     </div>
                     <h2 class="empty-title">No collected cases yet</h2>
                     <p class="empty-text">Discover more amazing content in the case library!</p>
@@ -94,6 +94,103 @@
         // 从localStorage读取保存的主题并应用到页面
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // 更新下拉菜单图标的函数
+        // 更新右上角头像的函数
+        function updateAvatarImage(theme) {
+            const userAvatarImg = document.querySelector('.user-avatar-img');
+            if (userAvatarImg) {
+                userAvatarImg.src = theme === 'light' ? 'images/白头像.png' : 'images/头像.png';
+            }
+        }
+        
+        function updateDropdownMenuIcons(theme) {
+            const menuHeaderAvatar = document.querySelector('.menu-header-avatar');
+            const menuSwitchIcon = document.querySelector('.menu-switch-icon');
+            const menuItemIcons = document.querySelectorAll('.menu-item-icon');
+            
+            // 更新菜单头部头像
+            if (menuHeaderAvatar) {
+                menuHeaderAvatar.src = theme === 'light' ? 'images/白头像.png' : 'images/头像.png';
+            }
+            
+            // 更新切换按钮图标
+            if (menuSwitchIcon) {
+                menuSwitchIcon.src = theme === 'light' ? 'images/白Transfer.png' : 'images/切换icon.png';
+            }
+            
+            // 更新菜单项图标（从上到下）
+            if (menuItemIcons.length > 0) {
+                const lightIcons = [
+                    'images/白Heart.png',      // Likes
+                    'images/白Bookmark.png',   // Collect
+                    'images/白Add User Male.png', // Follow
+                    'images/白Settings.png',   // Settings
+                    'images/白Logout Rounded.png' // Sign Out
+                ];
+                const darkIcons = [
+                    'images/heart icon.png',
+                    'images/collect icon.png',
+                    'images/follow icon.png',
+                    'images/Settings icon.png',
+                    'images/sign out icon.png'
+                ];
+                
+                menuItemIcons.forEach((icon, index) => {
+                    if (index < lightIcons.length) {
+                        icon.src = theme === 'light' ? lightIcons[index] : darkIcons[index];
+                    }
+                });
+            }
+        }
+        
+        // 更新所有收藏图标的函数
+        function updateBookmarkIcons(theme) {
+            // 更新空状态的收藏图标
+            const emptyIcon = document.querySelector('.empty-icon-img');
+            if (emptyIcon && emptyIcon.src.includes('collect icon.png')) {
+                emptyIcon.src = theme === 'light' ? 'images/blueBookmark.png' : 'images/collect icon.png';
+            }
+            
+            // 更新卡片统计中的收藏图标
+            const cardStatIcons = document.querySelectorAll('.card-stat-icon');
+            cardStatIcons.forEach(icon => {
+                if (icon.src.includes('collect icon.png')) {
+                    icon.src = theme === 'light' ? 'images/blueBookmark.png' : 'images/collect icon.png';
+                }
+            });
+            
+            // 更新操作按钮中的收藏图标（未激活状态）
+            const actionIcons = document.querySelectorAll('.action-icon-img');
+            actionIcons.forEach(icon => {
+                if (icon.src.includes('collect icon.png') && !icon.closest('.action-bookmark-btn.active')) {
+                    icon.src = theme === 'light' ? 'images/blueBookmark.png' : 'images/collect icon.png';
+                }
+            });
+        }
+        
+        // 初始化右上角头像
+        updateAvatarImage(savedTheme);
+        // 初始化下拉菜单图标
+        updateDropdownMenuIcons(savedTheme);
+        // 初始化收藏图标
+        updateBookmarkIcons(savedTheme);
+        
+        // 监听主题变化
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    updateAvatarImage(currentTheme);
+                    updateDropdownMenuIcons(currentTheme);
+                    updateBookmarkIcons(currentTheme);
+                }
+            });
+        });
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
     </script>
     
     <!-- JavaScript 控制用户菜单 -->
@@ -127,6 +224,8 @@
 
         // 创建案例卡片HTML
         function createCaseCard(caseData) {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const bookmarkIconSrc = theme === 'light' ? 'images/blueBookmark.png' : 'images/collect icon.png';
             return `
                 <article class="case-card" data-card-id="${caseData.id}">
                     <div class="card-image">
@@ -136,7 +235,7 @@
                                 <img src="images/heart icon.png" alt="Like" class="action-icon-img">
                             </button>
                             <button class="action-bookmark-btn active" aria-label="Bookmark" title="Bookmark">
-                                <img src="images/collect icon.png" alt="Bookmark" class="action-icon-img">
+                                <img src="images/blueBookmark.png" alt="Bookmark" class="action-icon-img">
                             </button>
                         </div>
                     </div>
@@ -150,7 +249,7 @@
                             </div>
                             <div class="stat-item bookmark-stat" data-bookmarked="true">
                                 <button class="bookmark-btn" aria-label="Bookmark">
-                                    <img src="images/collect icon.png" alt="Bookmark" class="card-stat-icon">
+                                    <img src="${bookmarkIconSrc}" alt="Bookmark" class="card-stat-icon">
                                 </button>
                                 <span class="stat-number">${caseData.bookmarkCount}</span>
                             </div>
@@ -189,6 +288,18 @@
 
             // 为每个卡片添加事件监听
             attachCardEvents();
+            
+            // 初始化所有激活状态的收藏图标为 blueBookmark.png
+            const activeBookmarkButtons = document.querySelectorAll('.action-bookmark-btn.active .action-icon-img');
+            activeBookmarkButtons.forEach(icon => {
+                icon.src = 'images/blueBookmark.png';
+            });
+            
+            // 更新浅色模式下的收藏图标
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                updateBookmarkIcons('light');
+            }
         }
 
         // 为卡片添加事件监听
@@ -314,7 +425,8 @@
                             actionBookmarkBtn.classList.remove('active');
                             const iconImg = actionBookmarkBtn.querySelector('.action-icon-img');
                             if (iconImg) {
-                                iconImg.src = 'images/collect icon.png';
+                                const theme = document.documentElement.getAttribute('data-theme');
+                                iconImg.src = theme === 'light' ? 'images/blueBookmark.png' : 'images/collect icon.png';
                             }
                         }
                         // 从localStorage中移除
