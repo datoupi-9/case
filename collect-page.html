@@ -230,6 +230,9 @@
                 <article class="case-card" data-card-id="${caseData.id}">
                     <div class="card-image">
                         <img src="${caseData.image}" alt="${caseData.title}" class="card-main-image">
+                        <!-- 渐变蒙版（悬停显示） -->
+                        <div class="card-gradient-overlay"></div>
+                        <!-- 卡片操作按钮（悬停显示） -->
                         <div class="card-actions">
                             <button class="action-like-btn" aria-label="Like" title="Like">
                                 <img src="images/heart icon.png" alt="Like" class="action-icon-img">
@@ -239,22 +242,16 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-content">
-                        <div class="card-stats">
-                            <div class="stat-item like-stat" data-liked="false">
-                                <button class="like-btn" aria-label="Like">
-                                    <img src="images/heart icon.png" alt="Like" class="card-stat-icon">
-                                </button>
-                                <span class="stat-number like-count">${caseData.likeCount}</span>
-                            </div>
-                            <div class="stat-item bookmark-stat" data-bookmarked="true">
-                                <button class="bookmark-btn" aria-label="Bookmark">
-                                    <img src="${bookmarkIconSrc}" alt="Bookmark" class="card-stat-icon">
-                                </button>
-                                <span class="stat-number">${caseData.bookmarkCount}</span>
-                            </div>
+                    <h3 class="card-title">${caseData.title}</h3>
+                    <div class="card-stats">
+                        <div class="stat-item like-stat" data-liked="false">
+                            <img src="images/heart icon.png" alt="Like" class="card-stat-icon">
+                            <span class="stat-number like-count">${caseData.likeCount}</span>
                         </div>
-                        <h3 class="card-title">${caseData.title}</h3>
+                        <div class="stat-item bookmark-stat" data-bookmarked="true">
+                            <img src="${bookmarkIconSrc}" alt="Bookmark" class="card-stat-icon">
+                            <span class="stat-number">${caseData.bookmarkCount}</span>
+                        </div>
                     </div>
                 </article>
             `;
