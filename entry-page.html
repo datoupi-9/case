@@ -47,6 +47,11 @@
                     </div>
                 </div>
                 
+                <!-- 中间分隔线 -->
+                <div class="menu-divider-line">
+                    <img src="images/entry line.png" alt="分隔线" class="divider-line-image">
+                </div>
+                
                 <!-- 右侧：检索框和按钮 -->
                 <div class="menu-right-section">
                     <!-- 检索框 -->
@@ -215,6 +220,31 @@
         }
     </script>
     
+    <!-- JavaScript 控制三个图片的点击交互 -->
+    <script>
+        // 为三个图片添加点击交互效果
+        document.querySelectorAll('.menu-image-item').forEach((item, index) => {
+            const image = item.querySelector('.menu-image');
+            const text = item.querySelector('.menu-image-text');
+            
+            if (image) {
+                // 点击整个图片项时触发交互
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 添加点击反馈效果
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        item.style.transform = '';
+                    }, 150);
+                    
+                    // 这里可以添加跳转到详情页或其他操作
+                    // 例如: window.location.href = 'case-detail.html?id=' + (index + 1);
+                    console.log('点击了图片:', image.alt);
+                });
+            }
+        });
+    </script>
+    
     <!-- JavaScript 控制检索框交互 -->
     <script>
         // 检索框交互功能
@@ -222,12 +252,12 @@
         const searchInput = document.querySelector('.search-input');
         
         if (searchBoxContainer && searchInput) {
-            // 点击检索框容器时聚焦输入框
+            // 点击检索框容器（包括图片）时聚焦输入框
             searchBoxContainer.addEventListener('click', function(e) {
-                // 如果点击的不是输入框本身，则聚焦输入框
-                if (e.target !== searchInput) {
-                    searchInput.focus();
-                }
+                e.preventDefault();
+                e.stopPropagation();
+                // 聚焦输入框
+                searchInput.focus();
             });
             
             // 确保输入框可以正常输入
@@ -239,6 +269,12 @@
             searchInput.addEventListener('input', function() {
                 // 输入时保持焦点
                 this.focus();
+            });
+            
+            // 确保输入框可以正常接收键盘输入
+            searchInput.addEventListener('keydown', function(e) {
+                // 允许所有键盘输入
+                e.stopPropagation();
             });
         }
     </script>

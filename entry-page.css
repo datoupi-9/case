@@ -170,6 +170,16 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.menu-image-item:hover {
+    transform: translateY(-5px);
+}
+
+.menu-image-item:active {
+    transform: translateY(0) scale(0.95);
 }
 
 .menu-image {
@@ -179,6 +189,11 @@ body {
     max-height: 280px;
     object-fit: contain;
     display: block;
+    transition: opacity 0.2s ease;
+}
+
+.menu-image-item:hover .menu-image {
+    opacity: 0.9;
 }
 
 /* 第二个图片（Drive-by-wire chassis.png）向左移10px */
@@ -201,6 +216,25 @@ body {
     text-align: center;
     white-space: nowrap;
     margin-top: -15px;
+}
+
+/* ========================================
+   中间分隔线
+   ======================================== */
+.menu-divider-line {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.divider-line-image {
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    display: block;
 }
 
 /* ========================================
