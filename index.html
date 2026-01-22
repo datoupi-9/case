@@ -77,7 +77,7 @@
                 </div>
                 <div class="tag-btn-wrapper">
                     <button class="tag-btn" data-dropdown="passenger">
-                        <span>Passenger transport</span>
+                        <span>Passenger Transport</span>
                         <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
                     </button>
                     <div class="tag-dropdown-menu" id="dropdown-passenger" style="display: none;">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="tag-btn-wrapper">
                     <button class="tag-btn" data-dropdown="education">
-                        <span>Education related</span>
+                        <span>Education Related</span>
                         <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
                     </button>
                     <div class="tag-dropdown-menu" id="dropdown-education" style="display: none;">
@@ -153,7 +153,7 @@
                 </div>
                 <div class="tag-btn-wrapper">
                     <button class="tag-btn" data-dropdown="special-env">
-                        <span>Special environment</span>
+                        <span>Special Environment</span>
                         <img src="images/向下箭头.png" alt="下拉" class="sort-down-icon-img">
                 </button>
                     <div class="tag-dropdown-menu" id="dropdown-special-env" style="display: none;">
@@ -727,22 +727,38 @@
         });
         
         // 下拉菜单项复选框点击功能
-        document.querySelectorAll('.tag-dropdown-item').forEach(item => {
-            const checkbox = item.querySelector('.checkbox-icon');
-            if (checkbox) {
-                item.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    // 切换复选框的选中状态
-                    checkbox.classList.toggle('checked');
-                    // 更新checkbox图标（如果取消选中，恢复正确的图标）
-                    if (!checkbox.classList.contains('checked')) {
+        // 为所有下拉菜单项添加点击交互效果
+        function initDropdownItemInteractions() {
+            document.querySelectorAll('.tag-dropdown-item').forEach(item => {
+                const checkbox = item.querySelector('.checkbox-icon');
+                if (checkbox) {
+                    // 点击整个item区域都可以触发
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // 切换复选框的选中状态
+                        const isChecked = checkbox.classList.contains('checked');
+                        checkbox.classList.toggle('checked');
+                        
+                        // 获取当前主题
                         const theme = document.documentElement.getAttribute('data-theme');
-                        const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
-                        checkbox.src = checkboxSrc;
-                    }
-                });
-            }
-        });
+                        
+                        if (checkbox.classList.contains('checked')) {
+                            // 选中状态：Done图标会通过CSS的::after伪元素显示
+                            // 确保checkbox图标本身保持可见，以便::after能正确显示
+                            const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
+                            checkbox.src = checkboxSrc;
+                        } else {
+                            // 取消选中：恢复正确的checkbox图标
+                            const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
+                            checkbox.src = checkboxSrc;
+                        }
+                    });
+                }
+            });
+        }
+        
+        // 初始化下拉菜单项交互
+        initDropdownItemInteractions();
         
         // Most popular 下拉菜单功能
         const mostPopularBtn = document.getElementById('mostPopularBtn');
@@ -995,10 +1011,8 @@
             const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
             const checkboxIcons = document.querySelectorAll('.checkbox-icon');
             checkboxIcons.forEach(icon => {
-                // 只更新未选中的checkbox，选中的checkbox会显示Done图标
-                if (!icon.classList.contains('checked')) {
-                    icon.src = checkboxSrc;
-                }
+                // 更新所有checkbox的图标（包括选中的，因为Done图标通过CSS的::after显示）
+                icon.src = checkboxSrc;
             });
         }
         
@@ -1099,16 +1113,18 @@
             });
         }
         
-        // 监听checkbox点击事件，确保切换主题后新创建的checkbox也使用正确的图标
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('checkbox-icon')) {
-                const theme = htmlElement.getAttribute('data-theme');
-                const checkboxSrc = theme === 'light' ? 'images/浅色choose方框.png' : 'images/点击方框.png';
-                // 如果checkbox被取消选中，恢复正确的图标
-                if (!e.target.classList.contains('checked')) {
-                    e.target.src = checkboxSrc;
+        // 监听主题变化，重新初始化下拉菜单项交互
+        const themeObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    // 主题切换后，重新初始化交互（以防有新的元素）
+                    initDropdownItemInteractions();
                 }
-            }
+            });
+        });
+        themeObserver.observe(htmlElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
         });
         
     </script>
