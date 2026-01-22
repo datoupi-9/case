@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,88 +13,56 @@
     
     <!-- 主容器 -->
     <div class="container">
-        
-        <!-- 顶部导航栏 -->
+        <!-- 导航栏 -->
         <nav class="top-navigation">
             <div class="nav-container">
                 <a href="#" class="nav-item" data-nav="parametric">Parametric modeling</a>
-                <a href="#" class="nav-item active" data-nav="library" id="libraryNav">Case Library</a>
+                <a href="#" class="nav-item" data-nav="library" id="libraryNav">Case Library</a>
                 <a href="#" class="nav-item" data-nav="learning">Learning documents</a>
             </div>
         </nav>
         
-        <!-- Case Library 下拉面板 -->
-        <div class="dropdown-panel" id="libraryPanel">
-            <div class="panel-container">
-                <!-- 案例模块 -->
-                <div class="cases-section">
-                    <div class="case-module">
-                        <img src="images/entry1.PNG" alt="Educational Kit" class="case-img">
-                        <div class="case-info">
-                            <h3 class="case-title">Educational Kit</h3>
-                        </div>
+        <!-- 下拉菜单区域 -->
+        <div class="dropdown-menu-container" id="libraryPanel" style="display: none;">
+            <!-- 下拉菜单背景 -->
+            <div class="dropdown-menu-bg">
+                <img src="images/进入page menu.png" alt="下拉菜单背景" class="menu-bg-image">
+            </div>
+            
+            <!-- 下拉菜单内容 -->
+            <div class="dropdown-menu-content">
+                <!-- 左侧：三个图片 -->
+                <div class="menu-left-section">
+                    <div class="menu-image-item">
+                        <img src="images/Educational Kit.png" alt="Educational Kit" class="menu-image">
+                        <div class="menu-image-text">Educational Kit</div>
                     </div>
-                    
-                    <div class="case-module">
-                        <img src="images/entry2.png" alt="Drive-by-wire chassis" class="case-img">
-                        <div class="case-info">
-                            <h3 class="case-title">Drive-by-wire chassis</h3>
-                        </div>
+                    <div class="menu-image-item">
+                        <img src="images/Drive-by-wire chassis.png" alt="Drive-by-wire chassis" class="menu-image drive-by-wire-image">
+                        <div class="menu-image-text">Drive-by-wire Chassis</div>
                     </div>
-                    
-                    <div class="case-module">
-                        <img src="images/entry3.PNG" alt="Simulation simulator" class="case-img">
-                        <div class="case-info">
-                            <h3 class="case-title">Simulation simulator</h3>
-                        </div>
+                    <div class="menu-image-item">
+                        <img src="images/Simulation simulator.png" alt="Simulation simulator" class="menu-image">
+                        <div class="menu-image-text">Simulation Simulator</div>
                     </div>
                 </div>
                 
-                <!-- 搜索栏 -->
-                <div class="search-section">
-                    <div class="search-container">
-                        <div class="search-box">
-                            <input type="text" class="search-input" placeholder="Search what you are interested in？" aria-label="搜索">
-                            <button class="search-btn" aria-label="搜索">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <circle cx="11" cy="11" r="8" stroke="#FFFFFF" stroke-width="2"/>
-                                    <path d="M20 20L16 16" stroke="#FFFFFF" stroke-width="2"/>
-                                </svg>
-                            </button>
-                        </div>
-                        
-                        <!-- Popular Recommendations 标题 -->
-                        <h3 class="recommendations-title">Popular Recommendations</h3>
-                        
-                        <!-- 可滚动的图片区域 -->
-                        <div class="image-scroll-container">
-                            <div class="image-scroll-wrapper">
-                                <div class="image-item" onclick="handleImageClick(1)">
-                                    <img src="images/simulation-simulator.png" alt="Image 1" class="scroll-img">
-                                </div>
-                                <div class="image-item" onclick="handleImageClick(2)">
-                                    <img src="images/drive-by-wire-chassis.png" alt="Image 2" class="scroll-img">
-                                </div>
-                                <div class="image-item" onclick="handleImageClick(3)">
-                                    <img src="images/educational-kit.png" alt="Image 3" class="scroll-img">
-                                </div>
-                                <div class="image-item" onclick="handleImageClick(4)">
-                                    <img src="images/simulation-simulator.png" alt="Image 4" class="scroll-img">
-                                </div>
-                                <div class="image-item" onclick="handleImageClick(5)">
-                                    <img src="images/drive-by-wire-chassis.png" alt="Image 5" class="scroll-img">
-                                </div>
-                            </div>
-                        </div>
+                <!-- 右侧：检索框和按钮 -->
+                <div class="menu-right-section">
+                    <!-- 检索框 -->
+                    <div class="search-box-container">
+                        <img src="images/进入page search.png" alt="检索框" class="search-box-image">
+                        <input type="text" class="search-input" placeholder="Search what you are interested in？" aria-label="搜索">
                     </div>
+                    
+                    <!-- 按钮 -->
+                    <button class="explore-btn" onclick="window.location.href='index.html'" aria-label="Explore more cases">
+                        <div class="explore-btn-wrapper">
+                            <img src="images/Explore more cases.png" alt="Explore more cases" class="explore-btn-image">
+                            <span class="explore-btn-text">Explore more cases</span>
+                        </div>
+                    </button>
                 </div>
-                
-                <!-- 右下角箭头按钮 -->
-                <button class="enter-arrow-btn" onclick="window.location.href='index.html'" aria-label="进入案例库">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                        <path d="M8 16H24M24 16L16 8M24 16L16 24" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
             </div>
         </div>
         
@@ -178,63 +146,125 @@
         });
     </script>
     
-    <!-- JavaScript 控制下拉面板显示/隐藏和用户菜单 -->
+    <!-- JavaScript 控制导航栏和下拉菜单 -->
     <script>
         // 获取导航项和下拉面板
         const libraryNav = document.getElementById('libraryNav');
         const libraryPanel = document.getElementById('libraryPanel');
         
         // 点击 Case Library 导航项时切换下拉面板显示
-        libraryNav.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (libraryPanel.style.display === 'none' || libraryPanel.style.display === '') {
-                libraryPanel.style.display = 'block';
-                libraryPanel.style.animation = 'slideDown 0.3s ease-in-out';
-            } else {
-                libraryPanel.style.display = 'none';
-            }
-        });
-        
-        // 点击其他导航项时隐藏下拉面板
-        document.querySelectorAll('.nav-item').forEach(item => {
-            if (item.id !== 'libraryNav') {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    libraryPanel.style.display = 'none';
-                    // 移除所有 active 类
-                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                    // 添加当前项的 active 类
+        if (libraryNav && libraryPanel) {
+            libraryNav.addEventListener('click', function(e) {
+                e.preventDefault();
+                const isVisible = libraryPanel.style.display === 'flex' || libraryPanel.style.display === 'block';
+                
+                if (!isVisible) {
+                    // 显示下拉菜单时，添加 active 类
                     this.classList.add('active');
+                    libraryPanel.style.display = 'flex';
+                    libraryPanel.style.animation = 'slideDown 0.3s ease-in-out';
+                } else {
+                    // 隐藏下拉菜单时，移除 active 类
+                    this.classList.remove('active');
+                    libraryPanel.style.display = 'none';
+                }
+            });
+            
+            // 点击其他导航项时隐藏下拉面板
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if (item.id !== 'libraryNav') {
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        libraryPanel.style.display = 'none';
+                        // 移除所有 active 类
+                        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                        // 添加当前项的 active 类
+                        this.classList.add('active');
+                    });
+                }
+            });
+            
+            // 点击页面其他地方时隐藏下拉面板
+            document.addEventListener('click', function(e) {
+                if (!libraryNav.contains(e.target) && !libraryPanel.contains(e.target)) {
+                    libraryPanel.style.display = 'none';
+                    // 隐藏下拉菜单时，移除 active 类，恢复白色
+                    libraryNav.classList.remove('active');
+                }
+            });
+            
+            // 监听下拉菜单的显示状态，确保显示时保持 active 类
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                        const isVisible = libraryPanel.style.display === 'flex' || libraryPanel.style.display === 'block';
+                        if (isVisible) {
+                            // 下拉菜单显示时，确保有 active 类
+                            libraryNav.classList.add('active');
+                        } else {
+                            // 下拉菜单隐藏时，移除 active 类
+                            libraryNav.classList.remove('active');
+                        }
+                    }
                 });
-            }
-        });
-        
-        // 处理图片点击事件
-        function handleImageClick(imageId) {
-            console.log('点击了图片:', imageId);
-            // 这里可以添加跳转到详情页或其他操作
-            // 例如: window.location.href = 'case-detail.html?id=' + imageId;
+            });
+            observer.observe(libraryPanel, {
+                attributes: true,
+                attributeFilter: ['style']
+            });
         }
+    </script>
+    
+    <!-- JavaScript 控制检索框交互 -->
+    <script>
+        // 检索框交互功能
+        const searchBoxContainer = document.querySelector('.search-box-container');
+        const searchInput = document.querySelector('.search-input');
         
+        if (searchBoxContainer && searchInput) {
+            // 点击检索框容器时聚焦输入框
+            searchBoxContainer.addEventListener('click', function(e) {
+                // 如果点击的不是输入框本身，则聚焦输入框
+                if (e.target !== searchInput) {
+                    searchInput.focus();
+                }
+            });
+            
+            // 确保输入框可以正常输入
+            searchInput.addEventListener('focus', function() {
+                this.style.cursor = 'text';
+            });
+            
+            // 输入框获得焦点时的样式
+            searchInput.addEventListener('input', function() {
+                // 输入时保持焦点
+                this.focus();
+            });
+        }
+    </script>
+    
+    <!-- JavaScript 控制用户菜单 -->
+    <script>
         // 用户菜单控制
         const userMenuBtn = document.getElementById('userMenuBtn');
         const userDropdownMenu = document.getElementById('userDropdownMenu');
         
-        userMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (userDropdownMenu.style.display === 'none' || userDropdownMenu.style.display === '') {
-                userDropdownMenu.style.display = 'block';
-            } else {
-                userDropdownMenu.style.display = 'none';
-            }
-        });
-        
-        document.addEventListener('click', function(e) {
-            if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-                userDropdownMenu.style.display = 'none';
-            }
-        });
+        if (userMenuBtn && userDropdownMenu) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (userDropdownMenu.style.display === 'none' || userDropdownMenu.style.display === '') {
+                    userDropdownMenu.style.display = 'block';
+                } else {
+                    userDropdownMenu.style.display = 'none';
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!userMenuBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                    userDropdownMenu.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
-

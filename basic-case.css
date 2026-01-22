@@ -49,6 +49,34 @@ body {
     transition: background-image 0.3s ease;
 }
 
+/* 左上角返回按钮 */
+.back-button {
+    position: fixed;
+    top: 33px;
+    left: 50px;
+    z-index: 1002;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.1);
+}
+
+.back-button:active {
+    transform: scale(0.95);
+}
+
+.back-icon-img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    display: block;
+}
+
 /* 顶部标题 */
 .main-title {
     position: fixed;
@@ -1398,6 +1426,7 @@ body {
     position: relative;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .checkbox-icon.checked {
@@ -1415,7 +1444,8 @@ body {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 1;
+    z-index: 10;
+    pointer-events: none;
 }
 
 .item-text {
