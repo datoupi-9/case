@@ -1000,6 +1000,14 @@
         const menuHeaderAvatar = document.querySelector('.menu-header-avatar');
         const expandArrowIconEl = document.querySelector('.expand-arrow-icon');
         
+        // 更新返回按钮图标的函数
+        function updateBackButtonIcon(theme) {
+            const backIconImg = document.querySelector('.back-icon-img');
+            if (backIconImg) {
+                backIconImg.src = theme === 'light' ? 'images/浅色back ep button.png' : 'images/back icon.png';
+            }
+        }
+        
         // 更新头像图片的函数
         function updateAvatarImage(theme) {
             const avatarSrc = theme === 'light' ? 'images/白头像.png' : 'images/头像.png';
@@ -1097,6 +1105,7 @@
         // 从localStorage读取保存的主题
         const savedTheme = localStorage.getItem('theme') || 'dark';
         htmlElement.setAttribute('data-theme', savedTheme);
+        updateBackButtonIcon(savedTheme); // 初始化返回按钮图标
         updateAvatarImage(savedTheme);
         updateArrowIcon(savedTheme);
         updateThemeIcon(savedTheme); // 初始化主题切换按钮图标
@@ -1117,6 +1126,7 @@
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 htmlElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
+                updateBackButtonIcon(newTheme); // 更新返回按钮图标
                 updateAvatarImage(newTheme);
                 updateArrowIcon(newTheme);
                 updateCheckboxIcons(newTheme);
@@ -1130,6 +1140,8 @@
         const themeObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    updateBackButtonIcon(currentTheme); // 主题变化时更新返回按钮图标
                     // 主题切换后，重新初始化交互（以防有新的元素）
                     initDropdownItemInteractions();
                 }
