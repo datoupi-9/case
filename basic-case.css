@@ -1077,7 +1077,7 @@ body {
    ======================================== */
 .main-content-area {
     width: 100%;
-    padding-top: 192px;
+    padding-top: 342px;
     min-height: calc(100vh - 100px);
     position: relative;
 }
@@ -1174,6 +1174,7 @@ body {
     justify-content: flex-end;
     padding-right: 69px;
     padding-top: 100px;
+    margin-top: -720px;
     width: 100%;
     box-sizing: border-box;
 }

@@ -228,7 +228,7 @@
         
         <!-- 主要内容区域 -->
         <main class="main-content-area">
-            <!-- 右侧 "Most popular" 标题 -->
+            <!-- 右侧 "Difficulty Levels" 标题 -->
             <div class="most-popular-header">
                 <svg class="divider-line" width="244" height="0" viewBox="0 0 244 0" fill="none">
                     <line x1="0" y1="0" x2="244" y2="0" stroke="url(#gradient)" stroke-width="1.5"/>
@@ -240,23 +240,28 @@
                     </defs>
                                 </svg>
                 <div class="most-popular-wrapper">
-                    <h2 class="most-popular-title" id="mostPopularBtn">Most popular</h2>
+                    <h2 class="most-popular-title" id="mostPopularBtn">Difficulty Levels</h2>
                     <img src="images/Expand Arrow.png" alt="展开" class="expand-arrow-icon">
                     <div class="most-popular-dropdown" id="mostPopularDropdown" style="display: none;">
-                        <div class="popular-dropdown-item" data-value="latest">
-                            <span class="popular-item-text">Lastest</span>
+                        <div class="popular-dropdown-item" data-value="beginner">
+                            <span class="popular-item-text">Beginner</span>
                             <img src="images/Done.png" alt="选中" class="done-icon" style="display: none;">
                             </div>
-                        <div class="popular-dropdown-item active" data-value="popular">
-                            <span class="popular-item-text">Most popular</span>
+                        <div class="popular-dropdown-item" data-value="basic">
+                            <span class="popular-item-text">Basic</span>
+                            <img src="images/Done.png" alt="选中" class="done-icon" style="display: none;">
+                            </div>
+                        <div class="popular-dropdown-item active" data-value="professional">
+                            <span class="popular-item-text">Professional</span>
                             <img src="images/Done.png" alt="选中" class="done-icon">
-                            </div>
-                        <div class="popular-dropdown-item" data-value="rated">
-                            <span class="popular-item-text">Top rated</span>
-                            <img src="images/Done.png" alt="选中" class="done-icon" style="display: none;">
                         </div>
+                        <div class="popular-dropdown-item" data-value="expert">
+                            <span class="popular-item-text">Expert</span>
+                            <img src="images/Done.png" alt="选中" class="done-icon" style="display: none;">
                     </div>
             </div>
+                </div>
+                </div>
                 </div>
             
             <!-- 案例卡片网格 - 3列2行 -->
@@ -812,13 +817,9 @@
                     if (doneIcon) {
                         doneIcon.style.display = 'block';
                     }
-                    // 更新标题文字
-                    const itemText = this.querySelector('.popular-item-text').textContent;
-                    if (mostPopularBtn) {
-                        mostPopularBtn.textContent = itemText;
-                    }
-                    // 关闭下拉菜单
-                    mostPopularDropdown.style.display = 'none';
+                    // 不更新标题文字，保持 "Difficulty Levels" 不变
+                    // 保持下拉菜单显示，不关闭
+                    // mostPopularDropdown.style.display = 'none';
                 });
             });
         }

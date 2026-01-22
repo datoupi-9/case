@@ -278,6 +278,16 @@
 
             // 显示被收藏的案例（使用从localStorage读取的完整数据）
             collectedCases.forEach(caseData => {
+                // 如果是第一个案例（id=1），确保使用 index page 第一个案例的数据
+                if (caseData.id === 1 || caseData.id === '1') {
+                    caseData = {
+                        id: 1,
+                        title: "CyberBrick 4WD car",
+                        image: "images/case-main-image.png",
+                        likeCount: "2.3k",
+                        bookmarkCount: "668"
+                    };
+                }
                 if (casesGrid) {
                     casesGrid.innerHTML += createCaseCard(caseData);
                 }
