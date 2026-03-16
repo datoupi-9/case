@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crawler / Intelligence Center - Mix Copilot inspired layout">
+    <title>Crawler - Intelligence Center | Sophicar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="crawler-page.css">
+</head>
+<body class="crawler-page">
+    <!-- 顶部导航栏 - Top header, Mix Copilot style -->
+    <header class="crawler-header">
+        <a href="index.html" class="crawler-back-link" aria-label="Back to case library">
+            <svg class="back-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M12.5 15L7.5 10L12.5 5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Back to case library</span>
+        </a>
+        <h1 class="crawler-site-title">Crawler · Intelligence Center</h1>
+        <div class="crawler-header-right">
+            <span class="crawler-tagline">See further, think deeper</span>
+        </div>
+    </header>
+
+    <!-- 主布局：左侧边栏 + 主内容区 - Main layout, Mix Copilot style -->
+    <div class="crawler-layout">
+        <!-- 左侧边栏导航 - Left sidebar navigation -->
+        <aside class="crawler-sidebar">
+            <nav class="crawler-nav">
+                <a href="#crawl" class="crawler-nav-item crawler-nav-item-active" data-section="crawl">
+                    <span class="crawler-nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" width="16" height="16">
+                            <path d="M4 5h12M6 9h8M8 13h4" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span class="crawler-nav-text">Crawl</span>
+                </a>
+                <a href="#workflow" class="crawler-nav-item crawler-nav-item-has-dropdown" data-section="workflow">
+                    <span class="crawler-nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" width="16" height="16">
+                            <circle cx="6" cy="6" r="2.2" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            <circle cx="14" cy="6" r="2.2" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            <circle cx="10" cy="14" r="2.2" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            <path d="M7.8 6h4.4M8.2 13L7 8.2M11.8 13L13 8.2" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span class="crawler-nav-text">Intelligence Center</span>
+                </a>
+                <!-- Intelligence Center 下拉菜单 -->
+                <div class="crawler-submenu" data-parent="workflow">
+                    <button class="crawler-submenu-item" type="button">Website</button>
+                    <button class="crawler-submenu-item" type="button">RSS</button>
+                    <button class="crawler-submenu-item" type="button">arXiv</button>
+                </div>
+                <a href="#sources" class="crawler-nav-item" data-section="sources">
+                    <span class="crawler-nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" width="16" height="16">
+                            <rect x="4" y="4" width="12" height="12" rx="2" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            <path d="M7 8h6M7 11h4" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span class="crawler-nav-text">Local Knowledge Base</span>
+                </a>
+                <a href="#knowledge" class="crawler-nav-item" data-section="knowledge">
+                    <span class="crawler-nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" width="16" height="16">
+                            <path d="M5 5h10v10H5z" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            <path d="M7 7h6M7 10h5M7 13h4" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span class="crawler-nav-text">Workflow</span>
+                </a>
+                <a href="#settings" class="crawler-nav-item" data-section="settings">
+                    <span class="crawler-nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 20 20" width="16" height="16">
+                            <circle cx="10" cy="10" r="2.4" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            <path d="M10 4.2v1.8M10 14v1.8M5.2 10H7M13 10h1.8M6.4 6.4L7.6 7.6M12.4 12.4l1.2 1.2M6.4 13.6l1.2-1.2M12.4 7.6l1.2-1.2" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span class="crawler-nav-text">Settings</span>
+                </a>
+            </nav>
+            <div class="crawler-sidebar-footer">
+                <p class="crawler-sidebar-hint">All data stored locally, privacy safe</p>
+            </div>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="crawler-main">
+            <!-- 欢迎区 / 信息处理中心概览 - Welcome / overview -->
+            <section class="crawler-welcome" id="crawl">
+                <h2 class="crawler-welcome-title">Build your own intelligence center</h2>
+                <p class="crawler-welcome-desc">Crawl and translate information with one click, schedule automatic crawling, smart translation and structured organization.</p>
+            </section>
+
+            <!-- 功能卡片网格 - Feature cards -->
+            <section class="crawler-features">
+                <article class="crawler-feature-card" data-card="crawl">
+                    <div class="crawler-feature-card-inner">
+                        <span class="crawler-feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path d="M5 6h14M7 11h10M9 16h6" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h3 class="crawler-feature-title">One-click crawl & translate</h3>
+                        <p class="crawler-feature-desc">Easily customize your sources, schedule automatic crawling, apply smart translation and structure everything into your own intel center.</p>
+                    </div>
+                </article>
+                <article class="crawler-feature-card" data-card="workflow">
+                    <div class="crawler-feature-card-inner">
+                        <span class="crawler-feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle cx="8" cy="7" r="2.4" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                                <circle cx="16" cy="7" r="2.4" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                                <circle cx="12" cy="16" r="2.4" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                                <path d="M10.4 7h3.2M9.2 15L8.2 9.8M14.8 15l1-5.2" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h3 class="crawler-feature-title">Agent workflows</h3>
+                        <p class="crawler-feature-desc">From brainstorming to content, use intelligent agents and APIs to automate steps and let ideas flow into deliverables.</p>
+                    </div>
+                </article>
+                <article class="crawler-feature-card" data-card="sources">
+                    <div class="crawler-feature-card-inner">
+                        <span class="crawler-feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <rect x="5" y="5" width="14" height="14" rx="2.2" stroke="#FFFFFF" stroke-width="1.6" fill="none"/>
+                                <path d="M9 9h6M9 12h4" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h3 class="crawler-feature-title">Multi-source fusion</h3>
+                        <p class="crawler-feature-desc">Break information silos, combine multi‑dimensional sources, and let AI surface key insights for complex decisions.</p>
+                    </div>
+                </article>
+                <article class="crawler-feature-card" data-card="knowledge">
+                    <div class="crawler-feature-card-inner">
+                        <span class="crawler-feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path d="M7 6h10v12H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3z" stroke="#FFFFFF" stroke-width="1.6" fill="none"/>
+                                <path d="M9 9h6M9 12h5M9 15h4" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h3 class="crawler-feature-title">Knowledge & Obsidian</h3>
+                        <p class="crawler-feature-desc">Export everything as Markdown and sync with Obsidian so scattered notes grow into a structured knowledge system.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- 爬取状态展示区域 - Crawl status area -->
+            <section class="crawler-status" id="crawlerStatus" aria-live="polite">
+                <h3 class="crawler-status-title">Live crawling status</h3>
+                <p class="crawler-status-desc">No active crawling yet. Click <strong>Crawl</strong> in the left menu to start.</p>
+                <ul class="crawler-status-list" id="crawlerStatusList">
+                    <!-- 动态加入正在爬取的源信息 -->
+                </ul>
+            </section>
+
+            <!-- 底部快捷输入区 - Bottom input, Copilot-like -->
+            <section class="crawler-input-area">
+                <div class="crawler-input-wrapper">
+                    <input type="text" class="crawler-input" placeholder="Enter URL or keyword to start crawling..." aria-label="Crawl input">
+                    <button type="button" class="crawler-input-btn" aria-label="Start crawling">Start</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 左侧导航切换高亮 + 爬取状态响应
+        const navItems = document.querySelectorAll('.crawler-nav-item');
+        const crawlNavItem = document.querySelector('.crawler-nav-item[data-section="crawl"]');
+        const crawlNavText = crawlNavItem ? crawlNavItem.querySelector('.crawler-nav-text') : null;
+        const statusSection = document.getElementById('crawlerStatus');
+        const statusDesc = document.querySelector('.crawler-status-desc');
+        const statusList = document.getElementById('crawlerStatusList');
+        let isCrawling = false;
+        let crawlTimeouts = [];
+
+        function startCrawlingMock() {
+            if (!statusSection || !statusDesc || !statusList) return;
+
+            // 如果已经在爬取，再次点击就视为停止
+            if (isCrawling) {
+                stopCrawlingMock();
+                return;
+            }
+
+            isCrawling = true;
+            statusSection.classList.add('is-active');
+            statusDesc.textContent = 'Crawling latest sources...';
+            statusList.innerHTML = '';
+
+            // 更新左侧 Crawl 文本为 Stop crawling
+            if (crawlNavText) {
+                crawlNavText.textContent = 'Stop crawling';
+            }
+
+            const sources = [
+                'https://news.example.com/ai/crawling',
+                'https://blog.example.com/robotics',
+                'https://forum.example.com/autonomous-driving'
+            ];
+
+            sources.forEach((url, index) => {
+                const li = document.createElement('li');
+                li.className = 'crawler-status-item';
+                li.innerHTML = '<span class="crawler-status-dot"></span>' +
+                               '<span class="crawler-status-url">' + url + '</span>' +
+                               '<span class="crawler-status-progress">Fetching...</span>';
+                statusList.appendChild(li);
+
+                // 模拟进度变化
+                const t1 = setTimeout(() => {
+                    if (!isCrawling) return;
+                    li.querySelector('.crawler-status-progress').textContent = 'Analyzing...';
+                }, 800 + index * 400);
+
+                const t2 = setTimeout(() => {
+                    if (!isCrawling) return;
+                    li.querySelector('.crawler-status-progress').textContent = 'Done';
+                    li.classList.add('is-done');
+                }, 1600 + index * 500);
+
+                crawlTimeouts.push(t1, t2);
+            });
+        }
+
+        function stopCrawlingMock() {
+            isCrawling = false;
+            crawlTimeouts.forEach(id => clearTimeout(id));
+            crawlTimeouts = [];
+
+            if (statusSection && statusDesc && statusList) {
+                statusDesc.textContent = 'Crawling stopped. Click Crawl to start again.';
+                statusList.querySelectorAll('.crawler-status-item').forEach(item => {
+                    item.classList.add('is-stopped');
+                    const progress = item.querySelector('.crawler-status-progress');
+                    if (progress && progress.textContent !== 'Done') {
+                        progress.textContent = 'Stopped';
+                    }
+                });
+            }
+
+            if (crawlNavText) {
+                crawlNavText.textContent = 'Crawl';
+            }
+
+            // 停止爬取时，恢复 Crawl 按钮原始颜色（移除高亮样式）
+            if (crawlNavItem) {
+                crawlNavItem.classList.remove('crawler-nav-item-active');
+            }
+        }
+
+        navItems.forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Intelligence Center 下拉菜单展开/收起
+                const isWorkflow = this.dataset.section === 'workflow';
+                const submenu = document.querySelector('.crawler-submenu[data-parent="workflow"]');
+                if (submenu) {
+                    if (isWorkflow) {
+                        const visible = submenu.style.display === 'flex';
+                        submenu.style.display = visible ? 'none' : 'flex';
+                    } else {
+                        submenu.style.display = 'none';
+                    }
+                }
+
+                navItems.forEach(function(i) { i.classList.remove('crawler-nav-item-active'); });
+                this.classList.add('crawler-nav-item-active');
+
+                // 只有点击 Crawl 时才触发或停止可视化爬取效果
+                if (this.dataset.section === 'crawl') {
+                    startCrawlingMock();
+                } else {
+                    // 切换到其他菜单时，恢复 Crawl 文本
+                    stopCrawlingMock();
+                }
+            });
+        });
+
+        // 底部 Start 按钮也触发同样的爬取效果
+        const startBtn = document.querySelector('.crawler-input-btn');
+        if (startBtn) {
+            startBtn.addEventListener('click', function() {
+                if (crawlNavItem) {
+                    navItems.forEach(function(i) { i.classList.remove('crawler-nav-item-active'); });
+                    crawlNavItem.classList.add('crawler-nav-item-active');
+                }
+                startCrawlingMock();
+            });
+        }
+    </script>
+</body>
+</html>

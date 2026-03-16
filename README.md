@@ -77,6 +77,10 @@
   - 联系邮箱：Bobwu@profabx.com
   - 地址：浙江省宁波市高新区清逸路215号智造港D区3号楼5层
 
+### 7. 爬虫页入口（index.html）
+- **位置**：页面右下角固定按钮
+- **说明**：点击「爬虫」按钮可进入「爬虫 / 信息处理中心」页面（crawler-page.html），布局参考 Mix Copilot：顶部标题栏、左侧功能导航、主内容区功能卡片、底部输入区。
+
 ## 样式说明
 
 ### 颜色方案
@@ -121,8 +125,11 @@
 ```
 figma/
 ├── README.md          # 项目说明文档
-├── index.html         # 主HTML文件
-└── styles.css         # 样式文件
+├── index.html         # 主HTML文件（案例库）
+├── crawler-page.html  # 爬虫/信息处理中心页面（参考 Mix Copilot 布局）
+├── crawler-page.css   # 爬虫页样式
+├── basic-case.css     # 案例库基础样式
+└── ...                # 其他页面与样式
 ```
 
 ## 使用说明

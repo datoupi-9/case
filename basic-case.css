@@ -511,6 +511,49 @@ body {
 }
 
 /* ========================================
+   右下角进入爬虫页按钮 - 固定定位
+   ======================================== */
+.crawler-entry-btn {
+    position: fixed;
+    bottom: 72px;
+    right: 24px;
+    z-index: 1001;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    height: 44px;
+    padding: 0 16px;
+    background: linear-gradient(135deg, #3E6AE2 0%, #5a7ef0 100%);
+    color: #fff;
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(62, 106, 226, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.crawler-entry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(62, 106, 226, 0.5);
+}
+.crawler-entry-btn:active {
+    transform: translateY(0);
+}
+.crawler-entry-btn-text {
+    pointer-events: none;
+}
+
+/* 浅色模式下爬虫按钮保持可见 */
+[data-theme="light"] .crawler-entry-btn {
+    background: linear-gradient(135deg, #3E6AE2 0%, #5a7ef0 100%);
+    color: #fff;
+}
+
+/* ========================================
    特色分类和标签区域
    ======================================== */
 .categories-section {
