@@ -4,6 +4,7 @@ const cors = require('cors');
 const { z } = require('zod');
 
 const { crawlUrl } = require('./services/crawler');
+const { crawlByKeywords } = require('./services/keywordCrawl');
 
 const app = express();
 
@@ -25,12 +26,6 @@ app.get('/health', (_req, res) => res.json({ ok: true }));
 app.post('/api/crawl', async (req, res) => {
   const schema = z.object({
     url: z.string().url(),
-    keywords: z.union([z.string(), z.array(z.string())]).optional().transform((v) => {
-      if (v == null || v === '') return undefined;
-      if (Array.isArray(v)) return v.filter(Boolean).length ? v : undefined;
-      const parts = String(v).trim().split(/[\s,，、]+/).filter(Boolean);
-      return parts.length ? parts : undefined;
-    }),
     mode: z.enum(['static', 'dynamic']).optional().default('dynamic'),
     maxCards: z.number().int().min(1).max(60).optional().default(30),
   });
@@ -45,11 +40,90 @@ app.post('/api/crawl', async (req, res) => {
   }
 
   try {
-    const { url, keywords, mode, maxCards } = parsed.data;
-    const result = await crawlUrl({ url, keywords, mode, maxCards });
+    const { url, mode, maxCards } = parsed.data;
+    const result = await crawlUrl({ url, mode, maxCards });
     return res.json({ ok: true, ...result });
   } catch (err) {
     const message = err && typeof err.message === 'string' ? err.message : 'Crawl failed';
+    return res.status(500).json({ ok: false, error: message });
+  }
+});
+
+/**
+ * POST /api/crawl-keywords
+ * body: { keywords: string | string[], mode?: 'static' | 'dynamic', maxCardsPerSite?: number }
+ *
+ * 在预置站点集合中，按关键词批量爬取并聚合卡片
+ */
+app.post('/api/crawl-keywords', async (req, res) => {
+  const schema = z.object({
+    keywords: z.union([z.string(), z.array(z.string())]).transform((v) => {
+      if (Array.isArray(v)) return v.map((k) => String(k).trim()).filter(Boolean);
+      return String(v).split(/[\s,，、]+/).map((k) => k.trim()).filter(Boolean);
+    }).refine((arr) => arr.length > 0, { message: 'keywords is required' }),
+    mode: z.enum(['static', 'dynamic']).optional().default('static'),
+    maxCardsPerSite: z.number().int().min(1).max(12).optional().default(5),
+  });
+
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      ok: false,
+      error: 'Invalid request body',
+      details: parsed.error.flatten(),
+    });
+  }
+
+  try {
+    const { keywords, mode, maxCardsPerSite } = parsed.data;
+    const result = await crawlByKeywords({
+      keywords,
+      mode,
+      maxCardsPerSite,
+    });
+    return res.json({ ok: true, ...result });
+  } catch (err) {
+    const message = err && typeof err.message === 'string' ? err.message : 'Keyword crawl failed';
+    return res.status(500).json({ ok: false, error: message });
+  }
+});
+
+/**
+ * POST /api/crawl-keywords-retry
+ * body: { siteUrls: string[], keywords: string | string[], mode?, maxCardsPerSite? }
+ * 仅对指定站点按关键词重新爬取（用于“重试失败”）
+ */
+app.post('/api/crawl-keywords-retry', async (req, res) => {
+  const schema = z.object({
+    siteUrls: z.array(z.string().url()).min(1).max(50),
+    keywords: z.union([z.string(), z.array(z.string())]).transform((v) => {
+      if (Array.isArray(v)) return v.map((k) => String(k).trim()).filter(Boolean);
+      return String(v).split(/[\s,，、]+/).map((k) => k.trim()).filter(Boolean);
+    }).refine((arr) => arr.length > 0, { message: 'keywords is required' }),
+    mode: z.enum(['static', 'dynamic']).optional().default('static'),
+    maxCardsPerSite: z.number().int().min(1).max(12).optional().default(5),
+  });
+
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      ok: false,
+      error: 'Invalid request body',
+      details: parsed.error.flatten(),
+    });
+  }
+
+  try {
+    const { siteUrls, keywords, mode, maxCardsPerSite } = parsed.data;
+    const result = await crawlByKeywords({
+      keywords,
+      mode,
+      maxCardsPerSite,
+      siteUrls,
+    });
+    return res.json({ ok: true, ...result });
+  } catch (err) {
+    const message = err && typeof err.message === 'string' ? err.message : 'Retry failed';
     return res.status(500).json({ ok: false, error: message });
   }
 });
