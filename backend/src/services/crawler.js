@@ -3,7 +3,7 @@ const { chromium } = require('playwright');
 const { JSDOM } = require('jsdom');
 const { Readability } = require('@mozilla/readability');
 
-const { extractCardsFromDom } = require('./extractors/cards');
+const { extractCardsFromDom, toAbsoluteUrl } = require('./extractors/cards');
 
 /**
  * 模拟浏览器的 User-Agent，能提高抓取成功率。
@@ -20,7 +20,7 @@ const DEFAULT_UA =
  * - 用 Readability 抽主内容摘要（对文章类页面更有效）
  * - 用启发式规则抽取“卡片列表”（标题/描述/图片/链接）
  */
-async function crawlUrl({ url, mode, maxCards }) {
+async function crawlUrl({ url, keywords, mode, maxCards }) {
   const startedAt = Date.now();
   let html = '';
   let finalUrl = url;
@@ -64,7 +64,7 @@ async function crawlUrl({ url, mode, maxCards }) {
   const dom = new JSDOM(html, { url: finalUrl });
   const doc = dom.window.document;
 
-  // 主内容摘要（失败也没关系）
+  // 主内容摘要（用于文章页兜底与摘要）
   let readable = null;
   try {
     readable = new Readability(doc.cloneNode(true)).parse();
@@ -72,8 +72,31 @@ async function crawlUrl({ url, mode, maxCards }) {
     readable = null;
   }
 
-  // 卡片抽取
-  const cards = extractCardsFromDom(doc, finalUrl, { maxCards });
+  // 卡片抽取（仅从主内容区抽取，避免整页链接/侧栏）
+  let cards = extractCardsFromDom(doc, finalUrl, { maxCards });
+
+  // 文章页兜底：若列表抽卡为 0 且 Readability 解析出主文，则生成 1 张“文章卡片”
+  if (cards.length === 0 && readable && (readable.title || readable.excerpt)) {
+    const ogImage = doc.querySelector('meta[property="og:image"]');
+    const ogSrc = ogImage ? (ogImage.getAttribute('content') || '') : '';
+    const firstImg = readable.content ? (readable.content.match(/<img[^>]+src="([^"]+)"/) || [])[1] : '';
+    const imageUrl = toAbsoluteUrl(finalUrl, ogSrc || firstImg);
+    cards = [{
+      title: readable.title || (doc.querySelector('title')?.textContent?.trim()) || 'Untitled',
+      description: (readable.excerpt || '').slice(0, 220) + (readable.excerpt && readable.excerpt.length > 220 ? '…' : ''),
+      imageUrl,
+      pageUrl: finalUrl,
+    }];
+  }
+
+  // 若传入了关键词，只保留标题或描述中包含任一关键词的卡片（不区分大小写）
+  if (keywords && Array.isArray(keywords) && keywords.length > 0) {
+    const lowerKeys = keywords.map((k) => String(k).toLowerCase().trim()).filter(Boolean);
+    cards = cards.filter((c) => {
+      const text = `${c.title || ''} ${c.description || ''}`.toLowerCase();
+      return lowerKeys.some((k) => text.includes(k));
+    });
+  }
 
   return {
     mode,

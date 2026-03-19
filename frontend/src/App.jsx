@@ -9,6 +9,7 @@ function normalizeUrl(raw) {
 
 function App() {
   const [url, setUrl] = useState('')
+  const [keywords, setKeywords] = useState('')
   const [mode, setMode] = useState('dynamic') // static | dynamic
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -27,7 +28,12 @@ function App() {
       const resp = await fetch('/api/crawl', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: normalizeUrl(url), mode, maxCards: 30 }),
+        body: JSON.stringify({
+          url: normalizeUrl(url),
+          keywords: keywords.trim() ? keywords.trim().split(/[\s,，、]+/).filter(Boolean) : undefined,
+          mode,
+          maxCards: 30,
+        }),
       })
       const data = await resp.json()
       if (!resp.ok || !data.ok) throw new Error(data?.error || 'Crawl failed')
@@ -73,8 +79,8 @@ function App() {
 
       <main className="mx-auto max-w-6xl px-4 py-8">
         <section className="rounded-2xl border border-white/10 bg-white/5 p-5">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end">
-            <div className="flex-1">
+          <div className="flex flex-col gap-4">
+            <div>
               <label className="mb-2 block text-xs font-medium text-slate-300">Target URL</label>
               <input
                 value={url}
@@ -83,7 +89,16 @@ function App() {
                 className="w-full rounded-xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm outline-none placeholder:text-slate-500 focus:border-white/20"
               />
             </div>
-
+            <div>
+              <label className="mb-2 block text-xs font-medium text-slate-300">Target Keywords</label>
+              <input
+                value={keywords}
+                onChange={(e) => setKeywords(e.target.value)}
+                placeholder="Enter keywords (optional), e.g. AI, product, news (comma or space separated)"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm outline-none placeholder:text-slate-500 focus:border-white/20"
+              />
+            </div>
+            <div className="flex flex-col gap-3 md:flex-row md:items-end">
             <div className="w-full md:w-48">
               <label className="mb-2 block text-xs font-medium text-slate-300">Mode</label>
               <select
@@ -103,6 +118,7 @@ function App() {
             >
               {loading ? 'Crawling…' : 'Start crawling'}
             </button>
+            </div>
           </div>
 
           {error ? (

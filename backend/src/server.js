@@ -25,6 +25,12 @@ app.get('/health', (_req, res) => res.json({ ok: true }));
 app.post('/api/crawl', async (req, res) => {
   const schema = z.object({
     url: z.string().url(),
+    keywords: z.union([z.string(), z.array(z.string())]).optional().transform((v) => {
+      if (v == null || v === '') return undefined;
+      if (Array.isArray(v)) return v.filter(Boolean).length ? v : undefined;
+      const parts = String(v).trim().split(/[\s,，、]+/).filter(Boolean);
+      return parts.length ? parts : undefined;
+    }),
     mode: z.enum(['static', 'dynamic']).optional().default('dynamic'),
     maxCards: z.number().int().min(1).max(60).optional().default(30),
   });
@@ -39,8 +45,8 @@ app.post('/api/crawl', async (req, res) => {
   }
 
   try {
-    const { url, mode, maxCards } = parsed.data;
-    const result = await crawlUrl({ url, mode, maxCards });
+    const { url, keywords, mode, maxCards } = parsed.data;
+    const result = await crawlUrl({ url, keywords, mode, maxCards });
     return res.json({ ok: true, ...result });
   } catch (err) {
     const message = err && typeof err.message === 'string' ? err.message : 'Crawl failed';
