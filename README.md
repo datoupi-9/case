@@ -77,9 +77,9 @@
   - 联系邮箱：Bobwu@profabx.com
   - 地址：浙江省宁波市高新区清逸路215号智造港D区3号楼5层
 
-### 7. 爬虫页入口（index.html）
+### 7. 爬虫系统入口（index.html）
 - **位置**：页面右下角固定按钮
-- **说明**：点击「爬虫」按钮可进入「爬虫 / 信息处理中心」页面（crawler-page.html），布局参考 Mix Copilot：顶部标题栏、左侧功能导航、主内容区功能卡片、底部输入区。
+- **说明**：点击「Crawling」按钮会打开本地前端 `http://localhost:5173/`（Mix Copilot 灵感爬虫系统）。
 
 ## 样式说明
 
@@ -126,11 +126,53 @@
 figma/
 ├── README.md          # 项目说明文档
 ├── index.html         # 主HTML文件（案例库）
-├── crawler-page.html  # 爬虫/信息处理中心页面（参考 Mix Copilot 布局）
-├── crawler-page.css   # 爬虫页样式
+├── backend/           # 爬虫后端（Express + Playwright + Cheerio）
+├── frontend/          # 爬虫前端（Vite + React + Tailwind）
 ├── basic-case.css     # 案例库基础样式
 └── ...                # 其他页面与样式
 ```
+
+## 新增：爬虫系统（核心功能）
+
+### 你能做什么
+- **输入一个目标网址**，点击开始
+- 后端会抓取页面（支持 **静态 HTML** 和 **动态渲染 Playwright**）
+- 后端会把页面“主要信息块”抽取成结构化 JSON（卡片：`title/description/imageUrl/pageUrl`）
+- 前端把卡片以统一风格网格展示（标题可点击打开原文）
+
+### 运行后端
+
+```bash
+cd backend
+npm run dev
+```
+
+后端默认端口：`http://localhost:8787`
+
+健康检查：`GET /health`
+
+爬取接口：`POST /api/crawl`
+
+请求示例：
+
+```json
+{
+  "url": "https://www.geekpark.net/",
+  "mode": "dynamic",
+  "maxCards": 30
+}
+```
+
+### 运行前端
+
+```bash
+cd frontend
+npm run dev
+```
+
+前端默认地址：`http://localhost:5173/`
+
+> 前端已配置 proxy：`/api/*` 会转发到 `http://localhost:8787`
 
 ## 使用说明
 1. 直接在浏览器中打开 `index.html` 文件即可查看页面
