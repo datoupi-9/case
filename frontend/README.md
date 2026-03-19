@@ -1,16 +1,3 @@
-## Crawler Frontend (Vite + React + Tailwind)
-
-### 启动
-
-先启动后端（见仓库根目录 README），再启动前端：
-
-```bash
-cd frontend
-npm run dev
-```
-
-默认地址为 `http://localhost:5173/`，并通过 Vite proxy 把 `/api/*` 转发到 `http://localhost:8787`。
-
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

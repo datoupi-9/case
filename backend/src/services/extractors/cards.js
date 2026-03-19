@@ -1,8 +1,5 @@
 const cheerio = require('cheerio');
 
-/**
- * 把相对链接转成绝对链接。
- */
 function toAbsoluteUrl(baseUrl, maybeRelative) {
   if (!maybeRelative) return '';
   try {
@@ -13,8 +10,7 @@ function toAbsoluteUrl(baseUrl, maybeRelative) {
 }
 
 /**
- * 非严格的“广告/跟踪”过滤。
- * 目标：先挡住最常见的噪音（广告、share、login、tracking）。
+ * 简单噪音过滤（广告/追踪/注册登录等常见链接）
  */
 function isLikelyNoiseUrl(url) {
   if (!url) return true;
@@ -30,24 +26,20 @@ function isLikelyNoiseUrl(url) {
     u.includes('/advert') ||
     u.includes('/ads') ||
     u.includes('share=') ||
-    u.includes('#') ||
     u.startsWith('mailto:') ||
     u.startsWith('javascript:')
   );
 }
 
 /**
- * 从 document 中抽取“卡片列表”。
+ * 启发式“卡片列表”抽取：
+ * - 尝试从页面中找到可能重复出现的信息块（article / li / div.card / div.item …）
+ * - 抽取每个块中的：title/description/imageUrl/pageUrl
+ * - 去重 + 过滤明显噪音
  *
- * 思路（参考 website understanding 的“区块识别”）：
- * - 先找最常见的重复容器：article / li / div.card / div[class*="item"] 等
- * - 只保留包含链接 + 文本（标题） 的块
- * - 尝试从块内找：标题、描述、图片、链接
- * - 做去重与简单过滤
- *
- * 注意：
- * - 这是一个“通用启发式”抽取器，不可能对所有站点 100% 精准
- * - 但足以支撑你在前端用卡片方式展示“抓到的核心信息块”
+ * 这不是站点定制规则，而是通用规则：
+ * - 对科技博客首页、新闻列表、产品列表类页面通常效果不错
+ * - 对极度复杂或强反爬站点，可能需要后续“站点适配”增强
  */
 function extractCardsFromDom(document, baseUrl, { maxCards = 30 } = {}) {
   const $ = cheerio.load(document.documentElement.outerHTML);
@@ -65,24 +57,19 @@ function extractCardsFromDom(document, baseUrl, { maxCards = 30 } = {}) {
 
   const candidates = [];
   for (const sel of candidateSelectors) {
-    $(sel).each((_, el) => {
-      candidates.push(el);
-    });
+    $(sel).each((_, el) => candidates.push(el));
   }
 
-  // 统计每个候选块的“信息密度”，用来粗略排序
   function scoreBlock(el) {
     const $el = $(el);
     const link = $el.find('a[href]').first().attr('href') || '';
     const text = $el.text().trim().replace(/\s+/g, ' ');
-    const img = $el.find('img[src], img[data-src], source[srcset]').first();
-    const hasImg = !!img.length;
+    const hasImg = $el.find('img[src], img[data-src]').length > 0;
     const hasLink = !!link;
     const len = text.length;
     return (hasLink ? 10 : 0) + (hasImg ? 5 : 0) + Math.min(40, Math.floor(len / 50));
   }
 
-  // 取前一批高分块，减少误匹配 + 性能开销
   const top = candidates
     .map((el) => ({ el, score: scoreBlock(el) }))
     .filter((x) => x.score >= 12)
@@ -94,36 +81,30 @@ function extractCardsFromDom(document, baseUrl, { maxCards = 30 } = {}) {
 
   for (const { el } of top) {
     if (cards.length >= maxCards) break;
-
     const $el = $(el);
     const $a = $el.find('a[href]').first();
     const href = toAbsoluteUrl(baseUrl, $a.attr('href'));
     if (!href || isLikelyNoiseUrl(href)) continue;
 
-    // 标题：优先 h1/h2/h3，其次 a 文本，再其次 aria-label/title
     const title =
       $el.find('h1,h2,h3').first().text().trim() ||
       $a.text().trim() ||
       $a.attr('aria-label') ||
       $a.attr('title') ||
       '';
-
     if (!title || title.length < 3) continue;
 
-    // 描述：找 p / .desc / .summary 一类
     const description =
       $el.find('p').first().text().trim() ||
       $el.find('[class*="desc"],[class*="summary"],[class*="excerpt"]').first().text().trim() ||
       '';
 
-    // 图片：img/src 或 data-src 或 srcset
     const $img = $el.find('img').first();
     const rawImg = $img.attr('src') || $img.attr('data-src') || '';
     const imageUrl = toAbsoluteUrl(baseUrl, rawImg);
 
-    const key = href;
-    if (seen.has(key)) continue;
-    seen.add(key);
+    if (seen.has(href)) continue;
+    seen.add(href);
 
     cards.push({
       title,

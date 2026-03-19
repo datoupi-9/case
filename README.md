@@ -77,10 +77,6 @@
   - 联系邮箱：Bobwu@profabx.com
   - 地址：浙江省宁波市高新区清逸路215号智造港D区3号楼5层
 
-### 7. 爬虫系统入口（index.html）
-- **位置**：页面右下角固定按钮
-- **说明**：点击「Crawling」按钮会打开本地前端 `http://localhost:5173/`（Mix Copilot 灵感爬虫系统）。
-
 ## 样式说明
 
 ### 颜色方案
@@ -132,47 +128,30 @@ figma/
 └── ...                # 其他页面与样式
 ```
 
-## 新增：爬虫系统（核心功能）
+## 新增：爬虫页面（Crawling）
 
-### 你能做什么
-- **输入一个目标网址**，点击开始
-- 后端会抓取页面（支持 **静态 HTML** 和 **动态渲染 Playwright**）
-- 后端会把页面“主要信息块”抽取成结构化 JSON（卡片：`title/description/imageUrl/pageUrl`）
-- 前端把卡片以统一风格网格展示（标题可点击打开原文）
+- **入口**：`index.html` 右下角 `Crawling` 按钮（打开 `http://localhost:8787/`）
+- **功能**：输入一个目标网址 → 后端抓取（静态/动态）→ 抽取卡片 JSON → 前端以卡片网格展示（标题/描述/缩略图）
 
-### 运行后端
+### 启动方式
 
-```bash
-cd backend
-npm run dev
-```
-
-后端默认端口：`http://localhost:8787`
-
-健康检查：`GET /health`
-
-爬取接口：`POST /api/crawl`
-
-请求示例：
-
-```json
-{
-  "url": "https://www.geekpark.net/",
-  "mode": "dynamic",
-  "maxCards": 30
-}
-```
-
-### 运行前端
+先构建前端（用于后端托管）：
 
 ```bash
 cd frontend
+npm install
+npm run build
+```
+
+再启动后端：
+
+```bash
+cd backend
+npm install
 npm run dev
 ```
 
-前端默认地址：`http://localhost:5173/`
-
-> 前端已配置 proxy：`/api/*` 会转发到 `http://localhost:8787`
+打开：`http://localhost:8787/`
 
 ## 使用说明
 1. 直接在浏览器中打开 `index.html` 文件即可查看页面

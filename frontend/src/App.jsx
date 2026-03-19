@@ -15,6 +15,7 @@ function App() {
   const [cards, setCards] = useState([])
   const [page, setPage] = useState(null)
 
+  const caseLibraryUrl = import.meta.env.VITE_CASE_LIBRARY_URL || '/index.html'
   const canSubmit = useMemo(() => !!url.trim() && !loading, [url, loading])
 
   async function onCrawl() {
@@ -29,9 +30,7 @@ function App() {
         body: JSON.stringify({ url: normalizeUrl(url), mode, maxCards: 30 }),
       })
       const data = await resp.json()
-      if (!resp.ok || !data.ok) {
-        throw new Error(data?.error || 'Crawl failed')
-      }
+      if (!resp.ok || !data.ok) throw new Error(data?.error || 'Crawl failed')
       setPage(data.page)
       setCards(Array.isArray(data.cards) ? data.cards : [])
     } catch (e) {
@@ -46,26 +45,29 @@ function App() {
       <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                window.location.href = 'https://datoupi-9.github.io/case/'
-              }}
-              className="inline-flex h-9 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 text-sm text-slate-200 transition hover:border-white/20 hover:bg-white/8"
-              aria-label="Back to Sophicar case library"
-              title="Back to Sophicar"
-            >
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>Back</span>
-            </button>
             <div className="h-9 w-9 rounded-xl border border-white/10 bg-white/5" />
             <div>
-              <div className="text-sm font-semibold tracking-wide">Crawler · Intelligence Center</div>
-              <div className="text-xs text-slate-400">Mix Copilot inspired · Extract cards from any page</div>
+              <div className="text-sm font-semibold tracking-wide">Crawling</div>
+              <div className="text-xs text-slate-400">Paste a URL, extract key info, render as cards</div>
             </div>
           </div>
+          <a
+            href={caseLibraryUrl}
+            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200 transition hover:border-white/20 hover:bg-white/10"
+            aria-label="Back to Case Library"
+            title="Back to Case Library"
+          >
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path
+                d="M12.5 15L7.5 10L12.5 5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>Back</span>
+          </a>
         </div>
       </header>
 
@@ -77,8 +79,8 @@ function App() {
               <input
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder="Paste a website URL, e.g. https://www.geekpark.net/"
-                className="w-full rounded-xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm outline-none ring-0 placeholder:text-slate-500 focus:border-white/20"
+                placeholder="Paste a URL, e.g. https://www.geekpark.net/"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm outline-none placeholder:text-slate-500 focus:border-white/20"
               />
             </div>
 
@@ -128,19 +130,17 @@ function App() {
             <div className="text-xs text-slate-500">{cards.length ? `${cards.length} items` : '—'}</div>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
             {cards.map((c, idx) => (
               <article
                 key={`${c.pageUrl || idx}`}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-white/20"
+                className="mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-white/20"
               >
-                <div className="h-36 w-full bg-slate-900">
+                <div className="h-40 w-full bg-slate-900">
                   {c.imageUrl ? (
-                    <img src={c.imageUrl} alt="" className="h-full w-full object-cover opacity-90" loading="lazy" />
+                    <img src={c.imageUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-xs text-slate-500">
-                      No image
-                    </div>
+                    <div className="flex h-full w-full items-center justify-center text-xs text-slate-500">No image</div>
                   )}
                 </div>
                 <div className="p-4">
