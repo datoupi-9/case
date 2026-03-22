@@ -153,6 +153,22 @@ npm run dev
 
 打开：`http://localhost:8787/`
 
+## 部署到 GitHub Pages（避免 Jekyll / Liquid 报错）
+
+若使用 **GitHub Pages** 且构建日志出现 `Liquid syntax error`、指向 `node_modules/.../README.md`，原因是 Pages 默认用 **Jekyll** 处理仓库，会解析依赖里的 Markdown。
+
+**处理方式（二选一或同时使用）：**
+
+1. **仓库根目录已包含 `.nojekyll` 文件**  
+   告诉 GitHub Pages **不要运行 Jekyll**，按静态文件直接发布。
+
+2. **仓库根目录已包含 `_config.yml`**  
+   在仍启用 Jekyll 时 **排除** `backend/node_modules`、`frontend/node_modules`，避免处理依赖包文档。
+
+部署前建议：**不要将 `node_modules` 提交到 Git**（仅用 CI 里 `npm install`），并确认发布目录不包含会触发 Liquid 的路径。
+
+**关于 `faraday-retry` 提示**：这是 Ruby/Jekyll 生态的依赖提示，一般不影响本站点；若你的 CI 使用自定义 Jekyll 插件，可在 `Gemfile` 中加入 `gem "faraday-retry"`。
+
 ## 使用说明
 1. 直接在浏览器中打开 `index.html` 文件即可查看页面
 2. 所有样式都在 `styles.css` 文件中

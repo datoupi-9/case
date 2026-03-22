@@ -1,0 +1,7 @@
+# GitHub Pages 若仍用 Jekyll 构建，必须排除 node_modules：
+# 依赖包内的 README 含 {{ }} 等字符，会触发 Liquid 语法错误。
+# 推荐同时使用仓库根目录的 .nojekyll，跳过 Jekyll，仅发布静态文件。
+exclude:
+  - backend/node_modules
+  - frontend/node_modules
+  - node_modules
